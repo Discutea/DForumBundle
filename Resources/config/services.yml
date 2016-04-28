@@ -1,0 +1,42 @@
+services:
+    topic.listener.updatelastpost:
+        class: Discutea\DForumBundle\EventListener\UpdateTopic
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
+            - { name: doctrine.event_listener, event: postRemove }
+
+    discutea.forum.pagin:
+            class: Discutea\DForumBundle\Component\Pagin
+            arguments:
+                - '@request_stack'
+                - '@knp_paginator'
+                - '%discutea_forum.pagination%'
+                - '%discutea_forum.pagination.pagename%'
+
+    discutea.security.category_voter:
+        class: Discutea\DForumBundle\Security\CategoryVoter
+        arguments: ['@security.access.decision_manager']
+        public: false
+        tags:
+            - { name: security.voter }
+
+    discutea.security.forum_voter:
+        class: Discutea\DForumBundle\Security\ForumVoter
+        arguments: ['@security.access.decision_manager']
+        public: false
+        tags:
+            - { name: security.voter }
+
+    discutea.security.topic_voter:
+        class: Discutea\DForumBundle\Security\TopicVoter
+        arguments: ['@security.access.decision_manager']
+        public: false
+        tags:
+            - { name: security.voter }
+
+    discutea.security.post_voter:
+        class: Discutea\DForumBundle\Security\PostVoter
+        arguments: ['@security.access.decision_manager']
+        public: false
+        tags:
+            - { name: security.voter }

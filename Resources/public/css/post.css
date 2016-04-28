@@ -1,0 +1,8 @@
+.topics a {
+    text-decoration:none;
+    color:grey;
+}
+
+li.topics{
+    margin-bottom:10px;
+}

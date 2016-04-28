@@ -1,0 +1,128 @@
+{% extends "DiscuteaBundle::layout.html.twig" %}
+
+{% block title %}
+  {{ forum.name }}
+{% endblock %}
+
+{% block stylesheets %}
+  {% stylesheets '@DForumBundle/Resources/public/css/topic.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+  {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+<div class="color-dark bg-lightblue topic-index">
+    <div class="container">
+    <h1 class="text-center">{{ forum.name }} <small>({{ pagination.getTotalItemCount }} topics)</small></h1>
+    <p class="text-center">{{ forum.description }}</p>
+
+    {{ knp_pagination_render(pagination) }}
+    {% if app.user %}
+    <a class="btn btn-primary btn-sm pull-right openTopic" href="#" role="button">{{ 'discutea.forum.topic.new'|trans }}</a>
+    {% endif %}
+    <div class="clearfix"></div>  
+      <div class="topics-container">
+        {% for topic in pagination %}
+
+            <div class="list-group-item topics" id="Topic{{ topic.id }}">
+              <div class="row">
+                <div class="topic-status-left col-md-1 col-xs-12">
+                    {% if topic.resolved == 1 %}
+                      <div data-toggle="tooltip" class="resolved">
+                          <img src="/img/solved.png" title="{{ 'discutea.forum.label.issolved'|trans }}" alt="{{ 'discutea.forum.label.issolved'|trans }}"/> <span class="hidden-md hidden-lg">{{ 'discutea.forum.label.issolved'|trans }}</span>
+                      </div>
+                    {% endif %}
+                </div>
+                <div id="content{{ topic.id }}" class="col-md-4 col-xs-12 topic-content">
+                    <a href="{{ path('discutea_forum_post', {'slug': topic.slug}) }}">
+                    <h2 class="topic-title">{{ topic.title }}</h2>
+                    <span class="small">{{ 'discutea.forum.by'|trans }} <strong>{{ topic.user.username }}</strong>
+                      {{ 'discutea.forum.on'|trans }} {{ topic.date|localizeddate('full', 'medium', app.request.getLocale()) }}
+                    </span>
+                    </a>
+                </div>
+                <div class="col-md-2 topic-msg-count">
+                    {% set posts_count = topic.posts|length %}
+                    <p><span class="badge">{{ posts_count }} {% if posts_count > 1 %}{{ 'discutea.forum.posts'|trans }}{% else %}{{ 'discutea.forum.post'|trans }}{% endif %}</span></p>
+                </div>
+                <div class="col-md-4 col-xs-12 topic-info">
+                    <div class="divider-topic hidden-lg hidden-md"></div>
+                  <a class="lastComment" href="{{ path('discutea_forum_post', {'slug': topic.slug}) }}">
+                        <p class="topic-poster">{{ 'discutea.forum.lastpostby'|trans }} <strong>{{ topic.posts.last.poster.username }}</strong></p>
+                        <p class="topic-lastpost-date">{{ topic.posts.last.date|timeago }}</p>
+                  </a>
+                </div>
+                <div class="topics-status-right col-md-1 col-xs-12">
+                {% if topic.pinned == 1 %}
+                    <div data-toggle="tooltip" class="pinned">
+                        <img src="/img/pinned.png" title="{{ 'discutea.forum.label.ispinned'|trans }}" alt="{{ 'discutea.forum.label.ispinned'|trans }}"/> <span class="hidden-md hidden-lg">{{ 'discutea.forum.label.ispinned'|trans }}</span>
+                    </div>
+                {% endif %}
+                </div>
+              </div>
+              {% if is_granted('ROLE_MODERATOR') %}  
+                <div class="row admin">
+                  <ul class="pull-right list-inline">
+                    <li><a id="{{ topic.id }}" class="editAction" href="{{ path("discutea_forum_topic_edit", {'id': topic.id}) }}"><i class="glyphicon glyphicon-edit"></i> {{ 'discutea.forum.edit'|trans }}</a></li>
+                    <li><a href="#" title="Delete" data-toggle="modal" data-target="#deleteTopic" data-link="{{ path('discutea_forum_topic_delete', {'id': topic.id}) }}"><i class="glyphicon glyphicon-remove"></i> {{ 'discutea.forum.remove'|trans }}</a></li>  
+                  </ul>
+                </div>
+              {% endif %}
+            </div>
+        {% else %}
+            <li class="list-group-item topics">
+              <div class="text-center">
+                <p>{{ 'discutea.forum.null'|trans }}</p>
+              </div>
+            </li>
+        {% endfor %}
+      </div>
+
+    {{ knp_pagination_render(pagination) }}
+
+    {% if form is not null %}
+        <a class="btn btn-primary btn-sm pull-right openTopic" href="#form" role="button">{{ 'discutea.forum.topic.new'|trans }}</a>
+        {% include 'DForumBundle:Form:Topic.html.twig' %}
+    {% endif %}
+
+      <div class="clearfix"></div>
+          {# Booststrap Modals #}
+        {% if is_granted('ROLE_MODERATOR') %}
+        <div class="modal fade" id="deleteTopic" tabindex="-1" role="dialog" aria-labelledby="deletePostLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="deletePostLabel">{{ 'discutea.forum.confirm'|trans }}</h4>
+              </div>
+                <div class="modal-body"><div class="alert alert-warning" role="alert"><p>{{ 'discutea.forum.post.want'|trans }}</p></div></div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'discutea.forum.cancel'|trans }}</button>
+                <a href="#" class="btn btn-danger">{{ 'discutea.forum.valid'|trans }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+    {% if is_granted('ROLE_MODERATOR') %}
+        {% javascripts
+          '@DForumBundle/Resources/public/js/moderator/topic.js' %}
+          <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}       
+    {% endif %}
+  <script type="text/javascript">
+  $(document).ready(function () {
+      $('a.openTopic').click(function (e) {
+        e.preventDefault();
+        $('form#newTopic').show();
+        $('form#newTopic, input#topic_title').focus(); 
+      }),
+      $('form').hide();
+    });
+    </script>
+{% endblock %}

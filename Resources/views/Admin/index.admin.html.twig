@@ -1,0 +1,66 @@
+{# Forums ans Categories #}
+<div class="row">        
+  <div class="col-xs-12">
+    <div class="widget-box">
+      <div class="widget-title">
+        <span class="icon"><i class="fa fa-file"></i></span><h5>{{ 'discutea.forum.category.manage'|trans }}</h5>
+        <span title="{{ categories|length }} {{ 'discutea.forum.categories'|trans }}" class="label label-danger tip-left">{{ categories|length }}</span>
+        <span title="{{ forums|length }} {{ 'discutea.forum.forums'|trans }}" class="label label-warning tip-left">{{ forums|length }}</span>      
+      </div>
+      <div class="widget-content nopadding">
+        <ul class="recent-posts">
+          <li class="viewall">
+            <a class="tip-top" href="{{ path('discutea_forum_create_category') }}"> {{ 'discutea.forum.category.createnew'|trans }} </a>
+          </li>
+          {% for category in categories %}
+          <li>
+            <h4>{{ category.name }}:</h4>
+            <div>
+              <a href="{{ path('discutea_forum_create_forum', {'id': category.id}) }}" class="btn btn-success btn-xs">{{ 'discutea.forum.category.addforum'|trans }}</a>
+              <a href="{{ path('discutea_forum_edit_category', {'id': category.id}) }}" class="btn btn-warning btn-xs">{{ 'discutea.forum.edit'|trans }}</a>
+              <a href="{{ path('discutea_forum_remove_category', {'id': category.id}) }}" class="btn btn-danger btn-xs">{{ 'discutea.forum.remove'|trans }}</a>
+            </div>
+            <br />
+            <span class="user-info">{{ 'discutea.forum.category.position'|trans }}: {{ category.position }}</span>
+            <span class="user-info">{{ 'discutea.forum.category.countforum'|trans }} {{ category.forums|length }}</span>
+            {% if category.readAuthorisedRoles is not null %}
+              <span class="user-info">({{  category.readAuthorisedRoles }})</span>
+            {% endif %}
+            <div class="clearfix"></div>
+            <br />
+            <div class="forums">
+              <h5>{{ 'discutea.forum.forum.incat'|trans }} {{ category.name  }}</h5>
+              <br />
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>{{ 'discutea.forum.title'|trans }}</th>
+                    <th>{{ 'discutea.forum.description'|trans }}</th>
+                    <th>{{ 'discutea.forum.topics'|trans }}</th>
+                    <th>{{ 'discutea.forum.position'|trans }}</th>
+                    <th>{{ 'discutea.forum.action'|trans }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for forum in category.forums %}
+                  <tr>
+                    <td>{{ forum.name }}</td>
+                    <td>{{ forum.description }}</td>
+                    <td class="text-center">{{ forum.topics|length }}</td>
+                    <td class="text-center">0</td>
+                    <td class="text-center"><a href="{{ path('discutea_forum_edit_forum', {'id': forum.id}) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-edit"></i></a> <a href="{{ path('discutea_forum_remove_forum', {'id': forum.id}) }}" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></a></td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </li>
+          {% endfor %}
+
+          <li class="viewall">
+            <a class="tip-top" href="{{ path('discutea_forum_create_category') }}"> {{ 'discutea.forum.category.createnew'|trans }} </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,357 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <!-- Categories -->
+            <trans-unit id="c1">
+                <source>discutea.forum.category.removeall.label</source>
+                <target>Supprimer tous les forums de cette catégorie ?</target>
+            </trans-unit>
+            <trans-unit id="c2">
+                <source>discutea.forum.category.created</source>
+                <target>La catégorie a été créée.</target>
+            </trans-unit>
+            <trans-unit id="c3">
+                <source>discutea.forum.category.edit</source>
+                <target>La catégorie a été mise à jour.</target>
+            </trans-unit>
+            <trans-unit id="c4">
+                <source>discutea.forum.category.movedforums</source>
+                <target>Les forums ont tous été deplacés.</target>
+            </trans-unit>
+            <trans-unit id="c5">
+                <source>discutea.forum.category.delete</source>
+                <target>La catégorie a été supprimée.</target>
+            </trans-unit>
+            <trans-unit id="c6">
+                <source>discutea.forum.category.form.title</source>
+                <target>Formulaire de gestion d'une catégorie.</target>
+            </trans-unit>
+            <trans-unit id="c7">
+                <source>discutea.forum.category.form.name</source>
+                <target>Nom de la catégorie.</target>
+            </trans-unit>
+            <trans-unit id="c8">
+                <source>discutea.forum.category.addforum</source>
+                <target>Ajouter un forum</target>
+            </trans-unit>
+            <trans-unit id="c9">
+                <source>discutea.forum.category.position</source>
+                <target>Position dans les résultats.</target>
+            </trans-unit>
+            <trans-unit id="c10">
+                <source>discutea.forum.category.permitions</source>
+                <target>Droits de lecture.</target>
+            </trans-unit>
+            <trans-unit id="c11">
+                <source>discutea.forum.category.form.deletetitle</source>
+                <target>Suppression d'une catégorie.</target>
+            </trans-unit>
+            <trans-unit id="c12">
+                <source>discutea.forum.category.form.movedto</source>
+                <target>Déplacer les forums dans :</target>
+            </trans-unit>
+            <trans-unit id="c13">
+                <source>discutea.forum.category.form.purge</source>
+                <target>Cocher pour supprimer tous les forums de cette catégorie.</target>
+            </trans-unit>
+            <trans-unit id="c14">
+                <source>discutea.forum.category.manage</source>
+                <target>Administrer les catégories et les forums.</target>
+            </trans-unit>
+            <trans-unit id="c15">
+                <source>discutea.forum.category.createnew</source>
+                <target>+ Créer une catégorie +</target>
+            </trans-unit>
+            <trans-unit id="c16">
+                <source>discutea.forum.category.countforum</source>
+                <target>Nombre de forums dans la categorie :</target>
+            </trans-unit>
+            <!-- Forums -->
+            <trans-unit id="f1">
+                <source>discutea.forum.forum.incat</source>
+                <target>Liste des forums de</target>
+            </trans-unit>
+            <trans-unit id="f2">
+                <source>discutea.forum.forum.delete</source>
+                <target>Le forum a été supprimé.</target>
+            </trans-unit>
+            <trans-unit id="f3">
+                <source>discutea.forum.forum.removeall.label</source>
+                <target>Supprimer tous les sujets du forum ?</target>
+            </trans-unit>
+            <trans-unit id="f4">
+                <source>discutea.forum.forum.created</source>
+                <target>Le forum a été ajouté.</target>
+            </trans-unit>
+            <trans-unit id="f5">
+                <source>discutea.forum.forum.edit</source>
+                <target>Le forum a été mis à jour.</target>
+            </trans-unit>
+            <trans-unit id="f6">
+                <source>discutea.forum.forum.movedtopics</source>
+                <target>Les sujets ont tous été deplacés.</target>
+            </trans-unit>
+            <trans-unit id="f7">
+                <source>discutea.forum.forum.form.title</source>
+                <target>Formulaire de gestion d'un forum.</target>
+            </trans-unit>
+            <trans-unit id="f8">
+                <source>discutea.forum.forum.form.name</source>
+                <target>Nom du forum.</target>
+            </trans-unit>
+            <trans-unit id="f9">
+                <source>discutea.forum.forum.form.description</source>
+                <target>Déscription du forum.</target>
+            </trans-unit>
+            <trans-unit id="f10">
+                <source>discutea.forum.forum.form.image</source>
+                <target>Image attachée au forum.</target>
+            </trans-unit>
+            <trans-unit id="f11">
+                <source>discutea.forum.forum.form.category</source>
+                <target>Sélectionner la catégorie :</target>
+            </trans-unit>
+            <trans-unit id="f12">
+                <source>discutea.forum.forum.form.deletetitle</source>
+                <target>Formulaire de supression d'un forum.</target>
+            </trans-unit>
+            <trans-unit id="f13">
+                <source>discutea.forum.forum.form.movedto</source>
+                <target>Déplacer les sujets dans :</target>
+            </trans-unit>
+            <trans-unit id="f14">
+                <source>discutea.forum.forum.form.purge</source>
+                <target>Cocher pour supprimer entièrement les sujets du forum.</target>
+            </trans-unit>
+            <!-- Topic -->
+            <trans-unit id="t1">
+                <source>discutea.forum.topic.create</source>
+                <target>Le sujet a été créé avec succès.</target>
+            </trans-unit>
+            <trans-unit id="t2">
+                <source>discutea.forum.topic.delete</source>
+                <target>Le sujet a bien été supprimé.</target>
+            </trans-unit>
+            <trans-unit id="t3">
+                <source>discutea.forum.topic.edit</source>
+                <target>Le sujet a bien été édité.</target>
+            </trans-unit>
+            <trans-unit id="t4">
+                <source>discutea.forum.topic.recent</source>
+                <target>Les derniers sujets.</target>
+            </trans-unit>
+            <trans-unit id="t5">
+                <source>discutea.forum.topic.new</source>
+                <target>Créer un sujet</target>
+            </trans-unit>
+            <trans-unit id="t6">
+                <source>discutea.forum.topic.title</source>
+                <target>Titre du sujet :</target>
+            </trans-unit>
+            <!-- Posts -->
+            <trans-unit id="p1">
+                <source>discutea.forum.warning.preview</source>
+                <target>Attention ce message est en mode prévisualisation validez-le avant de quitter</target>
+            </trans-unit>
+            <trans-unit id="p2">
+                <source>discutea.forum.post.create</source>
+                <target>Le message a été créé avec succès.</target>
+            </trans-unit>
+            <trans-unit id="p3">
+                <source>discutea.forum.post.edit</source>
+                <target>Le message a bien été édité.</target>
+            </trans-unit>
+            <trans-unit id="p4">
+                <source>discutea.forum.post.delete</source>
+                <target>Le message a bien été supprimé.</target>
+            </trans-unit>
+            <trans-unit id="p5">
+                <source>discutea.forum.post.deleteall</source>
+                <target>Tous les messages ont été supprimés.</target>
+            </trans-unit>
+            <trans-unit id="p6">
+                <source>discutea.forum.post.recent</source>
+                <target>Les derniers messages.</target>
+            </trans-unit>
+            <trans-unit id="p7">
+                <source>discutea.forum.post.want</source>
+                <target>Voulez-vous vraiment supprimer le message ?</target>
+            </trans-unit>
+            <trans-unit id="p8">
+                <source>discutea.forum.post.aged</source>
+                <target>Attention, ce sujet est ancien. Le déterrer n'est pas forcément approprié. Il est peut être plus adapté de créer un nouveau sujet.</target>
+            </trans-unit>
+            <trans-unit id="p9">
+                <source>discutea.forum.post.confirmfirst</source>
+                <target>Attention ! Ce message est le premier du sujet. En le supprimant vous supprimerez le sujet dans son intégralité !</target>
+            </trans-unit>
+            <trans-unit id="p10">
+                <source>discutea.forum.post.editpost</source>
+                <target>Edition du message</target>
+            </trans-unit>
+            <!-- Labels -->
+            <trans-unit id="l1">
+                <source>discutea.forum.label.mark.solved</source>
+                <target>Le sujet a été marqué comme résolu.</target>
+            </trans-unit>
+            <trans-unit id="l2">
+                <source>discutea.forum.label.unmark.solved</source>
+                <target>Le sujet n'est plus marqué comme résolu.</target>
+            </trans-unit>
+            <trans-unit id="l3">
+                <source>discutea.forum.label.mark.pinned</source>
+                <target>Le sujet a été épinglé.</target>
+            </trans-unit>
+            <trans-unit id="l4">
+                <source>discutea.forum.label.unmark.pinned</source>
+                <target>Le sujet n'est plus épinglé.</target>
+            </trans-unit>
+            <trans-unit id="l5">
+                <source>discutea.forum.label.mark.closed</source>
+                <target>Le sujet a été fermé.</target>
+            </trans-unit>
+            <trans-unit id="l6">
+                <source>discutea.forum.label.unmark.closed</source>
+                <target>Le sujet n'est plus fermé.</target>
+            </trans-unit>
+            <trans-unit id="l7">
+                <source>discutea.forum.label.solved</source>
+                <target>Résolu</target>
+            </trans-unit>
+            <trans-unit id="l8">
+                <source>discutea.forum.label.closed</source>
+                <target>Fermer</target>
+            </trans-unit>
+            <trans-unit id="l9">
+                <source>discutea.forum.label.pinned</source>
+                <target>Epingler</target>
+            </trans-unit>
+            <trans-unit id="l10">
+                <source>discutea.forum.label.issolved</source>
+                <target>Sujet résolu</target>
+            </trans-unit>
+            <trans-unit id="l11">
+                <source>discutea.forum.label.isclosed</source>
+                <target>Sujet fermé</target>
+            </trans-unit>
+            <trans-unit id="l12">
+                <source>discutea.forum.label.ispinned</source>
+                <target>Sujet épinglé</target>
+            </trans-unit>
+            <!-- Divers -->
+            <trans-unit id="d1">
+                <source>discutea.forum.edit</source>
+                <target>Editer</target>
+            </trans-unit>
+            <trans-unit id="d2">
+                <source>discutea.forum.remove</source>
+                <target>Supprimer</target>
+            </trans-unit>
+            <trans-unit id="d3">
+                <source>discutea.forum.title</source>
+                <target>Titre</target>
+            </trans-unit>
+            <trans-unit id="d4">
+                <source>discutea.forum.description</source>
+                <target>Déscription</target>
+            </trans-unit>
+            <trans-unit id="d5">
+                <source>discutea.forum.topics</source>
+                <target>Sujets</target>
+            </trans-unit>
+            <trans-unit id="d6">
+                <source>discutea.forum.position</source>
+                <target>Position</target>
+            </trans-unit>
+            <trans-unit id="d7">
+                <source>discutea.forum.action</source>
+                <target>Action</target>
+            </trans-unit>
+            <trans-unit id="d8">
+                <source>discutea.forum.categories</source>
+                <target>Catégories</target>
+            </trans-unit>
+            <trans-unit id="d9">
+                <source>discutea.forum.forums</source>
+                <target>Forums</target>
+            </trans-unit>
+            <trans-unit id="d10">
+                <source>discutea.forum.by</source>
+                <target>par</target>
+            </trans-unit>
+            <trans-unit id="d11">
+                <source>discutea.forum.on</source>
+                <target>le</target>
+            </trans-unit>
+            <trans-unit id="d12">
+                <source>discutea.forum.at</source>
+                <target>à</target>
+            </trans-unit>
+            <trans-unit id="d13">
+                <source>discutea.forum.location</source>
+                <target>Chemin :</target>
+            </trans-unit>
+            <trans-unit id="d14">
+                <source>discutea.forum.see</source>
+                <target>Voir</target>
+            </trans-unit>
+            <trans-unit id="d15">
+                <source>discutea.forum.forumlist</source>
+                <target>Liste des forums</target>
+            </trans-unit>
+            <trans-unit id="d16">
+                <source>discutea.forum.lastpostby</source>
+                <target>Dernier message par</target>
+            </trans-unit>
+            <trans-unit id="d17">
+                <source>discutea.forum.null</source>
+                <target>Aucune réponse. Créer du contenu.</target>
+            </trans-unit>
+            <trans-unit id="d18">
+                <source>discutea.forum.posts</source>
+                <target>messages</target>
+            </trans-unit>
+            <trans-unit id="d19">
+                <source>discutea.forum.post</source>
+                <target>message</target>
+            </trans-unit>
+            <trans-unit id="d20">
+                <source>discutea.forum.confirm</source>
+                <target>Confirmation nécessaire</target>
+            </trans-unit>
+            <trans-unit id="d21">
+                <source>discutea.forum.cancel</source>
+                <target>Annuler</target>
+            </trans-unit>
+            <trans-unit id="d22">
+                <source>discutea.forum.valid</source>
+                <target>Valider</target>
+            </trans-unit>
+            <trans-unit id="d23">
+                <source>discutea.forum.quote</source>
+                <target>Citer</target>
+            </trans-unit>
+            <trans-unit id="d24">
+                <source>discutea.forum.reply</source>
+                <target>Répondre</target>
+            </trans-unit>
+            <trans-unit id="d25">
+                <source>Save</source>
+                <target>Sauvegarder</target>
+            </trans-unit>
+            <trans-unit id="d26">
+                <source>Preview</source>
+                <target>Prévisualiser</target>
+            </trans-unit>
+            <trans-unit id="d27">
+                <source>Previous</source>
+                <target>Précédent</target>
+            </trans-unit>
+            <trans-unit id="d28">
+                <source>Next</source>
+                <target>Suivant</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

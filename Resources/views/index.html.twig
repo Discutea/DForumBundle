@@ -1,0 +1,60 @@
+{% extends "DiscuteaBundle::layout.html.twig" %}
+
+{% block title %}
+  Forums
+{% endblock %}
+
+{% block stylesheets %}
+  {% stylesheets '@DForumBundle/Resources/public/css/category.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+  {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+
+<div class="bg-grayblue">
+    <div class="container">
+    <h1 class="margintop-40">{{ 'discutea.forum.forumlist'|trans }}</h1>
+    <div class="col-md-12">
+
+      {% for category in categories %}
+        {% if is_granted('CanReadCategory', category) %}
+        <div class="section-heading">
+            <h2 class="h-bold">{{ category.name }}</h2>
+            <div class="divider-header"></div>
+        </div>
+        <div class="row forum-category-bloc">
+          {% for forum in category.forums %}
+            <div class="col-xs-12 col-sm-6 col-md-4">
+              <div class="category thumbnail text-center forum-box color-dark">
+                {% if forum.image %}
+                  <img src="{{ forum.image }}" class="illustration" alt="{{ forum.name }}" height="64" width="64">
+                {% endif %}
+                <h3><a href="{{ path('forum_topic', {'slug': forum.slug}) }}" title="{{ forum.name }}" rel="home">{{ forum.name }}</a></h3>
+                <div class="divider-header"></div>
+                <p>{{ forum.description }}</p>
+                <hr>
+                <div class="text-center">
+                {% if forum.topics.last != false %}
+                    <a class="lastComment" href="{{ path('discutea_forum_post', {'slug': forum.topics.last.slug}) }}#p{{ forum.topics.last.posts.last.id }}">
+                      <p>
+                          {{ 'discutea.forum.lastpostby'|trans }} <strong>{{ forum.topics.last.posts.last.poster.username }}</strong>
+                          <br />{{ forum.topics.last.posts.last.date|timeago }}
+                      </p>
+                    </a>
+                {% else %}
+                    <p>{{ 'discutea.forum.null'|trans }}</p>
+                {% endif %}
+                </div>
+              </div>
+            </div>    
+          {% endfor %}
+
+        </div>
+        {% endif %}
+      {% endfor %}
+
+    </div>
+    </div>
+</div>
+{% endblock %}

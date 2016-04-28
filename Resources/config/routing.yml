@@ -1,0 +1,29 @@
+discutea_forum_category_routing:
+    resource: "@DForumBundle/Controller/CategoryController.php"
+    prefix:   /forum
+    type:     annotation
+
+discutea_forum_forum_routing:
+    resource: "@DForumBundle/Controller/ForumController.php"
+    prefix:   /forum
+    type:     annotation
+
+discutea_forum_topic_routing:
+    resource: "@DForumBundle/Controller/TopicController.php"
+    prefix:   /forum
+    type:     annotation
+
+discutea_forum__post_routing:
+    resource: "@DForumBundle/Controller/PostController.php"
+    prefix:   /forum
+    type:     annotation
+
+discutea_forum_label_routing:
+    resource: "@DForumBundle/Controller/LabelController.php"
+    prefix:   /forum
+    type:     annotation
+
+discutea_forum_admin_routing:
+    resource: "@DForumBundle/Controller/AdminController.php"
+    prefix:   /forum
+    type:     annotation

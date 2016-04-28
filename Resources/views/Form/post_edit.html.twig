@@ -1,0 +1,15 @@
+{% if content is defined  %}
+    {{ content|bbcode_filter('forum') }}
+{% else %}
+    <div class="raw">
+      {{ form_start(form, {"action":path('discutea_forum_post_edit', {'id': post.id})}) }}
+      {{ form_widget(form.content) }}
+      <div class="form-group">
+        <div class="col-xs-6">
+          {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary btn-sm'}}) }}
+        </div>
+      </div>
+      {{ form_end(form) }}
+    </div>
+      <div class="clearfix"></div>
+{% endif %}

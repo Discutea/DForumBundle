@@ -1,0 +1,80 @@
+.pinned {
+    color: #2F6FC0;
+    font-size: 20px;
+}
+
+.pinned img {
+    width: 50px;
+}
+
+.resolved {
+    color: #36B36B;
+    font-size: 20px;
+}
+
+.resolved img {
+    width: 50px;
+}
+
+.topic-content {
+    padding: 20px;
+}
+
+.topic-msg-count {
+    margin-top: 40px;
+}
+
+.topic-info {
+    padding: 20px;
+}
+
+@media(min-width:767px) {
+    .pinned, .resolved {
+        text-align: center;
+        padding: 5px;
+    }
+    .topics-container {
+        text-align: center;
+    }
+}
+
+@media (max-width:768px) {
+    .pinned, .resolved {
+        text-align: center;
+        padding: 8px;
+    }
+    .topics-container {
+        text-align: center;
+    }
+}
+
+@media (max-width:480px) {
+    .pinned, .resolved {
+        text-align: center;
+        padding: 8px;
+    }
+    .topics-container {
+        text-align: center;
+    }
+}
+
+.topics-container {
+    margin-bottom: 20px;
+}
+
+.topics {
+    background-color: white;
+}
+
+.topics a {
+    text-decoration:none;
+    color:grey;
+}
+
+.topic-title {
+    font-size: 20px;
+}
+
+.topics-container .badge {
+    background-color: #606BA7;
+}

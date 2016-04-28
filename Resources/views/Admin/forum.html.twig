@@ -1,0 +1,48 @@
+{% extends "DiscuteaBundle::admin_layout.html.twig" %}
+
+{% block title %}new category{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+
+<hr />
+<div class="col-md-6">
+  <div class="panel panel-info">
+    <div class="panel-heading">{{ 'discutea.forum.forum.form.title'|trans }}</div>
+    <div class="panel-body">
+      {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+      <div class="form-group col-md-12">
+        {{ form_label(form.name, 'discutea.forum.forum.form.name') }}
+        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      <div class="form-group col-md-12">
+        {{ form_label(form.description, 'discutea.forum.forum.form.description') }}
+        {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      <div class="form-group col-md-12">
+        {{ form_label(form.image, 'discutea.forum.forum.form.image') }}
+        {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      <div class="form-group col-md-12">
+        <div class="col-md-8">
+        {{ form_label(form.category, 'discutea.forum.forum.form.category') }}
+        {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="col-md-4">
+          {{ form_label(form.position, 'discutea.forum.position') }}
+          {{ form_widget(form.position, {'attr': {'class': 'form-control'}}) }}
+        </div>       
+      </div>
+      <div class="form-group col-md-12">
+        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary btn-sm'}}) }}
+      </div>
+      {{ form_end(form) }}
+    </div>
+  </div>
+</div>
+<div class="clearfix"></div>
+ 
+{% endblock %}
+
+{% block js %}{% endblock %}

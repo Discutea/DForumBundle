@@ -1,0 +1,20 @@
+<div class="clearfix"></div>
+<hr />
+
+    {{ form_start(form, {'attr': {'id': 'newTopic', 'class': 'form-horizontal'}}) }}
+
+    <div class="form-group">
+              {{ form_label(form.title, 'discutea.forum.topic.title') }}
+              {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_widget(form.content, {'attr': {'class': 'form-control', 'rows': 16}}) }}
+    </div>
+    <div class="form-group">
+        <div class="pull-right">
+            {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary btn-sm'}}) }}
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+<div class="clearfix"></div>

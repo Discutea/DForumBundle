@@ -1,0 +1,21 @@
+<div class="alert alert-danger text-center" role="alert">{{ 'discutea.forum.warning.preview'|trans }}</div>
+
+<li id="post-preview" class="list-group-item topics">
+  <div class="row">
+    <div class="col-sm-2 text-center">
+      <p><strong>{{ postpreview.poster.username }}</strong></p>
+      <div class="avatar">
+        <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ1kn09Jy4NdTZmgv4issVLY4M3w_dLz5EGUfDk1DGHN1LKsfDa8A" alt="avatar" height="94" width="84">
+      </div>
+    </div>
+    <div class="col-sm-10">
+      <div class="raw">
+        <span class="small">{{ 'discutea.forum.on'|trans }} {{ postpreview.date|localizeddate('full', 'medium', app.request.getLocale()) }}</span>
+        <br /><br />
+      </div>
+              
+        <div class="raw">{{ postpreview.content|bbcode_filter('forum') }}</div>
+
+    </div>
+  </div>
+</li>

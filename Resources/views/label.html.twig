@@ -1,0 +1,9 @@
+<div class="raw">
+    <a href="{{ path('discutea_label_solved', {'slug': topic.slug}) }}">{{ 'discutea.forum.label.solved'|trans }}</a>
+    {% if is_granted('ROLE_MODERATOR') %}
+      <a href="{{ path('discutea_label_closed', {'slug': topic.slug}) }}">{{ 'discutea.forum.label.closed'|trans }}</a>
+      {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('discutea_label_pinned', {'slug': topic.slug}) }}">{{ 'discutea.forum.label.pinned'|trans }}</a>
+      {% endif %}
+    {% endif %}
+</div>

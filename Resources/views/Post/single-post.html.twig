@@ -1,0 +1,49 @@
+<li id="post{{ post.id }}" class="list-group-item topics">
+  <div class="row">
+    <div class="col-sm-2 text-center">
+      <p><strong>{{ post.poster.username }}</strong></p>
+      <div class="avatar">
+        <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ1kn09Jy4NdTZmgv4issVLY4M3w_dLz5EGUfDk1DGHN1LKsfDa8A" alt="avatar" height="94" width="84">
+      </div>
+    </div>
+    <div class="col-sm-10">
+      <div class="raw">
+        <span class="small">{{ 'discutea.forum.on'|trans }} {{ post.date|localizeddate('full', 'medium', app.request.getLocale()) }}</span>
+
+        {% if app.user and posts is defined %}
+          <ul class="pull-right list-inline">
+            {% if (post.poster == app.user or is_granted('ROLE_MODERATOR')) %}
+              <li><a id="{{ post.id }}" class="editAction" href="{{ path("discutea_forum_post_edit", {'id': post.id}) }}"><i class="glyphicon glyphicon-edit"></i> {{ 'discutea.forum.edit'|trans }}</a></li>
+            {% endif %}
+            {% if is_granted('ROLE_MODERATOR') %}
+              <li>
+                <a href=""
+                {% if topic.posts.first.id == post.id %}
+                  data-firstpost="true"
+                {% else %}
+                  data-firstpost="false"
+                {% endif %}
+                  title="Delete" data-toggle="modal" data-target="#deletepost" data-link="{{ path('discutea_forum_post_delete', {'id': post.id}) }}">
+                  <i class="glyphicon glyphicon-remove"></i> {{ 'discutea.forum.remove'|trans }}
+                </a>
+              </li>    
+            {% endif %}
+          </ul>
+        {% endif %}
+        <br /><br />
+      </div>
+              
+        <div id="content{{ post.id }}" class="raw">{{ post.content|bbcode_filter('forum') }}</div>
+      {% if app.user and posts is defined %}
+        <ul class="pull-right list-inline">
+          <li><a href="{{ path(posts.route, {'slug': posts.params.slug, 'p': posts.pageCount, 'quote': post.id}) }}#discutea_forum_post"><i class="glyphicon glyphicon-tint"></i> {{ 'discutea.forum.quote'|trans }}</a></li>
+          {% if posts.pageCount != posts.currentPageNumber %}
+            <li><a href="{{ path(posts.route, {'slug': posts.params.slug, 'p': posts.pageCount}) }}#discutea_forum_post"><i class="glyphicon glyphicon-thumbs-up"></i> {{ 'discutea.forum.reply'|trans }}</a></li>
+          {% else %}
+            <li><a href="#discutea_forum_post"><i class="glyphicon glyphicon-thumbs-up"></i> {{ 'discutea.forum.reply'|trans }}</a></li>
+          {% endif %} 
+        </ul>
+      {% endif %}
+    </div>
+  </div>
+</li>

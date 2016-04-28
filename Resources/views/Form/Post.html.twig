@@ -1,0 +1,13 @@
+{{ form_start(form, {'attr': {'id': 'discutea_forum_post'}}) }}
+    <div class="form-group">
+        {{ form_widget(form.content, {'attr': {'class': 'form-control', 'rows': 16}}) }}
+    </div>
+    <div class="form-group">
+      <div class="pull-right">
+        {% if form.preview is defined %}
+        {{ form_widget(form.preview, {'attr': {'class': 'btn btn-default btn-sm'}}) }}
+        {% endif %}
+        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary btn-sm'}}) }}
+      </div>
+    </div>
+{{ form_end(form) }}

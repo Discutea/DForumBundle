@@ -1,0 +1,13 @@
+.category .illustration {
+    position:absolute;
+    width:64px;
+    height:64px;
+    left:0px;
+    top:-10px
+}
+
+.category {
+    padding-top:30px;
+    height:250px;
+    margin-top:20px;
+}

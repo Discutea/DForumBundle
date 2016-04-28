@@ -1,0 +1,52 @@
+{% extends "DiscuteaBundle::layout.html.twig" %}
+
+{% block title %}{% endblock %}
+
+{% block stylesheets %}
+  {% stylesheets 
+    '@DForumBundle/Resources/public/css/post.css' %}
+  <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+  {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+<h1 class="text-center">{{ 'discutea.forum.post.editpost'|trans }}</h1>
+  
+  <ul id="postsList" class="list-unstyled">
+
+    {% if postpreview %}
+        {% include 'DForumBundle:Post:preview-post.html.twig' %}
+    {% endif %}
+    
+  </ul>
+
+  {% if form is not null %}
+  <h2>form</h2>
+
+  
+   {% include 'DForumBundle:Form:Post.html.twig' %}
+
+  {% endif %}
+  <div class="clearfix"></div>
+
+</div>
+{% endblock %}
+
+
+{% block js %}
+  {% if app.user %}
+    {% if is_granted('ROLE_MODERATOR') %}
+        {% javascripts
+          '@DForumBundle/Resources/public/js/post.js'
+          '@DForumBundle/Resources/public/js/moderator/post.js' %}
+          <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}       
+    {% else %}
+        {% javascripts
+          '@DForumBundle/Resources/public/js/post.js' %}
+          <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endif %}
+  {% endif %}
+{% endblock %}

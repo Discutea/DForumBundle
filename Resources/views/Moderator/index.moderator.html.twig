@@ -1,0 +1,86 @@
+{% extends "DiscuteaBundle::admin_layout.html.twig" %}
+
+{% block title %}
+  Admin
+{% endblock %}
+
+{% block body %}
+
+{# Posts and Topic #}
+<div class="row">
+
+  <div class="col-xs-12 col-sm-6">
+    <div class="widget-box">
+      <div class="widget-title">
+        <span class="icon"><i class="fa fa-file"></i></span><h5>{{ 'discutea.forum.post.recent'|trans }}</h5>
+        <span title="{{ posts|length }} Posts" class="label label-success tip-left">{{ posts|length }}</span>
+      </div>
+      <div class="widget-content nopadding">
+        <ul class="recent-posts">
+
+          {% for post in posts|slice(0, 5) %}
+          <li>
+            <div class="user-thumb">
+              <img width="40" height="40" alt="User" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ1kn09Jy4NdTZmgv4issVLY4M3w_dLz5EGUfDk1DGHN1LKsfDa8A">
+            </div>
+            <div class="article-post">
+              <p>
+                <span class="user-info">{{ 'discutea.forum.by'|trans }}: {{ post.poster.username }} {{ 'discutea.forum.on'|trans }} {{ post.date|localizeddate('full', 'medium', app.request.getLocale()) }}, {{ post.poster.email }}</span><br />
+                <span class="user-info">{{ 'discutea.forum.location'|trans }}: <a href="{{ path('forum_topic', {'slug': post.topic.forum.slug}) }}">{{ post.topic.forum.name }}</a> > <a href="{{ path('discutea_forum_post', {'slug': post.topic.slug}) }}#content{{ post.id }}">{{ post.topic.title }}</a> </span>
+              </p>
+              <p class="content">
+                {{ post.content|length > 150 ? post.content|slice(0, 150) ~ '...' : post.content  }}
+              </p>
+              <a href="{{ path('discutea_forum_post', {'slug': post.topic.slug}) }}#content{{ post.id }}" class="btn btn-primary btn-xs pull-right">{{ 'discutea.forum.see'|trans }}</a>
+              <div class="clearfix"></div>
+            </div>
+          </li>
+          {% endfor %}
+
+        </ul>
+      </div>
+    </div>
+  </div>
+          
+  <div class="col-xs-12 col-sm-6">
+    <div class="widget-box">
+      <div class="widget-title">
+        <span class="icon"><i class="fa fa-file"></i></span><h5>{{ 'discutea.forum.topic.recent'|trans }}</h5>
+        <span title="{{ topics|length }} Topics" class="label label-info tip-left">{{ topics|length }}</span>
+      </div>
+      <div class="widget-content nopadding">
+        <ul class="recent-posts">
+
+          {% for topic in topics|slice(0, 5) %}
+          <li>
+            <div class="user-thumb">
+              <img width="40" height="40" alt="User" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ1kn09Jy4NdTZmgv4issVLY4M3w_dLz5EGUfDk1DGHN1LKsfDa8A">
+            </div>
+            <div class="article-post">
+              <p>
+                <span class="user-info">{{ 'discutea.forum.by'|trans }}: {{ topic.date|localizeddate('full', 'medium', app.request.getLocale()) }}</span><br />
+                <span class="user-info">{{ 'discutea.forum.location'|trans }}: <a href="{{ path('forum_topic', {'slug': topic.forum.slug}) }}">{{ topic.forum.name }}</a> > <a href="{{ path('discutea_forum_post', {'slug': topic.slug}) }}">{{ topic.title }}</a> </span>
+              </p>
+              <p class="content">
+                {{ topic.title }}
+              </p>
+              <div class="pull-right">
+                <a href="{{ path('forum_topic', {'slug': topic.forum.slug}) }}" class="btn btn-primary btn-xs">{{ 'discutea.forum.see'|trans }}</a>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </li>
+          {% endfor %}
+
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% if is_granted('ROLE_MODERATOR') %}
+  {% include 'DForumBundle:Admin:index.admin.html.twig' %}
+{% endif %}
+ 
+{% endblock %}
