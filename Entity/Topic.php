@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  *
  * @ORM\Entity(repositoryClass="Discutea\DForumBundle\Repository\TopicRepository")
- * @ORM\Table(name="topics")
+ * @ORM\Table(name="d_topics")
  * 
  */
 class Topic extends BaseTopic

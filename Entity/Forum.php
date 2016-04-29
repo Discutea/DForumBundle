@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Discutea\DForumBundle\Repository\ForumRepository")
- * @ORM\Table(name="forums")
+ * @ORM\Table(name="d_forums")
  */
 class Forum extends BaseForum
 {

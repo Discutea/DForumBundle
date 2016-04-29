@@ -1,10 +1,8 @@
 <?php
 namespace Discutea\DForumBundle\Component;
-
 use Knp\Component\Pager\Paginator;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Doctrine\ORM\PersistentCollection;
-
 /**
  * Pagin 
  * Service use knp_paginator for pagination of Discutea\DForumBundle 
@@ -20,17 +18,14 @@ class Pagin
      * @var object Symfony\Component\HttpFoundation\ParameterBag
      */
     private $request;
-
     /*
      * @var object Knp\Component\Pager\Paginator
      */
     private $knpPagignator;
-
     /*
      * @var array configuration for pagination
      */
     private $config;
-
     /*
      * @var string get page name (url?page=1)
      */
@@ -49,7 +44,6 @@ class Pagin
         $this->config = $paginationConfig;
         $this->queryName = $queryName;
     }
-
     /**
      * 
      * @param string $name name for fetch configuration reference
@@ -60,14 +54,12 @@ class Pagin
      */
     public function pagignate($name, PersistentCollection $collection) {
         if ( (array_key_exists($name, $this->config)) &&  ($this->config[$name]["enabled"] === true)) {
-
             return $this->knpPagignator->paginate(
                     $collection,
                     $this->request->getInt($this->queryName, 1),
                     $this->config[$name]["per_page"]
                 );
         }
-
        return $collection; 
     }
 }
