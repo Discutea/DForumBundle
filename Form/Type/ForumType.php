@@ -15,9 +15,6 @@ class ForumType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('image', UrlType::class, array(
-                'required' => false,
-            ))
             ->add('category', EntityType::class, array(
                 'class' => 'DForumBundle:Category',
                 'choice_label' => 'name',

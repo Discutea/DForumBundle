@@ -1,4 +1,4 @@
-{% extends "DiscuteaBundle::admin_layout.html.twig" %}
+{% extends "DForumBundle::layout.html.twig" %}
 
 {% block title %}new category{% endblock %}
 
@@ -19,10 +19,6 @@
       <div class="form-group col-md-12">
         {{ form_label(form.description, 'discutea.forum.forum.form.description') }}
         {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
-      </div>
-      <div class="form-group col-md-12">
-        {{ form_label(form.image, 'discutea.forum.forum.form.image') }}
-        {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
       </div>
       <div class="form-group col-md-12">
         <div class="col-md-8">

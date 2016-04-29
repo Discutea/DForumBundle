@@ -1,4 +1,4 @@
-{% extends "DiscuteaBundle::layout.html.twig" %}
+{% extends "DForumBundle::layout.html.twig" %}
 
 {% block title %}
   Forums
@@ -27,9 +27,6 @@
           {% for forum in category.forums %}
             <div class="col-xs-12 col-sm-6 col-md-4">
               <div class="category thumbnail text-center forum-box color-dark">
-                {% if forum.image %}
-                  <img src="{{ forum.image }}" class="illustration" alt="{{ forum.name }}" height="64" width="64">
-                {% endif %}
                 <h3><a href="{{ path('forum_topic', {'slug': forum.slug}) }}" title="{{ forum.name }}" rel="home">{{ forum.name }}</a></h3>
                 <div class="divider-header"></div>
                 <p>{{ forum.description }}</p>
@@ -39,7 +36,7 @@
                     <a class="lastComment" href="{{ path('discutea_forum_post', {'slug': forum.topics.last.slug}) }}#p{{ forum.topics.last.posts.last.id }}">
                       <p>
                           {{ 'discutea.forum.lastpostby'|trans }} <strong>{{ forum.topics.last.posts.last.poster.username }}</strong>
-                          <br />{{ forum.topics.last.posts.last.date|timeago }}
+                          <br />{{ forum.topics.last.posts.last.date|localizeddate('full', 'medium', app.request.getLocale()) }}
                       </p>
                     </a>
                 {% else %}

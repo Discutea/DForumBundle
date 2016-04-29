@@ -11,30 +11,4 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Forum extends BaseForum
 {
-    /**
-     * @ORM\Column(name="image_url", type="string", length=255, nullable=true, options={"default" = """"})
-     */
-    protected $image;
-
-    /**
-     * Set url
-     *
-     * @param string $image
-     *
-     * @return this
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
 }

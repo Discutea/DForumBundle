@@ -1,4 +1,4 @@
-{% extends "DiscuteaBundle::layout.html.twig" %}
+{% extends "DForumBundle::layout.html.twig" %}
 
 {% block title %}
   {{ forum.name }}
@@ -49,7 +49,7 @@
                     <div class="divider-topic hidden-lg hidden-md"></div>
                   <a class="lastComment" href="{{ path('discutea_forum_post', {'slug': topic.slug}) }}">
                         <p class="topic-poster">{{ 'discutea.forum.lastpostby'|trans }} <strong>{{ topic.posts.last.poster.username }}</strong></p>
-                        <p class="topic-lastpost-date">{{ topic.posts.last.date|timeago }}</p>
+                        <p class="topic-lastpost-date">{{ topic.posts.last.date|localizeddate('full', 'medium', app.request.getLocale()) }}</p>
                   </a>
                 </div>
                 <div class="topics-status-right col-md-1 col-xs-12">
