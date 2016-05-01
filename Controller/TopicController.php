@@ -28,13 +28,17 @@ class TopicController extends BaseTopicController
      * infos:  Display the topics of a forum
      * 
      * @Route("/cat/{slug}", name="forum_topic")
-     * @ParamConverter("forum")
+     * ParamConverter("forum")
+     * @ParamConverter("forum", class="DForumBundle:Forum", options={
+     *    "repository_method" = "findByTranslatedSlug",
+     *    "mapping": {"slug": "slug", "_locale": "locale"},
+     *    "map_method_signature" = true
+     * })
      * @Security("is_granted('CanReadForum', forum)")
      * 
      */
     public function topicAction(Request $request, Forum $forum)
     {
-
         $pagination = $this->get('discutea.forum.pagin')->pagignate('topics', $forum->getTopics());
         
         if (($form = $this->generateTopicForm($forum)) !== NULL) {

@@ -6,17 +6,25 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 
 class ForumType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('description')
+            ->add('translations', TranslationsType::class, array(
+                'fields' => array(
+                    'slug' => array(
+                        'display' => false
+                    )
+                )
+            ))
+            ->add('image', UrlType::class)
             ->add('category', EntityType::class, array(
                 'class' => 'DForumBundle:Category',
-                'choice_label' => 'name',
+                'choice_label' => 'translations[en].name',
             ))
             ->add('position')
             ->add('save', SubmitType::class)

@@ -10,4 +10,14 @@ namespace Discutea\DForumBundle\Repository;
  */
 class ForumRepository extends \Doctrine\ORM\EntityRepository
 {
+   public function findByTranslatedSlug($slug, $locale)        //findSportsParCategorie pour la translation
+    {
+        $qb = $this->createQueryBuilder('n')
+            ->select('n, t')
+            ->join('n.translations', 't')
+            ->where('t.slug = :slug')
+            ->andWhere('t.locale = :locale')
+            ->setParameters(array('slug' => $slug, 'locale' => $locale));
+        return $qb->getQuery()->getSingleResult();
+    }
 }
