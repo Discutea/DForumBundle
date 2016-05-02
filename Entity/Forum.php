@@ -141,7 +141,7 @@ class Forum
     public function getTopicsByLocale(array $locales)
     {
         $topics = $this->getTopics()->filter(
-            function($entry) use ($locales) {
+            function(Topic $entry) use ($locales) {
                 return in_array($entry->getLocale(), $locales);
             }
         ); 
