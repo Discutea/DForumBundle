@@ -39,9 +39,12 @@ class TopicController extends BaseTopicController
      */
     public function topicAction(Request $request, Forum $forum)
     {
-        $pagination = $this->get('discutea.forum.pagin')->pagignate('topics', $forum->getTopics());
+
+        $topics = $forum->getTopicsByLocale( array( $request->getLocale() ) ); 
+      
+        $pagination = $this->get('discutea.forum.pagin')->pagignate('topics', $topics);
         
-        if (($form = $this->generateTopicForm($forum)) !== NULL) {
+        if (($form = $this->generateTopicForm($request->getLocale(), $forum)) !== NULL) {
             if ($form->handleRequest($request)->isValid()) {
                 $content = $form->get('content')->getData();
                 $post = $this->createPost($content, $this->topic);

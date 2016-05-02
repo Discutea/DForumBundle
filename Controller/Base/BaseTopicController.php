@@ -33,11 +33,11 @@ class BaseTopicController extends BaseController
      * 
      * @return NULL|object Symfony\Component\Form\Form
      */
-    protected function generateTopicForm(Forum $forum) {
+    protected function generateTopicForm($locale, Forum $forum) {
         
         if ($this->getAuthorization()->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $user = $this->get('security.token_storage')->getToken()->getUser();       
-            $this->topic = new Topic();
+            $this->topic = new Topic($locale);
             $this->topic->setForum($forum);
             $this->topic->setUser( $user );
             return $this->createForm(TopicType::class, $this->topic);

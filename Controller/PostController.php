@@ -5,7 +5,7 @@ use Discutea\DForumBundle\Controller\Base\BasePostController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Discutea\DForumBundle\Entity\Post;
 use Discutea\DForumBundle\Form\Type\PostType;
 use Discutea\DForumBundle\Entity\Topic;
@@ -38,8 +38,12 @@ class PostController extends BasePostController
      */
     public function postAction(Request $request, Topic $topic)
     {
-        $preview = false;
+        if($topic->getLocale() != $request->getLocale() ) {
+            throw new NotFoundHttpException('This topic exists but not in this language!');
+        }
 
+        $preview = false;
+        
         $posts = $this->getPaginator()->pagignate('posts', $topic->getPosts());
 
         if (( $form = $this->generatePostForm($request, $topic) ) !== NULL) {

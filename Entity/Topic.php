@@ -93,10 +93,11 @@ class Topic
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct($locale = "en")
     {
         $this->posts = new ArrayCollection();
         $this->date = new \Datetime();    
+        $this->setLocale($locale);
     }
 
     /**

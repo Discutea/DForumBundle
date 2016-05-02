@@ -34,5 +34,4 @@ class CategoryTranslation
     {
         $this->name = $name;
     }
-
 }

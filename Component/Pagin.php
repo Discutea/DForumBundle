@@ -2,7 +2,7 @@
 namespace Discutea\DForumBundle\Component;
 use Knp\Component\Pager\Paginator;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Doctrine\ORM\PersistentCollection;
+
 /**
  * Pagin 
  * Service use knp_paginator for pagination of Discutea\DForumBundle 
@@ -52,7 +52,7 @@ class Pagin
      * @return objet Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination
      * @return objet $collection Doctrine\ORM\PersistentCollection
      */
-    public function pagignate($name, PersistentCollection $collection) {
+    public function pagignate($name, $collection) {
         if ( (array_key_exists($name, $this->config)) &&  ($this->config[$name]["enabled"] === true)) {
             return $this->knpPagignator->paginate(
                     $collection,

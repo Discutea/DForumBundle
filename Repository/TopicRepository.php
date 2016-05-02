@@ -41,7 +41,7 @@ class TopicRepository extends \Doctrine\ORM\EntityRepository
      */
     public function findAllByForumOrderedByDate(Forum $forum, $order = 'DESC')
     {
-      
+        
         $qb = $this->createQueryBuilder('t');
    
         $qb->where('t.forum = :forum')

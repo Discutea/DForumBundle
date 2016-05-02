@@ -19,7 +19,7 @@ class TopicVoter extends Voter
     const CANREADTOPIC = 'CanReadTopic';
     const CANREPLYTOPIC = 'CanReplyTopic';
     const CANEDITTOPIC = 'CanEditTopic';
-    
+
     /**
      *
      * @var object Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface

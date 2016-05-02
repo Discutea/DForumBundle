@@ -133,6 +133,25 @@ class Forum
     }
 
     /**
+     * Get topics by locale
+     *
+     * @param array $locales
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTopicsByLocale(array $locales)
+    {
+        $topics = $this->getTopics()->filter(
+            function($entry) use ($locales) {
+                return in_array($entry->getLocale(), $locales);
+            }
+        ); 
+
+        return $topics;
+    }
+        
+
+        
+    /**
      * Set position
      *
      * @param integer $position
