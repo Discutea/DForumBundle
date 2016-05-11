@@ -32,9 +32,9 @@ class LabelController extends BaseController
             $this->getEm()->flush();
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.label.unmark.solved'));
         } else {
+            $topic->setResolved(true);
             $this->getEm()->persist($topic);
             $this->getEm()->flush();
-            $topic->setResolved(true);
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.label.mark.solved'));
         }
                 
