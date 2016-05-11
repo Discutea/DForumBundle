@@ -107,7 +107,9 @@ class BasePostController extends BaseController
      * @return false|object Discutea\DForumBundle\Entity\Post
      */
     protected function getPreview(Request $request, Form $form, Post $post) {
-        
+       if ( false === $this->container->getParameter('discutea_forum.preview') ) {
+            return false;
+        }
         if ( $form->get('preview')->isClicked() ) {
             $request->getSession()->getFlashBag()->add('warning', $this->getTranslator()->trans('discutea.forum.warning.preview'));
             return $post; 
