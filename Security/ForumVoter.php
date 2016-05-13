@@ -5,7 +5,6 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Doctrine\ORM\EntityManager;
 use Discutea\DForumBundle\Entity\Forum;
 
 /**
@@ -27,8 +26,6 @@ class ForumVoter extends Voter
      * 
      */
     private $decisionManager;
-
-    private $em;
     
     private $request;
 
@@ -36,10 +33,9 @@ class ForumVoter extends Voter
      * 
      * @param AccessDecisionManagerInterface $decisionManager
      */
-    public function __construct(AccessDecisionManagerInterface $decisionManager, EntityManager $em, RequestStack $request)
+    public function __construct(AccessDecisionManagerInterface $decisionManager, RequestStack $request)
     {
         $this->decisionManager = $decisionManager;
-        $this->em = $em;
         $this->request = $request->getCurrentRequest();
     }
     
