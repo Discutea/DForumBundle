@@ -138,8 +138,12 @@ class Forum
      * @param array $locales
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getTopicsByLocale(array $locales)
+    public function getTopicsByLocale($locales)
     {
+        if (false === is_array($locales)) {
+            $locales = array($locales => $locales);
+        }
+        
         $topics = $this->getTopics()->filter(
             function(Topic $entry) use ($locales) {
                 return in_array($entry->getLocale(), $locales);

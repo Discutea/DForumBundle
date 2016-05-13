@@ -28,7 +28,6 @@ class TopicController extends BaseTopicController
      * infos:  Display the topics of a forum
      * 
      * @Route("/cat/{slug}", name="forum_topic")
-     * ParamConverter("forum")
      * @ParamConverter("forum", class="DForumBundle:Forum", options={
      *    "repository_method" = "findByTranslatedSlug",
      *    "mapping": {"slug": "slug", "_locale": "locale"},
@@ -39,9 +38,8 @@ class TopicController extends BaseTopicController
      */
     public function topicAction(Request $request, Forum $forum)
     {
-
         $topics = $forum->getTopicsByLocale( array( $request->getLocale() ) ); 
-      
+        
         $pagination = $this->get('discutea.forum.pagin')->pagignate('topics', $topics);
         
         if (($form = $this->generateTopicForm($request->getLocale(), $forum)) !== NULL) {
@@ -59,7 +57,7 @@ class TopicController extends BaseTopicController
 
             $form = $form->createView();
         }
-
+        
         return $this->render('DForumBundle:topic.html.twig', array(
             'forum' => $forum,
             'pagination' => $pagination,

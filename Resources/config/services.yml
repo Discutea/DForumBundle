@@ -22,7 +22,10 @@ services:
 
     discutea.security.forum_voter:
         class: Discutea\DForumBundle\Security\ForumVoter
-        arguments: ['@security.access.decision_manager']
+        arguments: 
+            - '@security.access.decision_manager'
+            - '@doctrine.orm.entity_manager'
+            - '@request_stack'
         public: false
         tags:
             - { name: security.voter }
@@ -40,3 +43,14 @@ services:
         public: false
         tags:
             - { name: security.voter }
+
+    dforumbundle.twig_extension:
+        class: Discutea\DForumBundle\Twig\DForumExtension
+        arguments: 
+            - '@doctrine.orm.entity_manager'
+            - '@request_stack'
+            - '%hosts%'
+            - '%prefix_url%'
+        public: false
+        tags:
+            - { name: twig.extension }
