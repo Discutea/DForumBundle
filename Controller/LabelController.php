@@ -26,7 +26,7 @@ class LabelController extends BaseController
      */
     public function solvedAction(Request $request, Topic $topic)
     {        
-        if ( $topic->getResolved() ) {
+        if ( $topic->getResolved() !== NULL ) {
             $topic->setResolved(NULL);
             $this->getEm()->persist($topic);
             $this->getEm()->flush();
@@ -52,7 +52,7 @@ class LabelController extends BaseController
      */
     public function pinnedAction(Request $request, Topic $topic)
     {        
-        if ( $topic->getPinned() ) {
+        if ( $topic->getPinned() !== NULL ) {
             $topic->setPinned(NULL);
             $this->getEm()->persist($topic);
             $this->getEm()->flush();
@@ -76,7 +76,7 @@ class LabelController extends BaseController
      */
     public function closedAction(Request $request, Topic $topic)
     {        
-        if ($topic->getClosed() ) {
+        if ($topic->getClosed() !== NULL ) {
             $topic->setClosed(NULL);
             $this->getEm()->persist($topic);
             $this->getEm()->flush();
