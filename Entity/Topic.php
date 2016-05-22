@@ -41,11 +41,6 @@ class Topic
     protected $slug;
 
     /**
-     * @ORM\Column(type="string")
-     */
-    protected $locale;
-
-    /**
      * @ORM\Column(name="created_at", type="datetime")
      */
     protected $date;
@@ -93,11 +88,10 @@ class Topic
     /**
      * Constructor
      */
-    public function __construct($locale = "en")
+    public function __construct()
     {
         $this->posts = new ArrayCollection();
-        $this->date = new \Datetime();    
-        $this->setLocale($locale);
+        $this->date = new \Datetime();
     }
 
     /**
@@ -334,30 +328,6 @@ class Topic
     public function setLastPost($lastPost)
     {
         $this->lastPost = $lastPost;
-
-        return $this;
-    }
-
-    /**
-     * Get locale
-     *
-     * @return string
-     */
-    public function getLocale()
-    {
-        return $this->locale;
-    }
-
-    /**
-     * Set locale
-     *
-     * @param string $locale
-     *
-     * @return Topic
-     */
-    public function setLocale($locale)
-    {
-        $this->locale = $locale;
 
         return $this;
     }

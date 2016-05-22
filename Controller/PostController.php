@@ -38,10 +38,6 @@ class PostController extends BasePostController
      */
     public function postAction(Request $request, Topic $topic)
     {
-        if($topic->getLocale() != $request->getLocale() ) {
-            throw new NotFoundHttpException('This topic exists but not in this language!');
-        }
-
         $preview = false;
         
         $posts = $this->getPaginator()->pagignate('posts', $topic->getPosts());

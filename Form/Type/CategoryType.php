@@ -6,14 +6,14 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CategoryType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('translations', TranslationsType::class)
+            ->add('name', TextType::class)
             ->add('position')
             ->add('readAuthorisedRoles', ChoiceType::class, array(
                 'choices' => $options['roles'],

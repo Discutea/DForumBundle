@@ -4,7 +4,6 @@ namespace Discutea\DForumBundle\Security;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Discutea\DForumBundle\Entity\Forum;
 
 /**
@@ -18,7 +17,6 @@ class ForumVoter extends Voter
 {
     
     const CANREADFORUM = 'CanReadForum';
-    const CANDISPLAYFORUM = 'CanDisplayForum';
     
     /**
      *
@@ -26,23 +24,20 @@ class ForumVoter extends Voter
      * 
      */
     private $decisionManager;
-    
-    private $request;
 
     /**
      * 
      * @param AccessDecisionManagerInterface $decisionManager
      */
-    public function __construct(AccessDecisionManagerInterface $decisionManager, RequestStack $request)
+    public function __construct(AccessDecisionManagerInterface $decisionManager)
     {
         $this->decisionManager = $decisionManager;
-        $this->request = $request->getCurrentRequest();
     }
     
     protected function supports($attribute, $forum)
     {
         // if the attribute isn't one we support, return false
-        if (!in_array($attribute, array(self::CANREADFORUM, self::CANDISPLAYFORUM))) {
+        if (!in_array($attribute, array(self::CANREADFORUM))) {
             return false;
         }
 
@@ -60,8 +55,6 @@ class ForumVoter extends Voter
         switch($attribute) {
             case self::CANREADFORUM:
                 return $this->canReadForum($forum, $token);
-            case self::CANDISPLAYFORUM:
-                return $this->canDisplayForum($forum);
         }
 
         throw new \LogicException('This code should not be reached!');
@@ -82,18 +75,6 @@ class ForumVoter extends Voter
         $roleToRead = $category->getReadAuthorisedRoles();
         
         if ( ($roleToRead === NULL) || ($this->decisionManager->decide($token, array($roleToRead))) ) {
-            return true;
-        }
-
-        return false;
-    }
-
-    public function canDisplayForum(Forum $forum)
-    {
-        $locale = $this->request->getLocale();
-        $translation = $forum->translate($locale);
-
-        if ( ( null !== $translation->getLocale() ) && ( $locale == $translation->getLocale() ) ) {
             return true;
         }
 

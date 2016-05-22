@@ -14,17 +14,11 @@ class ForumType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('translations', TranslationsType::class, array(
-                'fields' => array(
-                    'slug' => array(
-                        'display' => false
-                    )
-                )
-            ))
+            ->add('name', TextType::class)
             ->add('image', UrlType::class)
             ->add('category', EntityType::class, array(
                 'class' => 'DForumBundle:Category',
-                'choice_label' => 'translations[en].name',
+                'choice_label' => 'name',
             ))
             ->add('position')
             ->add('save', SubmitType::class)

@@ -8,7 +8,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Discutea\DForumBundle\Entity\Forum;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * @ORM\Entity(repositoryClass="Discutea\DForumBundle\Repository\CategoryRepository")
@@ -16,7 +15,6 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  */
 class Category 
 {
-use ORMBehaviors\Translatable\Translatable;
     /**
      * @var smallint
      *
@@ -25,6 +23,28 @@ use ORMBehaviors\Translatable\Translatable;
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $name;
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param  string
+     * @return null
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
 
     /**
      * @var integer
@@ -52,12 +72,7 @@ use ORMBehaviors\Translatable\Translatable;
     public function __construct()
     {
         $this->forums = new ArrayCollection();
-		$this->translations = new ArrayCollection();
-    }
-
-    public function __call($method, $arguments)
-    {
-        return \Symfony\Component\PropertyAccess\PropertyAccess::createPropertyAccessor()->getValue($this->translate(), $method);
+        $this->translations = new ArrayCollection();
     }
 
     /**
