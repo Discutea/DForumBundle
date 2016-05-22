@@ -15,7 +15,7 @@ class AbstractPostType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('content', TextareaType::class);
+        $builder->add('content', TextareaType::class, array('label'  => 'discutea.forum.post'));
     }
     
     public function getName()

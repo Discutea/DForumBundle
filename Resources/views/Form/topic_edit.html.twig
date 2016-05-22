@@ -8,14 +8,16 @@
     <div class="col-xs-12">
       {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
       <div class="form-group">
+      {{ form_label(form.title) }}
       {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
       </div>
       <div class="form-group">
+        {{ form_label(form.forum) }}
         {{ form_widget(form.forum, {'attr': {'class': 'form-control'}}) }}
       </div>
     <div class="form-group">
       <div class="pull-right">
-        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary btn-sm'}}) }}
+        <button type="submit" class="btn btn-primary">{{ 'discutea.forum.btn.submit'|trans }}</button>
       </div>
     </div>
       {{ form_end(form) }}

@@ -5,6 +5,7 @@ namespace Discutea\DForumBundle\Form\Type\Model;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class AbstractTopicType extends AbstractType
 {
@@ -14,7 +15,7 @@ class AbstractTopicType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title');
+        $builder->add('title', TextType::class, array('label' => 'discutea.forum.topic.title'));
     }
     
   public function getName()

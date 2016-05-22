@@ -17,12 +17,9 @@ class PostType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         if ($options['preview'] === true) {
             $builder->add('preview', SubmitType::class);
         }
-        
-        $builder->add('save', SubmitType::class);
     }
     
     public function getParent()

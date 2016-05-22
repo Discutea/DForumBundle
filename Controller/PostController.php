@@ -5,7 +5,6 @@ use Discutea\DForumBundle\Controller\Base\BasePostController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Discutea\DForumBundle\Entity\Post;
 use Discutea\DForumBundle\Form\Type\PostType;
 use Discutea\DForumBundle\Entity\Topic;

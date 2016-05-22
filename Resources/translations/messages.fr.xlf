@@ -337,8 +337,8 @@
                 <target>Répondre</target>
             </trans-unit>
             <trans-unit id="d25">
-                <source>Save</source>
-                <target>Sauvegarder</target>
+                <source>discutea.forum.btn.submit</source>
+                <target>Soumettre</target>
             </trans-unit>
             <trans-unit id="d26">
                 <source>Preview</source>
@@ -351,6 +351,10 @@
             <trans-unit id="d28">
                 <source>Next</source>
                 <target>Suivant</target>
+            </trans-unit>
+            <trans-unit id="d29">
+                <source>discutea.forum.choice</source>
+                <target>Sélectionner un forum</target>
             </trans-unit>
         </body>
     </file>

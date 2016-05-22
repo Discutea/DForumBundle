@@ -5,7 +5,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -14,15 +13,17 @@ class ForumType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('description', TextType::class)
-            ->add('image', UrlType::class)
+            ->add('name', TextType::class, array('label' => 'discutea.forum.forum.form.name'))
+            ->add('description', TextType::class, array('label' => 'discutea.forum.forum.form.description'))
+            ->add('image', UrlType::class, array(
+                'required' => false
+            ))
             ->add('category', EntityType::class, array(
-                'class' => 'DForumBundle:Category',
+                'label'        => 'discutea.forum.forum.form.category',
+                'class'        => 'DForumBundle:Category',
                 'choice_label' => 'name',
             ))
             ->add('position')
-            ->add('save', SubmitType::class)
         ;
     }
 

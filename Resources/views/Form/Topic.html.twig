@@ -4,15 +4,16 @@
     {{ form_start(form, {'attr': {'id': 'newTopic', 'class': 'form-horizontal'}}) }}
 
     <div class="form-group">
-              {{ form_label(form.title, 'discutea.forum.topic.title') }}
+              {{ form_label(form.title) }}
               {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
     </div>
     <div class="form-group">
+        {{ form_label(form.content) }}
         {{ form_widget(form.content, {'attr': {'class': 'form-control', 'rows': 16}}) }}
     </div>
     <div class="form-group">
         <div class="pull-right">
-            {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary btn-sm'}}) }}
+            <button type="submit" class="btn btn-primary">{{ 'discutea.forum.btn.submit'|trans }}</button>
         </div>
     </div>
     {{ form_end(form) }}
