@@ -21,51 +21,6 @@ use Discutea\DForumBundle\Controller\Base\BaseController;
  */
 class BaseCategoryController extends BaseController
 {
-
-    /**
-     * Create form for remove forum
-     * 
-     * @param object $category Discutea\DForumBundle\Entity\Category
-     * 
-     * @return object Symfony\Component\Form\Form
-     */
-    protected function getFormRemoverCategory(Category $category) {
-        $form = $this->createFormBuilder()
-            ->add('movedTo', ChoiceType::class, array(
-                'choices' => $this->getAllCategories($category),
-                'choices_as_values' => true,
-            ))
-            ->add('purge', CheckboxType::class, array(
-                'label'    => 'discutea.forum.category.removeall.label',
-                'required' => false,
-            ))
-            ->add('save', SubmitType::class)
-            ->getForm();
-        
-        return $form;
-    }
-    
-    /**
-     * 
-     * Listing all forums order by categories
-     * 
-     * @param object $cats Discutea\DForumBundle\Entity\Category
-     * 
-     * @return array categorie's list ordoned
-     */
-    protected function getAllCategories(Category $cat) {
-        $categories = $this->getEm()->getRepository('DForumBundle:Category')->findBy(array(), array('position' => 'asc', ));
-
-        $cats = array();
-        foreach ($categories as $category) {
-            if ($category !== $cat) {
-                $cats[$category->getName()] = $category->getId();  
-            }
-        }
-
-        return $cats;
-    }
-
     /**
      * Role listing
      * 

@@ -4,6 +4,7 @@ namespace Discutea\DForumBundle\Controller;
 use Discutea\DForumBundle\Controller\Base\BaseCategoryController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Discutea\DForumBundle\Form\Type\Remover\RemoveCategoryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -102,7 +103,7 @@ class CategoryController extends BaseCategoryController
     public function removeCategoryAction(Request $request, Category $category)
     {
 
-        $form = $this->getFormRemoverCategory($category);
+        $form = $this->createForm(RemoveCategoryType::class);
 
         if ($form->handleRequest($request)->isValid()) {
             if ($form->getData()['purge'] === false) {

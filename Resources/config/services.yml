@@ -1,5 +1,5 @@
 services:
-    topic.listener.updatelastpost:
+    discutea.forum.topic.listener.updater:
         class: Discutea\DForumBundle\EventListener\UpdateTopic
         tags:
             - { name: doctrine.event_listener, event: postPersist }
@@ -13,14 +13,14 @@ services:
                 - '%discutea_forum.pagination%'
                 - '%discutea_forum.pagination.pagename%'
 
-    discutea.security.category_voter:
+    discutea.forum.security.category_voter:
         class: Discutea\DForumBundle\Security\CategoryVoter
         arguments: ['@security.access.decision_manager']
         public: false
         tags:
             - { name: security.voter }
 
-    discutea.security.forum_voter:
+    discutea.forum.security.forum_voter:
         class: Discutea\DForumBundle\Security\ForumVoter
         arguments: 
             - '@security.access.decision_manager'
@@ -28,21 +28,21 @@ services:
         tags:
             - { name: security.voter }
 
-    discutea.security.topic_voter:
+    discutea.forum.security.topic_voter:
         class: Discutea\DForumBundle\Security\TopicVoter
         arguments: ['@security.access.decision_manager']
         public: false
         tags:
             - { name: security.voter }
 
-    discutea.security.post_voter:
+    discutea.forum.security.post_voter:
         class: Discutea\DForumBundle\Security\PostVoter
         arguments: ['@security.access.decision_manager']
         public: false
         tags:
             - { name: security.voter }
 
-    dforumbundle.twig_extension:
+    discutea.forum.twig_extension:
         class: Discutea\DForumBundle\Twig\DForumExtension
         arguments: 
             - '@doctrine.orm.entity_manager'
@@ -50,3 +50,15 @@ services:
         public: false
         tags:
             - { name: twig.extension }
+
+    discutea.forum.form.remove.forum:
+        class: Discutea\DForumBundle\Form\Type\Remover\RemoveForumType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type }
+
+    discutea.forum.form.remove.category:
+        class: Discutea\DForumBundle\Form\Type\Remover\RemoveCategoryType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type }

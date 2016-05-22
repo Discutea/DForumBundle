@@ -1,56 +1,52 @@
 <?php
+namespace Discutea\DForumBundle\Form\Type\Remover;
 
-namespace Discutea\DForumBundle\Controller\Base;
-
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Doctrine\ORM\EntityManager;
 
-use Discutea\DForumBundle\Controller\Base\BaseController;
-
-
-/**
- * BaseForumController 
- * 
- * This class contains useful methods for the proper functioning of the forum controller and not method actions.
- * This class extends BaseController.
- * 
- * @package  DForumBundle
- * @author   David Verdier <contact@discutea.com>
- * @access   protected
- */
-class BaseForumController extends BaseController
+class RemoveForumType extends AbstractType
 {
+    /**
+     *
+     * @var type EntityManager
+     */
+    protected $em;
 
     /**
-     * Create form for remove forum
      * 
-     * @return object Symfony\Component\Form\Form
-     */
-    protected function getFormRemoverForum() {
-        $form = $this->createFormBuilder()
+     * @param EntityManager $em
+     */    
+    public function __construct (EntityManager $em) {
+        $this->em = $em;
+    }
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+                
             ->add('movedTo', ChoiceType::class, array(
                 'choices' => $this->getAllForums(),
                 'choices_as_values' => true,
             ))
+                
             ->add('purge', CheckboxType::class, array(
                 'label'    => 'discutea.forum.forum.removeall.label',
                 'required' => false,
             ))
-            ->add('save', SubmitType::class)
-            ->getForm();
-        
-        return $form;
+        ;
     }
-    
+
     /**
      * 
      * Listing all forums order by categories
      * 
      * @return array forum's list ordoned
      */
-    protected function getAllForums() {
-        $categories = $this->getEm()->getRepository('DForumBundle:Category')->findBy(array(), array('position' => 'asc', ));
+    private function getAllForums() {
+        $categories = $this->em->getRepository('DForumBundle:Category')->findBy(array(), array('position' => 'asc', ));
         $fors = array();
 
         foreach ($categories as $category) {
@@ -65,5 +61,10 @@ class BaseForumController extends BaseController
         }
         
         return $fors;
+    }
+
+    public function getName()
+    {
+        return 'forum_remove_forum';
     }
 }

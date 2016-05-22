@@ -1,7 +1,7 @@
 <?php
 namespace Discutea\DForumBundle\Controller;
 
-use Discutea\DForumBundle\Controller\Base\BaseForumController;
+use Discutea\DForumBundle\Controller\Base\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Discutea\DForumBundle\Entity\Category;
 use Discutea\DForumBundle\Entity\Forum;
 use Discutea\DForumBundle\Form\Type\ForumType;
+use Discutea\DForumBundle\Form\Type\Remover\RemoveForumType;
+
 
 /**
  * ForumController 
@@ -21,7 +23,7 @@ use Discutea\DForumBundle\Form\Type\ForumType;
  * @author   David Verdier <contact@discutea.com>
  * @access   public
  */
-class ForumController extends BaseForumController
+class ForumController extends BaseController
 {
 
     /**
@@ -71,10 +73,8 @@ class ForumController extends BaseForumController
             return $this->redirect($this->generateUrl('discutea_forum_moderator_dashboard'));
         }
 
-        $form = $form->createView();
-
         return $this->render('DForumBundle:Admin/forum.html.twig', array(
-            'form' => $form
+            'form' => $form->createView()
         ));
     }
 
@@ -102,11 +102,9 @@ class ForumController extends BaseForumController
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.forum.edit'));
             return $this->redirect($this->generateUrl('discutea_forum_moderator_dashboard'));
         }
-        
-        $form = $form->createView();
 
         return $this->render('DForumBundle:Admin/forum.html.twig', array(
-            'form' => $form
+            'form' => $form->createView()
         ));
     }
 
@@ -126,7 +124,8 @@ class ForumController extends BaseForumController
 
     public function removeForumAction(Request $request, Forum $forum)
     {
-        $form = $this->getFormRemoverForum();
+
+        $form = $this->createForm(RemoveForumType::class);
         
         if ($form->handleRequest($request)->isValid()) {
             if ($form->getData()['purge'] === false) {
