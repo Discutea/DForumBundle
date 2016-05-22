@@ -2,9 +2,6 @@
   <div class="row">
     <div class="col-sm-2 text-center">
       <p><strong>{{ post.poster.username }}</strong></p>
-      <div class="avatar">
-        <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ1kn09Jy4NdTZmgv4issVLY4M3w_dLz5EGUfDk1DGHN1LKsfDa8A" alt="avatar" height="94" width="84">
-      </div>
     </div>
     <div class="col-sm-10">
       <div class="raw">
@@ -25,7 +22,7 @@
         <br /><br />
       </div>
               
-        <div id="content{{ post.id }}" class="raw">{{ post.content|bbcode_filter('forum') }}</div>
+        <div id="content{{ post.id }}" class="raw">{{ post.content }}</div>
       {% if app.user and posts is defined %}
         <ul class="pull-right list-inline">
           <li><a href="{{ path(posts.route, {'slug': posts.params.slug, 'p': posts.pageCount, 'quote': post.id}) }}#discutea_forum_post"><i class="glyphicon glyphicon-tint"></i> {{ 'discutea.forum.quote'|trans }}</a></li>

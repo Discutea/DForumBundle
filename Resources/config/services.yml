@@ -47,8 +47,6 @@ services:
         arguments: 
             - '@doctrine.orm.entity_manager'
             - '@request_stack'
-            - '%hosts%'
-            - '%prefix_url%'
         public: false
         tags:
             - { name: twig.extension }
