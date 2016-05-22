@@ -1,36 +1,30 @@
 {% extends "DForumBundle::layout.html.twig" %}
 
-{% block title %}
-  Forums
-{% endblock %}
+{% block title %}Index Forums{% endblock %}
 
 {% block stylesheets %}
-  {% stylesheets '@DForumBundle/Resources/public/css/category.css' %}
-    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
-  {% endstylesheets %}
+<style>
+.category {
+    padding-top:30px;
+    height:250px;
+    margin-top:20px;
+}
+</style>
 {% endblock %}
 
 {% block body %}
-
-<div class="bg-grayblue">
-    <div class="container">
-    <h1 class="margintop-40">{{ 'discutea.forum.forumlist'|trans }}</h1>
-    <div class="col-md-12">
-
-      {% for category in categories %}
-        {% if is_granted('CanReadCategory', category) %}
-        <div class="section-heading">
-            <h2 class="h-bold">{{ category.name }}</h2>
-            <div class="divider-header"></div>
-        </div>
-        <div class="row forum-category-bloc">
+  <h1 class="text-center">{{ 'discutea.forum.forumlist'|trans }}</h1>
+  <div class="col-md-12">
+    {% for category in categories if is_granted('CanReadCategory', category) %}
+      <h2 class="h-bold">{{ category.name }}</h2>
+      <hr />
+      <div class="row forum-category-bloc">
           {% for forum in category.forums %}
             <div class="col-xs-12 col-sm-6 col-md-4">
               <div class="category thumbnail text-center forum-box color-dark">
-                <h3><a href="{{ path('forum_topic', {'slug': forum.slug}) }}" title="{{ forum.name }}" rel="home">{{ forum.name }}</a></h3>
-                <div class="divider-header"></div>
+                <h3><a href="{{ path('forum_topic', {'slug': forum.slug}) }}" title="{{ forum.name }}">{{ forum.name }}</a></h3>
                 <p>{{ forum.description }}</p>
-                <hr>
+                <hr />
                 <div class="text-center">
                 {% if forum.topics.last != false %}
                     <a class="lastComment" href="{{ path('discutea_forum_post', {'slug': forum.topics.last.slug}) }}#p{{ forum.topics.last.posts.last.id }}">
@@ -44,14 +38,13 @@
                 {% endif %}
                 </div>
               </div>
-            </div>    
+            </div>
+          {% else %}
+            <p class="text-center"><a class="btn btn-primary" href="{{ path('discutea_forum_create_forum', {'id': category.id}) }}">{{ 'discutea.forum.category.addforum'|trans }}</a></p>
           {% endfor %}
-
-        </div>
-        {% endif %}
-      {% endfor %}
-
-    </div>
-    </div>
-</div>
+      </div>  
+    {% else %}
+      <p class="text-center"><a class="btn btn-primary" href="{{ path('discutea_forum_create_category') }}"> {{ 'discutea.forum.category.createnew'|trans }} </a></p>
+    {% endfor %}
+  </div>
 {% endblock %}

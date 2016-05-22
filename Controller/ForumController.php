@@ -26,7 +26,7 @@ class ForumController extends BaseForumController
 
     /**
      *
-     * @Route("/", name="forum_homepage")
+     * @Route("/", name="discutea_forum_homepage")
      * 
      * @return objet Symfony\Component\HttpFoundation\Response
      * 

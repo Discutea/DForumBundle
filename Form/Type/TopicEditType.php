@@ -19,7 +19,7 @@ class TopicEditType extends AbstractType
         $builder
             ->add('forum', EntityType::class, array(
                 'class' => 'DForumBundle:Forum',
-                'choice_label' => 'translations[en].name',
+                'choice_label' => 'name',
             ))
             ->add('save', SubmitType::class)
         ;

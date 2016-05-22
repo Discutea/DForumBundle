@@ -2,92 +2,33 @@
 
 {% block title %}{{ topic.title }}{% endblock %}
 
-{% block stylesheets %}
-  {% stylesheets 
-    '@DForumBundle/Resources/public/css/post.css' %}
-  <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
-  {% endstylesheets %}
-{% endblock %}
-
 {% block body %}
-<div class="container">
-<h1 class="text-center">{{ topic.title }}</h1>
-
+  <h1 class="text-center">{{ topic.title }}</h1>
   {{ knp_pagination_render(posts) }}
   
   {% if topic.closed == 1 %}
-    <div class="alert alert-danger" role="alert">{{ 'discutea.forum.label.closed'|trans }}</div>
+    <div class="alert alert-danger">{{ 'discutea.forum.label.closed'|trans }}</div>
   {% endif %}
   {% if topic.resolved == 1 %}
-    <div class="alert alert-success" role="alert">{{ 'discutea.forum.label.issolved'|trans }}</div>
+    <div class="alert alert-success">{{ 'discutea.forum.label.issolved'|trans }}</div>
   {% endif %}
   {% if topic.pinned == 1 %}
-    <div class="alert alert-warning" role="alert">{{ 'discutea.forum.label.ispinned'|trans }}</div>
+    <div class="alert alert-warning">{{ 'discutea.forum.label.ispinned'|trans }}</div>
   {% endif %}
-  <div class="clearfix"></div>
-  
-  <ul id="postsList" class="list-unstyled">
-    {% for post in posts %}
-        {% include 'DForumBundle:Post:single-post.html.twig' %}
-    {% endfor %}
-    
-    {% if postpreview %}
-        {% include 'DForumBundle:Post:preview-post.html.twig' %}
-    {% endif %}
-    
-    {% if is_granted('CanEditTopic', topic) %}
-        {% include 'DForumBundle:label.html.twig' %}
-    {% endif %}
+
+  <ul class="list-unstyled">
+    {% for post in posts %}{% include 'DForumBundle:Post:single-post.html.twig' %}{% endfor %}
+    {% if postpreview %}{% include 'DForumBundle:Post:preview-post.html.twig' %}{% endif %}
+    {% if is_granted('CanEditTopic', topic) %}{% include 'DForumBundle:label.html.twig' %}{% endif %}
   </ul>
+
   {{ knp_pagination_render(posts) }}
-  {% if form is not null %}
-  <h2>{{ topic.title }}</h2>
-  {% if date(topic.lastpost) < date('-1month') %}
-      <div class="alert alert-danger text-center" role="alert">{{ 'discutea.forum.post.aged'|trans }}</div>
-  {% endif %}
   
-   {% include 'DForumBundle:Form:Post.html.twig' %}
-
-  {% endif %}
-  <div class="clearfix"></div>
-      {# Booststrap Modals #}
-    {% if is_granted('ROLE_MODERATOR') %}
-    <div class="modal fade" id="deletepost" tabindex="-1" role="dialog" aria-labelledby="deletePostLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="deletePostLabel">{{ 'discutea.forum.confirm'|trans }}</h4>
-          </div>
-          <div class="modal-body">
-            <div class="alert alert-warning" role="alert"><p>{{ 'discutea.forum.post.want'|trans }}</p></div>
-            <div id="firstMsg" class="alert alert-danger" role="alert"><p>{{ 'discutea.forum.post.confirmfirst'|trans }}</p></div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'discutea.forum.cancel'|trans }}</button>
-            <a href="#" class="btn btn-danger">{{ 'discutea.forum.valid'|trans }}</a>
-          </div>
-        </div>
-      </div>
-    </div>
+  {% if form is not null %}
+    <h2>{{ topic.title }}</h2>
+    {% if date(topic.lastpost) < date('-1month') %}
+      <div class="alert alert-danger text-center" role="alert">{{ 'discutea.forum.post.aged'|trans }}</div>
     {% endif %}
-</div>
-{% endblock %}
-
-
-{% block js %}
-  {% if app.user %}
-    {% if is_granted('ROLE_MODERATOR') %}
-        {% javascripts
-          '@DForumBundle/Resources/public/js/post.js'
-          '@DForumBundle/Resources/public/js/moderator/post.js' %}
-          <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}       
-    {% else %}
-        {% javascripts
-          '@DForumBundle/Resources/public/js/post.js' %}
-          <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}
-    {% endif %}
+    {% include 'DForumBundle:Form:Post.html.twig' %}
   {% endif %}
 {% endblock %}

@@ -7,7 +7,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
-use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ForumType extends AbstractType
 {
@@ -15,6 +15,7 @@ class ForumType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
+            ->add('description', TextType::class)
             ->add('image', UrlType::class)
             ->add('category', EntityType::class, array(
                 'class' => 'DForumBundle:Category',

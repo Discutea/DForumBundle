@@ -1,78 +1,60 @@
 <!DOCTYPE html>
-<html lang="fr">
+{% set pagetitle %}{% block title %}{{ 'home.meta.title'|trans }}{% endblock %}{% endset %}
+<html lang="{{ app.request.locale }}">
   <head>
-    <title>{% block title %}IRCz{% endblock %}</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+    <meta charset="utf-8" />
     <!--[if lt IE 9]>
-      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
-        <!-- css -->
-    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>{{ pagetitle }}</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <style>
+        body {
+            padding-top: 50px;
+        }
+        .starter-template {
+            padding: 40px 15px;
+        }
+    </style>
     {% block stylesheets %}{% endblock %}
-    {% block extends_stylesheets %}{% endblock %}
   </head>
-
-<body id="page-top">
-    <!-- Navigation -->
-    <div id="navigation">
-        <nav class="navbar navbar-custom" role="navigation">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="site-logo">
-                            <a href="" class="brand">#IRCz</a>
-                         </div>
-                    </div>
-                    <div class="col-md-10">
-                        <!-- Brand and toggle get grouped for better mobile display -->
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
-                                <i class="fa fa-bars"></i>
-                            </button>
-                        </div>
-                        <!-- Collect the nav links, forms, and other content for toggling -->
-                        <div class="collapse navbar-collapse" id="menu">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li class="active"><a href=""></a></li>
-                                <li><a href=""></a></li>
-                                <li><a href="#"></a></li>
-                                <li><a href="#"></a></li>
-                                <li><a href="#"></a></li>				                                                                  
-                            </ul>
-                        </div>
-                        <!-- /.Navbar-collapse -->
-                    </div>
-                </div>
-            </div>
-            <!-- /.container -->
-        </nav>
-    </div> 
-    <!-- /Navigation -->  
-
-    {% block extends_tbody %}{% endblock %}
-    {% block body %}{% endblock %}
-
-    
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <ul class="footer-menu">
-                        <li><a href="/"></a></li>
-                    </ul>
-                </div>
-                <div class="col-md-6 text-right">
-                    <p>&copy;Copyright 2016 - Discutea.com</p>
-                </div>
-            </div>	
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">DForumBundle</a>
         </div>
-    </footer>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
-{% block js %}{% endblock %}
-</body>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="{{ path('discutea_forum_homepage') }}">Home</a></li>
+            <li><a href="{{ path('discutea_forum_admin_dashboard') }}">Admin</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="starter-template">
+
+      {% for label, flashes in app.session.flashbag.all %}
+        {% for flash in flashes %}
+          <div class="alert alert-{{ label }}">{{ flash }}</div>
+        {% endfor %}
+      {% endfor %}
+
+      {% block body %}{% endblock %}
+
+      </div>
+    </div><!-- /.container -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  </body>
 </html>

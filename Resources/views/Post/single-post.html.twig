@@ -17,15 +17,7 @@
             {% endif %}
             {% if is_granted('ROLE_MODERATOR') %}
               <li>
-                <a href=""
-                {% if topic.posts.first.id == post.id %}
-                  data-firstpost="true"
-                {% else %}
-                  data-firstpost="false"
-                {% endif %}
-                  title="Delete" data-toggle="modal" data-target="#deletepost" data-link="{{ path('discutea_forum_post_delete', {'id': post.id}) }}">
-                  <i class="glyphicon glyphicon-remove"></i> {{ 'discutea.forum.remove'|trans }}
-                </a>
+                <a href="{{ path('discutea_forum_post_delete', {'id': post.id}) }}"><i class="glyphicon glyphicon-remove"></i> {{ 'discutea.forum.remove'|trans }}</a>
               </li>    
             {% endif %}
           </ul>

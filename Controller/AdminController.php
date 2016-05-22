@@ -29,7 +29,7 @@ class AdminController extends BaseController
      * 
      * Moderator's dashboard
      * 
-     * @Route("/admin", name="discutea_forum_moderator_dashboard")
+     * @Route("/admin", name="discutea_forum_admin_dashboard")
      * @Security("is_granted('ROLE_MODERATOR')")
      * 
      */

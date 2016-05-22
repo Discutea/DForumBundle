@@ -76,7 +76,7 @@ class PostController extends BasePostController
      * 
      * @return object Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction(Post $post)
+    public function deleteAction(Request $request, Post $post)
     {
         $topic = $post->getTopic();
 
