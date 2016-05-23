@@ -4,6 +4,7 @@ namespace Discutea\DForumBundle\Twig;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\User\UserInterface as Poster;
+use Discutea\DForumBundle\Entity\Forum;
 
 class DForumExtension extends \Twig_Extension
 {
@@ -33,7 +34,7 @@ class DForumExtension extends \Twig_Extension
     {
         $posts = $this->em->getRepository('DForumBundle:Post')->findBy(
             array('poster' => $poster),
-            array('date' => 'ASC'),
+            array('date' => 'DESC'),
             $limit,
             null);
 
@@ -44,7 +45,7 @@ class DForumExtension extends \Twig_Extension
     {
         $topics = $this->em->getRepository('DForumBundle:Topic')->findBy(
             array('user' => $poster),
-            array('date' => 'ASC'),
+            array('date' => 'DESC'),
             $limit,
             null);
 
@@ -55,7 +56,7 @@ class DForumExtension extends \Twig_Extension
     {
         $topics = $this->em->getRepository('DForumBundle:Topic')->findBy(
             array(),
-            array('date' => 'ASC'),
+            array('date' => 'DESC'),
             $limit,
             null);
 
@@ -66,7 +67,7 @@ class DForumExtension extends \Twig_Extension
     {
         $topics = $this->em->getRepository('DForumBundle:Topic')->findBy(
             array('closed' => true),
-            array('date' => 'ASC'),
+            array('date' => 'DESC'),
             $limit,
             null);
 
@@ -77,7 +78,7 @@ class DForumExtension extends \Twig_Extension
     {
         $topics = $this->em->getRepository('DForumBundle:Topic')->findBy(
             array('pinned' => true),
-            array('date' => 'ASC'),
+            array('date' => 'DESC'),
             $limit,
             null);
 
@@ -88,7 +89,7 @@ class DForumExtension extends \Twig_Extension
     {
         $topics = $this->em->getRepository('DForumBundle:Topic')->findBy(
             array('resolved' => true),
-            array('date' => 'ASC'),
+            array('date' => 'DESC'),
             $limit,
             null);
 
@@ -99,7 +100,7 @@ class DForumExtension extends \Twig_Extension
     {
         $posts = $this->em->getRepository('DForumBundle:Post')->findBy(
             array(),
-            array('date' => 'ASC'),
+            array('date' => 'DESC'),
             $limit,
             null);
 
@@ -107,12 +108,13 @@ class DForumExtension extends \Twig_Extension
     }
     public function dfLastPostsEdited($limit = null)
     {
-        $posts = $this->em->getRepository('DForumBundle:Post')->findLastEdited();
+       
+        $posts = $this->em->getRepository('DForumBundle:Post')->findLastEdited($limit);
 
         return $posts;
     }
     
-    public function dfLastTopicInForum($forum)
+    public function dfLastTopicInForum(Forum $forum)
     {
         $topic = $this->em->getRepository('DForumBundle:Topic')->findOneBy(
             array('forum' => $forum, 'pinned' => null),
