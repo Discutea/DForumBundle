@@ -1,55 +1,60 @@
-# ForumBundle
-Forum Bundle for symfony 3;x
+INFORMATION SUR LE BUNDLE:
 
-xxx: require php intl
-xxx: composer require twig/extensions
+Cet ensemble est conçu pour le framework Symfony 3 et PHP >= 5.x | 7.x
 
-app/config/service.yml
-    twig.extension.intl:
-        class: Twig_Extensions_Extension_Intl
-        tags:
-            - { name: twig.extension }
+Ce projet a été réalisé pour les besoins de discutea et IRCz qui sont en cours de construction sur Symfony3.
+Ce projet est amateur, mon linkedin: https://www.linkedin.com/in/verdierdavid si mon travail vous satisfait sachez que je cherche à travailler avec le Framework Symfony
+
+Disponible sur: 
+* Github
+* Packagist
+* KnpBundles
+
+CARACTERISTIQUES:
+
+Ce bundle offre les fonctionnalités suivantes:
+
+* Catégorie : Créer / modifier / supprimer / Déplacer un forum.
+* Forum : Créer / Modifier / Supprimer / Déplacer un topic.
+* Topics : Créer / Modifier / Supprimer / Déplacer
+* Posts : Créer / Modifier / Supprimer
+* Labels : Resolu / Épinglé / Fermé
+* D'autres fonctionnalités arriveront par la suite
 
 
-Voter's list:
+Installation du bundle forum de discutea
 
-canReadCategory($category)
-canReadForum($forum)
-canReadTopic($topic)
-canReplyTopic($topic)
-canEditTopic($topic)
-canReplyPost($post)
-canEditPost($post)
+Avant de commencer installer KnpPaginatorBundle si cela n'est pas déjà fait.
 
-#app/config.yml
-framework:
-    translator: ~
+1: Ajouter la dependance à votre configuration composer
+    "discutea/forum-bundle": "dev-master"
 
+2: Mettre à jour les paquets
+   composer update
+
+3: Enregistrer DForumBundle dans votre kernel
+   # app/AppKernel.php
+   new Discutea\DForumBundle\DForumBundle(),
+
+4: Ajouter les routes
+   # app/Config/routing.yml
+   
+   discutea_forum:
+    resource: "@DForumBundle/Resources/config/routing.yml"
+    prefix:   /
+
+5: Ajouter la configuration du bundle:
+
+# Configuration de l'entité utilisateur
 doctrine:
     orm:
-        ...
+        auto_generate_proxy_classes: "%kernel.debug%"
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
         resolve_target_entities:
-            Symfony\Component\Security\Core\User\UserInterface: Acme\YourUserBundle\Entity\User
+            Symfony\Component\Security\Core\User\UserInterface: IRCz\UsersBundle\Entity\Users
 
-knp_paginator:
-    # default page range used in pagination control
-    page_range: 3
-    default_options:
-        # page query parameter name
-        page_name: p
-        # sort field query parameter name
-        sort_field_name: sort
-        # sort direction query parameter name
-        sort_direction_name: direction
-        # ensure distinct results, useful when ORM queries are using GROUP BY statements
-        distinct: true
-    template:
-        # sliding pagination controls template
-        pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig
-        # sort link template
-        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig
-
-
+# Configuration discutea forum
 discutea_forum:
     preview:
         enabled: true
@@ -61,4 +66,25 @@ discutea_forum:
         posts:
             enabled: true
             per_page: 10
-
+  
+  6: Faites la mise à jour de la base de données
+      php bin/console doctrine:schema:update --force
+      
+  C'est prêt, rendez-vous à l'adresse /forum et créez votre première categorie et votre premier forum
+  
+  Plus de documentation:
+      - Installation
+      - Modifier les vues
+      - Les voters
+      - Le twig helper
+      - Ajouter des bbcodes
+      - Ajouter un breadcrumb
+  
+  INFORMATIONS PRATIQUES
+  
+  Pour une aide ou demander des fonctionalités merci de me joindre sur IRC (Anglais ou Français)
+    - serveur: irc.ircz.fr:6667
+    - salon:   #IRCz
+    
+  Pour les problèmes, merci d'ouvrir un ticket sur GitHub
+    
