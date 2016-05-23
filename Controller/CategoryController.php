@@ -48,10 +48,8 @@ class CategoryController extends BaseController
             return $this->redirect($this->generateUrl('discutea_forum_moderator_dashboard'));
         }
 
-        $form = $form->createView();
-
         return $this->render('DForumBundle:Admin/category.html.twig', array(
-            'form' => $form
+            'form' => $form->createView()
         ));
     }
 

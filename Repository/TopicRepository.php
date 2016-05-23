@@ -32,7 +32,7 @@ class TopicRepository extends \Doctrine\ORM\EntityRepository
         
         return $lastTopics;
     }
-
+    
     /**
      * infos: Find lastTopics list
      *

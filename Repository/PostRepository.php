@@ -31,4 +31,22 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
         
         return $lastPosts;
     }
+
+    /**
+     * infos: Find lastEdited 
+     *
+     * @param class Discutea\DForumBundle\Entity\Forum $forum
+     * @return array $forumsList
+     */
+    public function findLastEdited()
+    {
+        
+        $qb = $this->createQueryBuilder('p');
+   
+        $qb->where('p.updated is not null')
+           ->addOrderBy("p.updated", 'ASC');
+    
+        return $qb->getQuery()->getResult();
+    }
+
 }
