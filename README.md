@@ -87,4 +87,3 @@ discutea_forum:
     - salon:   #IRCz
     
   Pour les problèmes, merci d'ouvrir un ticket sur GitHub
-    
