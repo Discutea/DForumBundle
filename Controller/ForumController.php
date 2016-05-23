@@ -67,8 +67,9 @@ class ForumController extends BaseController
         $form = $this->createForm(ForumType::class, $forum);
 
         if ($form->handleRequest($request)->isValid()) {
-            $this->getEm()->persist($forum);
-            $this->getEm()->flush();
+            $em = $this->getEm();
+            $em->persist($forum);
+            $em->flush();
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.forum.created'));
             return $this->redirect($this->generateUrl('discutea_forum_moderator_dashboard'));
         }
@@ -97,8 +98,9 @@ class ForumController extends BaseController
         $form = $this->createForm(ForumType::class, $forum);
 
         if ($form->handleRequest($request)->isValid()) {
-            $this->getEm()->persist($forum);
-            $this->getEm()->flush();
+            $em = $this->getEm();
+            $em->persist($forum);
+            $em->flush();
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.forum.edit'));
             return $this->redirect($this->generateUrl('discutea_forum_moderator_dashboard'));
         }
@@ -126,22 +128,22 @@ class ForumController extends BaseController
     {
 
         $form = $this->createForm(RemoveForumType::class);
-        
+        $em = $this->getEm();
         if ($form->handleRequest($request)->isValid()) {
             if ($form->getData()['purge'] === false) {
-                $newFor = $this->getEm()->getRepository('DForumBundle:Forum')->find($form->getData()['movedTo']) ;
+                $newFor = $em->getRepository('DForumBundle:Forum')->find($form->getData()['movedTo']) ;
                 
                 foreach ($forum->getTopics() as $topic) { $topic->setForum($newFor); }
                 
-                $this->getEm()->flush();
-                $this->getEm()->clear();
+                $em->flush();
+                $em->clear();
                 $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.forum.movedtopics'));
             }
             
             
-            $forum = $this->getEm()->getRepository('DForumBundle:Forum')->find($forum->getId()); // Fix detach error
-            $this->getEm()->remove($forum);
-            $this->getEm()->flush();
+            $forum = $em->getRepository('DForumBundle:Forum')->find($forum->getId()); // Fix detach error
+            $em->remove($forum);
+            $em->flush();
 
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.forum.delete'));
             return $this->redirect($this->generateUrl('discutea_forum_moderator_dashboard'));

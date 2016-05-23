@@ -35,11 +35,12 @@ class AdminController extends BaseController
      */
     public function indexAction()
     {
-        $posts = $this->getEm()->getRepository('DForumBundle:Post')->findBy(array(), array('date' => 'desc'));
-        $topics = $this->getEm()->getRepository('DForumBundle:Topic')->findBy(array(), array('date' => 'desc'));
+        $em = $form->createView();
+        $posts = $em->getRepository('DForumBundle:Post')->findBy(array(), array('date' => 'desc'));
+        $topics = $em->getRepository('DForumBundle:Topic')->findBy(array(), array('date' => 'desc'));
         if ($this->getAuthorization()->isGranted('ROLE_ADMIN')) {
-            $forums = $this->getEm()->getRepository('DForumBundle:Forum')->findAll();
-            $categories = $this->getEm()->getRepository('DForumBundle:Category')->findBy(array(), array('position' => 'desc', ));
+            $forums = $em->getRepository('DForumBundle:Forum')->findAll();
+            $categories = $em->getRepository('DForumBundle:Category')->findBy(array(), array('position' => 'desc', ));
         } else {
             $forums = NULL;
             $categories = NULL;

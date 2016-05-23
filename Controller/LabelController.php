@@ -26,15 +26,17 @@ class LabelController extends BaseController
      */
     public function solvedAction(Request $request, Topic $topic)
     {        
+        $em = $this->getEm();
         if ( $topic->getResolved() !== NULL ) {
             $topic->setResolved(NULL);
-            $this->getEm()->persist($topic);
-            $this->getEm()->flush();
+            
+            $em->persist($topic);
+            $em->flush();
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.label.unmark.solved'));
         } else {
             $topic->setResolved(true);
-            $this->getEm()->persist($topic);
-            $this->getEm()->flush();
+            $em->persist($topic);
+            $em->flush();
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.label.mark.solved'));
         }
                 
@@ -51,16 +53,17 @@ class LabelController extends BaseController
      *
      */
     public function pinnedAction(Request $request, Topic $topic)
-    {        
+    {
+        $em = $this->getEm();
         if ( $topic->getPinned() !== NULL ) {
             $topic->setPinned(NULL);
-            $this->getEm()->persist($topic);
-            $this->getEm()->flush();
+            $em->persist($topic);
+            $em->flush();
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.label.unmark.pinned'));
         } else {
             $topic->setPinned(true);
-            $this->getEm()->persist($topic);
-            $this->getEm()->flush();
+            $em->persist($topic);
+            $em->flush();
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.label.mark.pinned'));
         }
  
@@ -75,16 +78,17 @@ class LabelController extends BaseController
      *
      */
     public function closedAction(Request $request, Topic $topic)
-    {        
+    {
+        $em = $this->getEm();
         if ($topic->getClosed() !== NULL ) {
             $topic->setClosed(NULL);
-            $this->getEm()->persist($topic);
-            $this->getEm()->flush();
+            $em->persist($topic);
+            $em->flush();
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.label.unmark.closed'));
         } else {
             $topic->setClosed(true);
-            $this->getEm()->persist($topic);
-            $this->getEm()->flush();
+            $em->persist($topic);
+            $em->flush();
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.label.mark.closed'));
         }
  

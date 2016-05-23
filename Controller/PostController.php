@@ -45,8 +45,9 @@ class PostController extends BasePostController
 
             if ($form->handleRequest($request)->isValid()) {
                 if ( !$preview = $this->getPreview($request, $form, $this->post) ) {
-                    $this->getEm()->persist($this->post);
-                    $this->getEm()->flush();
+                    $em = $this->getEm();
+                    $em->persist($this->post);
+                    $em->flush();
                     $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.post.create'));
                     return $this->redirectAfterPost($posts);
                 }
@@ -81,14 +82,16 @@ class PostController extends BasePostController
 
         if ($topic->getPosts()->first() === $post)
         {
-            $this->getEm()->remove($topic);
-            $this->getEm()->flush();
+            $em = $this->getEm();
+            $em->remove($topic);
+            $em->flush();
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.topic.delete'));
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.post.deleteall'));
             $redirect = $this->generateUrl('forum_topic', array('slug' => $topic->getForum()->getSlug()));
         } else {
-            $this->getEm()->remove($post);
-            $this->getEm()->flush();
+            $em = $this->getEm();
+            $em->remove($post);
+            $em->flush();
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.post.delete'));
             $redirect = $this->generateUrl('discutea_forum_post', array('slug' => $topic->getSlug())); 
         }

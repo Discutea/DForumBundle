@@ -1,7 +1,7 @@
 <?php
 namespace Discutea\DForumBundle\Controller;
 
-use Discutea\DForumBundle\Controller\Base\BaseCategoryController;
+use Discutea\DForumBundle\Controller\Base\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Discutea\DForumBundle\Form\Type\Remover\RemoveCategoryType;
@@ -21,7 +21,7 @@ use Discutea\DForumBundle\Form\Type\CategoryType;
  * @author   David Verdier <contact@discutea.com>
  * @access   public
  */
-class CategoryController extends BaseCategoryController
+class CategoryController extends BaseController
 {
     /**
      * 
@@ -41,7 +41,7 @@ class CategoryController extends BaseCategoryController
         $form = $this->createForm(CategoryType::class, $category, array('roles' => $this->getRolesList()));
 
         if ($form->handleRequest($request)->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->getEm();
             $em->persist($category);
             $em->flush();
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.category.created'));
@@ -74,16 +74,15 @@ class CategoryController extends BaseCategoryController
         $form = $this->createForm(CategoryType::class, $category, array('roles' => $this->getRolesList()));
 
         if ($form->handleRequest($request)->isValid()) {
-            $this->getEm()->persist($category);
-            $this->getEm()->flush();
+            $em = $this->getEm();
+            $em->persist($category);
+            $em->flush();
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.category.edit'));
             return $this->redirect($this->generateUrl('discutea_forum_moderator_dashboard'));
         }
-        
-        $form = $form->createView();
 
         return $this->render('DForumBundle:Admin/category.html.twig', array(
-            'form' => $form
+            'form' => $form->createView()
         ));
     }
 
@@ -106,20 +105,22 @@ class CategoryController extends BaseCategoryController
         $form = $this->createForm(RemoveCategoryType::class);
 
         if ($form->handleRequest($request)->isValid()) {
+            $em = $this->getEm();
             if ($form->getData()['purge'] === false) {
                 $forums = $category->getForums();
-                $newCat = $this->getEm()->getRepository('DForumBundle:Category')->find($form->getData()['movedTo']) ;
+                
+                $newCat = $em->getRepository('DForumBundle:Category')->find($form->getData()['movedTo']) ;
                 
                 foreach ($forums as $forum) { $forum->setCategory($newCat); }
 
-                $this->getEm()->flush();
-                $this->getEm()->clear();
+                $em->flush();
+                $em->clear();
                 $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.category.movedforums'));
             }
             
-            $category = $this->getEm()->getRepository('DForumBundle:Category')->find($category->getId()); // Fix detach error;
-            $this->getEm()->remove($category);
-            $this->getEm()->flush();
+            $category = $em->getRepository('DForumBundle:Category')->find($category->getId()); // Fix detach error;
+            $em->remove($category);
+            $em->flush();
 
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.category.delete'));
             return $this->redirect($this->generateUrl('discutea_forum_moderator_dashboard'));

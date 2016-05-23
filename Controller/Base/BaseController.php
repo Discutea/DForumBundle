@@ -78,4 +78,22 @@ class BaseController extends Controller
         
         return $this->translator;
     }
+
+    /**
+     * Role listing
+     * 
+     * @return array $roles
+     */
+    protected function getRolesList()
+    {
+        $rolesList = $this->get('service_container')->getParameter('security.role_hierarchy.roles');
+        $roles = array();
+        $roles['Aucun'] = NULL;
+        foreach ($rolesList as $roleParent) {
+            foreach ($roleParent as $roleChild) {
+                $roles[$roleChild] = $roleChild;  
+            }  
+        }
+        return $roles;
+    }
 }

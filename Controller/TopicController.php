@@ -42,10 +42,10 @@ class TopicController extends BaseTopicController
             if ($form->handleRequest($request)->isValid()) {
                 $content = $form->get('content')->getData();
                 $post = $this->createPost($content, $this->topic);
-
-                $this->getEm()->persist($this->topic);
-                $this->getEm()->persist($post);
-                $this->getEm()->flush();
+                $em = $this->getEm();
+                $em->persist($this->topic);
+                $em->persist($post);
+                $em->flush();
 
                 $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.topic.create'));
                 return $this->redirect($this->generateUrl('discutea_forum_post', array('slug' => $this->topic->getSlug())));
@@ -69,8 +69,9 @@ class TopicController extends BaseTopicController
     public function deleteAction(Request $request, Topic $topic)
     {
         $forumSlug = $topic->getForum()->getSlug();
-        $this->getEm()->remove($topic);
-        $this->getEm()->flush();
+        $em = $this->getEm();
+        $em->remove($topic);
+        $em->flush();
         $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.topic.delete'));
         return $this->redirect($this->generateUrl('forum_topic', array('slug' => $forumSlug)));       
  
