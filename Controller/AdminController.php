@@ -35,7 +35,7 @@ class AdminController extends BaseController
      */
     public function indexAction()
     {
-        $em = $form->createView();
+        $em = $this->getEm();
         $posts = $em->getRepository('DForumBundle:Post')->findBy(array(), array('date' => 'desc'));
         $topics = $em->getRepository('DForumBundle:Topic')->findBy(array(), array('date' => 'desc'));
         if ($this->getAuthorization()->isGranted('ROLE_ADMIN')) {

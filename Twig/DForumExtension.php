@@ -4,15 +4,23 @@ namespace Discutea\DForumBundle\Twig;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\User\UserInterface as Poster;
+use Discutea\DForumBundle\Component\Pagin;
 use Discutea\DForumBundle\Entity\Forum;
+use Discutea\DForumBundle\Entity\Post;
 
 class DForumExtension extends \Twig_Extension
 {
     
     private $em;
 
-    public function __construct (EntityManager $em) {
+    /*
+     * @var object Knp\Component\Pager\Paginator
+     */
+    private $pagin;
+
+    public function __construct (EntityManager $em, Pagin $pagin) {
         $this->em = $em;
+        $this->pagin = $pagin;
     }
     
     public function getFunctions()
@@ -27,6 +35,7 @@ class DForumExtension extends \Twig_Extension
             new \Twig_SimpleFunction('dfLastPosts', array($this, 'dfLastPosts')),
             new \Twig_SimpleFunction('dfLastPostsEdited', array($this, 'dfLastPostsEdited')),
             new \Twig_SimpleFunction('dfLastTopicInForum', array($this, 'dfLastTopicInForum')),
+			new \Twig_SimpleFunction('dfPostsPageCount', array($this, 'dfPostsPageCount')),
         );
     }
 
@@ -121,7 +130,15 @@ class DForumExtension extends \Twig_Extension
             array('lastPost' => 'DESC'));
         return $topic;
     }
+
+    public function dfPostsPageCount(Post $post)
+    {
+        $topic = $post->getTopic();
+        $posts = $this->pagin->pagignate('posts', $topic->getPosts());
     
+        return $posts->getPageCount();
+    }
+
     public function getName()
     {
         return 'discutea.forumbundle_extension';
