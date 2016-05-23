@@ -38,7 +38,7 @@ Avant de commencer installer KnpPaginatorBundle si cela n'est pas déjà fait.
 
 4: Ajouter les routes
    # app/Config/routing.yml
-   
+
    discutea_forum:
     resource: "@DForumBundle/Resources/config/routing.yml"
     prefix:   /
@@ -46,26 +46,39 @@ Avant de commencer installer KnpPaginatorBundle si cela n'est pas déjà fait.
 5: Ajouter la configuration du bundle:
 
 # Configuration de l'entité utilisateur
-doctrine:
-    orm:
-        auto_generate_proxy_classes: "%kernel.debug%"
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
-        resolve_target_entities:
-            Symfony\Component\Security\Core\User\UserInterface: IRCz\UsersBundle\Entity\Users
 
-# Configuration discutea forum
-discutea_forum:
-    preview:
-        enabled: true
+    doctrine:
+        orm:
+            auto_generate_proxy_classes: "%kernel.debug%"
+            naming_strategy: doctrine.orm.naming_strategy.underscore
+            auto_mapping: true
+            resolve_target_entities:
+                Symfony\Component\Security\Core\User\UserInterface: IRCz\UsersBundle\Entity\Users
+    
+    # Configurer knp paginator attention changer bien le page_name
     knp_paginator:
-        page_name: p
-        topics:
+        page_range: 3
+        default_options:
+            page_name: p
+            sort_field_name: sort
+            sort_direction_name: direction
+            distinct: true
+        template:
+            pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig
+            sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig
+
+    # Configuration discutea forum
+    discutea_forum:
+        preview:
             enabled: true
-            per_page: 10
-        posts:
-            enabled: true
-            per_page: 10
+        knp_paginator:
+            page_name: p
+            topics:
+                enabled: true
+                per_page: 10
+            posts:
+                enabled: true
+                per_page: 10
   
   6: Faites la mise à jour de la base de données
       php bin/console doctrine:schema:update --force

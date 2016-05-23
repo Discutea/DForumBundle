@@ -39,10 +39,9 @@ class Pagin
      */
     public function __construct(RequestStack $request = null, Paginator $knpPagignator, $paginationConfig, $queryName)
     {
-		if ($request !== null) {
-			$this->request = $request->getCurrentRequest()->query;
-		}
-        
+        if ($request !== null) {
+            $this->request = $request->getCurrentRequest()->query;
+        }
         $this->knpPagignator = $knpPagignator;
         $this->config = $paginationConfig;
         $this->queryName = $queryName;

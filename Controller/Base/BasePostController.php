@@ -69,10 +69,11 @@ class BasePostController extends BaseController
         $totalPosts = $posts->getTotalItemCount() + 1;
         $nbrPerPage = $posts->getItemNumberPerPage();
         $pagesCount =  ceil( $totalPosts / $nbrPerPage );
+        $paramPage  = $this->container->getParameter('discutea_forum.pagination')["page_name"];
 
         $url = $this->generateUrl('discutea_forum_post', array(
-            'slug' => $this->post->getTopic()->getSlug(),
-            'p'    => $pagesCount
+            'slug'     => $this->post->getTopic()->getSlug(),
+            $paramPage => $pagesCount
         ));  
         
         $redirection = ''.$url.'#post'.$this->post->getId().'';
