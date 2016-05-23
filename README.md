@@ -14,7 +14,7 @@ CARACTERISTIQUES:
 
 Ce bundle offre les fonctionnalités suivantes:
 
-* Catégorie : Créer / modifier / supprimer / Déplacer un forum.
+* Catégorie : Créer / modifier / supprimer / Déplacer un forum / Droits de lecture.
 * Forum : Créer / Modifier / Supprimer / Déplacer un topic.
 * Topics : Créer / Modifier / Supprimer / Déplacer
 * Posts : Créer / Modifier / Supprimer

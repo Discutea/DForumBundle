@@ -26,11 +26,12 @@
                 <p>{{ forum.description }}</p>
                 <hr />
                 <div class="text-center">
-                {% if forum.topics.last != false %}
-                    <a class="lastComment" href="{{ path('discutea_forum_post', {'slug': forum.topics.last.slug}) }}#p{{ forum.topics.last.posts.last.id }}">
+                {% set lastTopic = dfLastTopicInForum(forum) %}
+                {% if lastTopic is defined %}
+                    <a class="lastComment" href="{{ path('discutea_forum_post', {'slug': lastTopic.slug}) }}#p{{ lastTopic.posts.last.id }}">
                       <p>
-                          {{ 'discutea.forum.lastpostby'|trans }} <strong>{{ forum.topics.last.posts.last.poster.username }}</strong>
-                          <br />{{ forum.topics.last.posts.last.date|localizeddate('full', 'medium', app.request.getLocale()) }}
+                          {{ 'discutea.forum.lastpostby'|trans }} <strong>{{ lastTopic.posts.last.poster.username }}</strong>
+                          <br />{{ lastTopic.posts.last.date|localizeddate('full', 'medium', app.request.getLocale()) }}
                       </p>
                     </a>
                 {% else %}

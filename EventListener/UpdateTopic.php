@@ -41,7 +41,7 @@ class UpdateTopic
     }
 
     /**
-     * infos: Update LastPost on postPersist
+     * infos: Update LastPost on postRemove
      *
      * @param class Doctrine\ORM\Event\LifecycleEventArgs $args
      * @return sql  topic.last_post

@@ -3,19 +3,15 @@
 namespace Discutea\DForumBundle\Twig;
 
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\User\UserInterface as Poster;
 
 class DForumExtension extends \Twig_Extension
 {
     
     private $em;
-    
-    private $request;
 
-    public function __construct (EntityManager $em, RequestStack $request) {
+    public function __construct (EntityManager $em) {
         $this->em = $em;
-        $this->request = $request->getCurrentRequest();
     }
     
     public function getFunctions()
@@ -29,6 +25,7 @@ class DForumExtension extends \Twig_Extension
             new \Twig_SimpleFunction('dfLastTopicsResolved', array($this, 'dfLastTopicsResolved')),
             new \Twig_SimpleFunction('dfLastPosts', array($this, 'dfLastPosts')),
             new \Twig_SimpleFunction('dfLastPostsEdited', array($this, 'dfLastPostsEdited')),
+            new \Twig_SimpleFunction('dfLastTopicInForum', array($this, 'dfLastTopicInForum')),
         );
     }
 
@@ -113,6 +110,14 @@ class DForumExtension extends \Twig_Extension
         $posts = $this->em->getRepository('DForumBundle:Post')->findLastEdited();
 
         return $posts;
+    }
+    
+    public function dfLastTopicInForum($forum)
+    {
+        $topic = $this->em->getRepository('DForumBundle:Topic')->findOneBy(
+            array('forum' => $forum, 'pinned' => null),
+            array('lastPost' => 'DESC'));
+        return $topic;
     }
     
     public function getName()

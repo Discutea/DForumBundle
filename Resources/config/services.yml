@@ -1,5 +1,5 @@
 services:
-    discutea.forum.topic.listener.updater:
+    topic.listener.updatelastpost:
         class: Discutea\DForumBundle\EventListener\UpdateTopic
         tags:
             - { name: doctrine.event_listener, event: postPersist }
@@ -46,7 +46,6 @@ services:
         class: Discutea\DForumBundle\Twig\DForumExtension
         arguments: 
             - '@doctrine.orm.entity_manager'
-            - '@request_stack'
         public: false
         tags:
             - { name: twig.extension }

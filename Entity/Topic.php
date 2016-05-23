@@ -71,6 +71,7 @@ class Topic
     
     /**
      * @ORM\OneToMany(targetEntity="Discutea\DForumBundle\Entity\Post", mappedBy="topic"))
+     * @ORM\OrderBy({"date" = "asc"})
      */
     protected $posts;
 
