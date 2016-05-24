@@ -13,11 +13,13 @@
     "require": {
         "php": ">=5.5.9",
         "symfony/form": "~3.0",
-        "stof/doctrine-extensions-bundle": ">=1.2.2",
-        "knplabs/knp-paginator-bundle": ">=2.5.3"
+        "stof/doctrine-extensions-bundle": ">=1.2",
+        "knplabs/knp-paginator-bundle": ">=2.5"
     },
     "require-dev": {
-        "friendsofsymfony/user-bundle": "dev-master"
+        "friendsofsymfony/user-bundle": "dev-master",
+        "symfony/phpunit-bridge": "^3.0",
+        "doctrine/doctrine-fixtures-bundle": "^2.3"
     },
     "suggest": {
         "helios-ag/fm-bbcode-bundle": "BBCodes bundle"

@@ -1,7 +1,9 @@
 <?php
-namespace Discutea\DForumBundle\Tests\tests\Entity;
+namespace Discutea\DForumBundle\Tests\tests\src\Entity;
+
 use FOS\UserBundle\Model\User as BaseUser;
-class User extends BaseUser
+
+class Users extends BaseUser
 {
     public function __construct()
     {

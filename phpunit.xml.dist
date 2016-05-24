@@ -17,17 +17,16 @@
         </testsuite>
     </testsuites>
     <php>
-        <server name="KERNEL_DIR" value="../../../../../app/" />
+        <server name="KERNEL_DIR" value="Tests/tests/app/" />
     </php> 
     <filter>
         <whitelist>
             <directory>./</directory>
             <exclude>
+                <directory>./cache/</directory>
                 <directory>./Tests/</directory>
                 <directory>./DependencyInjection/</directory>
                 <directory>./vendor/</directory>
-
-                <!-- Ignore ODM driver -->
                 <directory>./Document/</directory>
             </exclude>
         </whitelist>

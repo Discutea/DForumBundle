@@ -39,7 +39,6 @@ class TestBase extends KernelTestCase
     protected function tearDown()
     {
         parent::tearDown();
-        $this->em->close();
         $this->em = null; // avoid memory leaks
     }
 }
