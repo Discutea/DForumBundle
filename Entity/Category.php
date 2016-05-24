@@ -27,23 +27,6 @@ class Category
     protected $name;
 
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param  string
-     * @return null
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="disp_position", type="integer", options={"unsigned"=true})
@@ -80,6 +63,23 @@ class Category
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param  string
+     * @return null
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 
     /**
