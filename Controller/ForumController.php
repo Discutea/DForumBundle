@@ -40,7 +40,7 @@ class ForumController extends BaseController
             ->findBy(array(), array('position' => 'asc', ))
         ;
 
-        return $this->render('DForumBundle:index.html.twig', array(
+        return $this->render('DForumBundle::index.html.twig', array(
             'categories' => $categories
         ));
     }
@@ -74,7 +74,7 @@ class ForumController extends BaseController
             return $this->redirect($this->generateUrl('discutea_forum_moderator_dashboard'));
         }
 
-        return $this->render('DForumBundle:Admin/forum.html.twig', array(
+        return $this->render('DForumBundle::Admin/forum.html.twig', array(
             'form' => $form->createView()
         ));
     }
@@ -105,7 +105,7 @@ class ForumController extends BaseController
             return $this->redirect($this->generateUrl('discutea_forum_moderator_dashboard'));
         }
 
-        return $this->render('DForumBundle:Admin/forum.html.twig', array(
+        return $this->render('DForumBundle::Admin/forum.html.twig', array(
             'form' => $form->createView()
         ));
     }
@@ -149,7 +149,7 @@ class ForumController extends BaseController
             return $this->redirect($this->generateUrl('discutea_forum_moderator_dashboard'));
         }
  
-        return $this->render('DForumBundle:Admin/remove_forum.html.twig', array(
+        return $this->render('DForumBundle::Admin/remove_forum.html.twig', array(
             'form' => $form->createView()
         ));
     }

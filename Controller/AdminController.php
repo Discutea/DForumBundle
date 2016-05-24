@@ -46,7 +46,7 @@ class AdminController extends BaseController
             $categories = NULL;
         }
 
-        return $this->render('DForumBundle:Moderator/index.moderator.html.twig', array(
+        return $this->render('DForumBundle::Moderator/index.moderator.html.twig', array(
             'posts' => $posts,
             'topics' => $topics,
             'forums' => $forums,

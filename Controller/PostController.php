@@ -56,7 +56,7 @@ class PostController extends BasePostController
             $form = $this->autorizedPostForm($posts, $request, $form);
         }
 
-        return $this->render('DForumBundle:post.html.twig', array(
+        return $this->render('DForumBundle::post.html.twig', array(
             'topic' => $topic,
             'posts' => $posts,
             'form'  => $form,
@@ -129,7 +129,7 @@ class PostController extends BasePostController
             }
         }
 
-        return $this->render('DForumBundle:Post:edit_post.html.twig', array(
+        return $this->render('DForumBundle::Post:edit_post.html.twig', array(
             'form'  => $form->createView(),
             'post'  => $post,
             'topic' => $post->getTopic(),

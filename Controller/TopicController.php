@@ -54,7 +54,7 @@ class TopicController extends BaseTopicController
             $form = $form->createView();
         }
         
-        return $this->render('DForumBundle:topic.html.twig', array(
+        return $this->render('DForumBundle::topic.html.twig', array(
             'forum' => $forum,
             'pagination' => $pagination,
             'form' => $form
@@ -94,7 +94,7 @@ class TopicController extends BaseTopicController
             return $this->redirect($this->generateUrl('forum_topic', array('slug' => $forumSlug)));
         }
          
-        return $this->render('DForumBundle:Form/topic_edit.html.twig', array(
+        return $this->render('DForumBundle::Form/topic_edit.html.twig', array(
             'form'  => $form->createView()
         ));
     }
