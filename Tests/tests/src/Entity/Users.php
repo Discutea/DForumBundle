@@ -1,4 +1,5 @@
 <?php
+
 namespace Discutea\DForumBundle\Tests\tests\src\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;

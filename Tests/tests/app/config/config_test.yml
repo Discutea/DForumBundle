@@ -1,2 +1,153 @@
 imports:
-    - { resource: config.yml }
+    - { resource: parameters.yml }
+
+parameters:
+    locale: fr
+
+framework:
+    test: ~
+    translator:      { fallbacks: ["%locale%"] }
+    secret:          "secret"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: "%kernel.debug%"
+    form:            true
+    csrf_protection: true
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale:  "%locale%"
+    trusted_proxies: ~
+    session:
+        handler_id:  ~
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+    fragments:       ~
+    http_method_override: true
+    assets: ~
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+
+doctrine:
+    dbal:
+        driver:   pdo_mysql
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+
+        default_entity_manager: default
+        auto_generate_proxy_classes: "%kernel.debug%"
+        resolve_target_entities:
+            Symfony\Component\Security\Core\User\UserInterface: Discutea\DForumBundle\Tests\tests\src\Entity\Users
+        mappings:
+            DForumBundle:
+                mapping: true
+                type: yml
+                #dir: 'Tests/tests/src/Entity'
+                dir:                  "Tests/tests/src/Resources/config/doctrine"
+                is_bundle: true
+                prefix: Discutea\DForumBundle\Entity
+                alias: ~
+            DForumBundleUsersEntity:
+                mapping:              true
+                type:                 yml
+                dir:                  "Tests/tests/src/Resources/config/doctrine"
+                alias:                ~
+                prefix:               Discutea\DForumBundle\Tests\tests\src\Entity
+                is_bundle:            false
+                    
+#
+# UsersBundle extends FosUser
+#
+fos_user:
+    db_driver:     orm
+    firewall_name: main
+    user_class:    Discutea\DForumBundle\Tests\tests\src\Entity\Users
+
+#
+# Stof Doctrine Extensions
+#
+stof_doctrine_extensions:
+    orm:
+        default:
+            sluggable: true
+
+
+
+#
+# Service for pagination see vendor/knplabs/knp-compotements/doc/ for more informations.
+#
+knp_paginator:
+    # default page range used in pagination control
+    page_range: 3
+    default_options:
+        # page query parameter name
+        page_name: p
+        # sort field query parameter name
+        sort_field_name: sort
+        # sort direction query parameter name
+        sort_direction_name: direction
+        # ensure distinct results, useful when ORM queries are using GROUP BY statements
+        distinct: true
+    template:
+        # sliding pagination controls template
+        pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig
+        # sort link template
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.
+
+discutea_forum:
+    preview:
+        enabled: false
+    knp_paginator:
+        page_name: p
+        topics:
+            enabled: true
+            per_page: 12
+        posts:
+            enabled: true
+            per_page: 10
+
+security:
+
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+
+    role_hierarchy:
+        ROLE_ADMIN:       [ROLE_MODERATOR]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        main:
+            id: fos_user.user_provider.username
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            pattern: ^/
+            form_login:
+                provider: main
+                csrf_token_generator: security.csrf.token_manager
+
+                # if you are using Symfony < 2.8, use the following config instead:
+                # csrf_provider: form.csrf_provider
+
+            logout:       true
+            anonymous:    true
+
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/, role: ROLE_ADMIN }

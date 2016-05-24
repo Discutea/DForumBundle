@@ -1,18 +1,10 @@
 <?php
-/*
- * This file is part of the CCDNForum ForumBundle
- *
- * (c) CCDN (c) CodeConsortium <http://www.codeconsortium.com/>
- *
- * Available on github <http://www.github.com/codeconsortium/>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-namespace Discutea\DForumBundle\Tests;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class TestBase extends KernelTestCase
+namespace Discutea\DForumBundle\Tests;
+
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
+class TestBase extends WebTestCase
 {
     /**
      *
@@ -27,10 +19,24 @@ class TestBase extends KernelTestCase
     protected function setUp()
     {
         self::bootKernel();
+    
+        $client = self::createClient();
+        $container = $client->getKernel()->getContainer();
         
         $this->em = static::$kernel->getContainer()
             ->get('doctrine')
             ->getManager();
+
+        $purger = new \Doctrine\Common\DataFixtures\Purger\ORMPurger($this->em);
+        $executor = new \Doctrine\Common\DataFixtures\Executor\ORMExecutor($this->em, $purger);
+        $executor->purge();
+
+        $loader = new \Doctrine\Common\DataFixtures\Loader;
+        $fixtures = new \Discutea\DForumBundle\Tests\Fixtures\FosFixtures();
+        $fixtures->setContainer($container);
+        $loader->addFixture($fixtures);
+        $executor->execute($loader->getFixtures());
+        
     }
 
     /**

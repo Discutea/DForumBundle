@@ -18,7 +18,6 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-            new Discutea\UsersBundle\UsersBundle(),
             new Discutea\DForumBundle\DForumBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
         ];
@@ -50,6 +49,6 @@ class AppKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
+        $loader->load($this->getRootDir().'/config/config_test.yml');
     }
 }
