@@ -46,7 +46,7 @@ services:
         class: Discutea\DForumBundle\Twig\DForumExtension
         arguments: 
             - '@doctrine.orm.entity_manager'
-            - '@discutea.forum.pagin'
+#            - '@discutea.forum.pagin'
         public: false
         tags:
             - { name: twig.extension }

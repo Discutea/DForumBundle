@@ -16,6 +16,9 @@
         "stof/doctrine-extensions-bundle": ">=1.2.2",
         "knplabs/knp-paginator-bundle": ">=2.5.3"
     },
+    "require-dev": {
+        "friendsofsymfony/user-bundle": "dev-master"
+    },
     "suggest": {
         "helios-ag/fm-bbcode-bundle": "BBCodes bundle"
     },

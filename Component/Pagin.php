@@ -37,11 +37,9 @@ class Pagin
      * @param array paginationConfig Discutea config pagination
      * @param array $queryName
      */
-    public function __construct(RequestStack $request = null, Paginator $knpPagignator, $paginationConfig, $queryName)
+    public function __construct(RequestStack $request, Paginator $knpPagignator, $paginationConfig, $queryName)
     {
-        if ($request !== null) {
-            $this->request = $request->getCurrentRequest()->query;
-        }
+        $this->request = $request->getCurrentRequest()->query;
         $this->knpPagignator = $knpPagignator;
         $this->config = $paginationConfig;
         $this->queryName = $queryName;
