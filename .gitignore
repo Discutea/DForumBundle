@@ -39,4 +39,4 @@
 
 # Composer PHAR
 /composer.phar
-/var/
+/Tests/tests/var/

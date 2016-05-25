@@ -19,11 +19,19 @@ framework:
     default_locale:  "%locale%"
     trusted_proxies: ~
     session:
-        handler_id:  ~
-        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+        storage_id: session.storage.mock_file
+    profiler:
+        collect: false
     fragments:       ~
     http_method_override: true
     assets: ~
+
+web_profiler:
+    toolbar: false
+    intercept_redirects: false
+
+swiftmailer:
+    disable_delivery: true
 
 # Twig Configuration
 twig:
@@ -51,16 +59,16 @@ doctrine:
         mappings:
             DForumBundle:
                 mapping: true
-                type: yml
+                type: annotation
                 #dir: 'Tests/tests/src/Entity'
-                dir:                  "Tests/tests/src/Resources/config/doctrine"
+                dir:                  "Tests/tests/src/Entity"
                 is_bundle: true
                 prefix: Discutea\DForumBundle\Entity
                 alias: ~
             DForumBundleUsersEntity:
                 mapping:              true
-                type:                 yml
-                dir:                  "Tests/tests/src/Resources/config/doctrine"
+                type:                 annotation
+                dir:                  "Tests/tests/src/Entity"
                 alias:                ~
                 prefix:               Discutea\DForumBundle\Tests\tests\src\Entity
                 is_bundle:            false

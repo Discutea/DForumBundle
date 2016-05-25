@@ -1,7 +1,0 @@
-Discutea\DForumBundle\Tests\tests\src\Entity\Users:
-    type: entity
-    table: z_users_test
-    id:
-        id:
-            type: integer
-            generator: { strategy: AUTO }

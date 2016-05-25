@@ -12,7 +12,8 @@ class TestBase extends WebTestCase
      */
     protected $em;
 
-
+    protected $client;
+    
     /**
      * {@inheritDoc}
      */
@@ -20,8 +21,8 @@ class TestBase extends WebTestCase
     {
         self::bootKernel();
     
-        $client = self::createClient();
-        $container = $client->getKernel()->getContainer();
+        $this->client = self::createClient();
+        $container = $this->client->getKernel()->getContainer();
         
         $this->em = static::$kernel->getContainer()
             ->get('doctrine')

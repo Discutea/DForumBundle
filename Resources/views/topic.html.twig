@@ -13,7 +13,7 @@
               <a href="{{ path('discutea_forum_post', {'slug': topic.slug}) }}">
                 <h2 class="topic-title">{{ topic.title }}</h2>
                 <span class="small">{{ 'discutea.forum.by'|trans }} <strong>{{ topic.user.username }}</strong>
-                  {{ 'discutea.forum.on'|trans }} {{ topic.date|localizeddate('full', 'medium', app.request.getLocale()) }}
+                  {{ 'discutea.forum.on'|trans }} {{ topic.date|date("Y-m-d H:i:s") }}
                 </span>
               </a>
             </div>
@@ -29,7 +29,7 @@
             <div class="col-md-4 col-xs-12">
               <a class="lastComment" href="{{ path('discutea_forum_post', {'slug': topic.slug}) }}">
                 <p class="topic-poster">{{ 'discutea.forum.lastpostby'|trans }} <strong>{{ topic.posts.last.poster.username }}</strong></p>
-                <p class="topic-lastpost-date">{{ topic.posts.last.date|localizeddate('full', 'medium', app.request.getLocale()) }}</p>
+                <p class="topic-lastpost-date">{{ topic.posts.last.date|date("Y-m-d H:i:s") }}</p>
               </a>
             </div>
           </div>
