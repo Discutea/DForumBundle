@@ -23,15 +23,23 @@ class FosFixtures implements FixtureInterface, ContainerAwareInterface {
     public function load(ObjectManager $manager) {
 
         $userManager = $this->container->get('fos_user.user_manager');
-
-        // Create a new user
-        $user = $userManager->createUser();
-        $user->setUsername('user');
-        $user->setEmail('user@domain.com');
-        $user->setPlainPassword('user_password');
-        $user->setEnabled(true);
-
-        $manager->persist($user);
-        $manager->flush();
+        $userNames = array('admin', 'moderator', 'member1', 'member2');
+       
+        foreach ($userNames as $nick) {
+            $user = $userManager->createUser();
+            $user->setUsername($nick);
+            $user->setEmail($nick . '@test.discutea.com');
+            $user->setPlainPassword('password');
+            $user->setEnabled(true);                   
+            if ($nick == 'admin') {
+                $user->addRole('ROLE_ADMIN');
+            } elseif ($nick == 'moderator') {
+                $user->addRole('ROLE_MODERATOR');
+            }
+            
+            $manager->persist($user);
+            $manager->flush();
+        }
     }
+    
 }
