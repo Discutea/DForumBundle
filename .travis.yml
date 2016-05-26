@@ -25,10 +25,17 @@ before_install:
 install: composer update --prefer-dist --no-interaction $COMPOSER_FLAGS
 
 script:
-  - phpunit --coverage-text
-
-notifications:
-  email: contact@discutea.com
+  - phpunit
 
 services:
   - mysql
+
+before_script:
+    - echo 'date.timezone = "Europe/Paris"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - mysql -e 'CREATE DATABASE dftests'
+
+after_script:
+    - mysql -e 'DROP DATABASE dftests;'
+
+notifications:
+  email: contact@discutea.com
