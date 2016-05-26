@@ -6,13 +6,13 @@
   <h1 class="text-center">{{ topic.title }}</h1>
   {{ knp_pagination_render(posts) }}
   
-  {% if topic.closed == 1 %}
+  {% if topic.closed == true %}
     <div class="alert alert-danger">{{ 'discutea.forum.label.closed'|trans }}</div>
   {% endif %}
-  {% if topic.resolved == 1 %}
+  {% if topic.resolved == true %}
     <div class="alert alert-success">{{ 'discutea.forum.label.issolved'|trans }}</div>
   {% endif %}
-  {% if topic.pinned == 1 %}
+  {% if topic.pinned == true %}
     <div class="alert alert-warning">{{ 'discutea.forum.label.ispinned'|trans }}</div>
   {% endif %}
 

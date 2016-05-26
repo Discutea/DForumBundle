@@ -27,8 +27,8 @@ class LabelController extends BaseController
     public function solvedAction(Request $request, Topic $topic)
     {        
         $em = $this->getEm();
-        if ( $topic->getResolved() !== NULL ) {
-            $topic->setResolved(NULL);
+        if ( $topic->getResolved() !== false ) {
+            $topic->setResolved(false);
             
             $em->persist($topic);
             $em->flush();
@@ -55,8 +55,8 @@ class LabelController extends BaseController
     public function pinnedAction(Request $request, Topic $topic)
     {
         $em = $this->getEm();
-        if ( $topic->getPinned() !== NULL ) {
-            $topic->setPinned(NULL);
+        if ( $topic->getPinned() !== false ) {
+            $topic->setPinned(false);
             $em->persist($topic);
             $em->flush();
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.label.unmark.pinned'));
@@ -74,14 +74,14 @@ class LabelController extends BaseController
      * 
      * @Route("/label/closed/{slug}", name="discutea_label_closed")
      * @ParamConverter("topic")
-     * @Security("has_role('ROLE_MODERATOR')")
+     * @Security("has_role('ROLE_MODERATOR') and  is_granted('CanEditTopic', topic)")
      *
      */
     public function closedAction(Request $request, Topic $topic)
     {
         $em = $this->getEm();
-        if ($topic->getClosed() !== NULL ) {
-            $topic->setClosed(NULL);
+        if ($topic->getClosed() !== false ) {
+            $topic->setClosed(false);
             $em->persist($topic);
             $em->flush();
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.label.unmark.closed'));

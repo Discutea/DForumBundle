@@ -97,6 +97,10 @@ class TopicVoter extends Voter
     public function canReplyTopic(Topic $topic, TokenInterface $token)
     {
 
+        if (!$this->canReadTopic($topic, $token)) {
+            return false;
+        }
+        
         if ($this->decisionManager->decide($token, array('ROLE_MODERATOR'))) {
             return true;
         }
@@ -122,6 +126,11 @@ class TopicVoter extends Voter
      */
     public function canEditTopic(Topic $topic, TokenInterface $token)
     {
+
+        if (!$this->canReadTopic($topic, $token)) {
+            return false;
+        }
+        
         if ($this->decisionManager->decide($token, array('ROLE_MODERATOR'))) {
             return true;
         }

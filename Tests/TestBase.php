@@ -37,6 +37,7 @@ class TestBase extends WebTestCase
      */
     protected function setUp()
     {
+        
         self::runCommand('doctrine:database:create');
         self::runCommand('doctrine:schema:update --force');
         
@@ -52,7 +53,7 @@ class TestBase extends WebTestCase
         $purger = new \Doctrine\Common\DataFixtures\Purger\ORMPurger($this->em);
         $this->executor = new \Doctrine\Common\DataFixtures\Executor\ORMExecutor($this->em, $purger);
         $this->executor->purge();
-
+        
         $loader = new \Doctrine\Common\DataFixtures\Loader;
         $fixtures = new \Discutea\DForumBundle\Tests\Fixtures\FosFixtures();
         $fixtures->setContainer($this->container);
@@ -67,7 +68,6 @@ class TestBase extends WebTestCase
     protected function tearDown()
     {
         parent::tearDown();
-//        self::runCommand('doctrine:database:drop --force');
         $this->em = null; // avoid memory leaks
     }
 

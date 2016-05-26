@@ -46,22 +46,22 @@ abstract class BaseTopic
     protected $date;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true, options={"default" = 0})
+     * @ORM\Column(type="boolean")
      *
      */
-    protected $pinned;
+    protected $pinned = false;
     
     /**
-     * @ORM\Column(type="boolean", nullable=true, options={"default" = 0})
+     * @ORM\Column(type="boolean")
      *
      */
-    protected $resolved;
+    protected $resolved = false;
     
     /**
-     * @ORM\Column(type="boolean", nullable=true, options={"default" = 0})
+     * @ORM\Column(type="boolean")
      *
      */
-    protected $closed;
+    protected $closed = false;
 
     /**
      * @ORM\ManyToOne(targetEntity="Discutea\DForumBundle\Entity\Forum", inversedBy="topics")
