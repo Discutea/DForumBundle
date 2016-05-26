@@ -4,8 +4,8 @@ namespace Discutea\DForumBundle\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-
 use Symfony\Component\Console\Input\StringInput;
+use Discutea\DForumBundle\Entity\Category;
 
 class TestBase extends WebTestCase
 {
@@ -16,6 +16,10 @@ class TestBase extends WebTestCase
     protected $em;
 
     protected $client;
+    
+    protected $container;
+    
+    protected $executor;
     
     protected static $application;
     
@@ -30,23 +34,21 @@ class TestBase extends WebTestCase
         self::bootKernel();
         
         $this->client = self::createClient();
-        $container = $this->client->getKernel()->getContainer();
+        $this->container = $this->client->getKernel()->getContainer();
         
         $this->em = static::$kernel->getContainer()
             ->get('doctrine')
             ->getManager();
-        
-        
 
         $purger = new \Doctrine\Common\DataFixtures\Purger\ORMPurger($this->em);
-        $executor = new \Doctrine\Common\DataFixtures\Executor\ORMExecutor($this->em, $purger);
-        $executor->purge();
+        $this->executor = new \Doctrine\Common\DataFixtures\Executor\ORMExecutor($this->em, $purger);
+        $this->executor->purge();
 
         $loader = new \Doctrine\Common\DataFixtures\Loader;
         $fixtures = new \Discutea\DForumBundle\Tests\Fixtures\FosFixtures();
-        $fixtures->setContainer($container);
+        $fixtures->setContainer($this->container);
         $loader->addFixture($fixtures);
-        $executor->execute($loader->getFixtures());
+        $this->executor->execute($loader->getFixtures());
         
     }
 
@@ -56,7 +58,7 @@ class TestBase extends WebTestCase
     protected function tearDown()
     {
         parent::tearDown();
-        self::runCommand('doctrine:database:drop --force');
+//        self::runCommand('doctrine:database:drop --force');
         $this->em = null; // avoid memory leaks
     }
 
@@ -91,8 +93,54 @@ class TestBase extends WebTestCase
         return $this->client;
     }
 
-    protected function tryUrl($httpCode, $url) {
+    protected function tryUrlModerator($url) {
+        return $this->tryUrl(302, 403, 403, 200, 200, $url);
+    }
+    
+    protected function tryUrlAdmin($url) {
+        $this->tryUrl(302, 403, 403, 403, 200, $url);
+    }
+    
+    protected function tryUrl($anonCode, $member1Code, $member2Code, $moderatorCode, $adminCode, $url) {
+        $this->client = self::createClient();
         $this->client->request('GET', $url);
-        $this->assertEquals($httpCode, $this->client->getResponse()->getStatusCode()); 
+        $this->assertEquals($anonCode, $this->client->getResponse()->getStatusCode());
+
+        $this->client = $this->doLogin('member1', 'password');
+        $this->client->request('GET', $url);
+        $this->assertEquals($member1Code, $this->client->getResponse()->getStatusCode());
+
+        $this->client = $this->doLogin('member2', 'password');
+        $this->client->request('GET', $url);
+        $this->assertEquals($member2Code, $this->client->getResponse()->getStatusCode());
+
+        $this->client = $this->doLogin('moderator', 'password');
+        $this->client->request('GET', $url);
+        $this->assertEquals($moderatorCode, $this->client->getResponse()->getStatusCode());
+
+        $this->client = $this->doLogin('admin', 'password');
+        $this->client->request('GET', $url);
+        $this->assertEquals($adminCode, $this->client->getResponse()->getStatusCode());
+    }
+    
+    protected function addFixtruresCategory() {
+        $query = $this->em->createQuery('DELETE FROM DForumBundle:Category');
+        $query->execute(); 
+
+        $admin = new Category();
+        $admin->setName('admin');
+        $admin->setReadAuthorisedRoles('ROLE_ADMIN');
+        
+        $moderator = new Category();
+        $moderator->setName('moderator');
+        $moderator->setReadAuthorisedRoles('ROLE_MODERATOR');
+        
+        $user = new Category();
+        $user->setName('user');
+        
+        $this->em->persist($admin);
+        $this->em->persist($moderator);
+        $this->em->persist($user);
+        $this->em->flush();
     }
 }

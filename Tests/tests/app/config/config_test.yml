@@ -60,7 +60,6 @@ doctrine:
             DForumBundle:
                 mapping: true
                 type: annotation
-                #dir: 'Tests/tests/src/Entity'
                 dir:                  "Tests/tests/src/Entity"
                 is_bundle: true
                 prefix: Discutea\DForumBundle\Entity
@@ -72,7 +71,13 @@ doctrine:
                 alias:                ~
                 prefix:               Discutea\DForumBundle\Tests\tests\src\Entity
                 is_bundle:            false
-                    
+            DForumBundleForumEntity:
+                mapping:              true
+                type:                 annotation
+                dir:                  "%kernel.root_dir%/../../../Entity"
+                alias:                ~
+                prefix:               Discutea\DForumBundle\Entity
+                is_bundle:            false                    
 #
 # UsersBundle extends FosUser
 #
