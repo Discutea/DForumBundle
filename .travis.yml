@@ -29,3 +29,6 @@ script:
 
 notifications:
   email: contact@discutea.com
+
+services:
+  - mysql
