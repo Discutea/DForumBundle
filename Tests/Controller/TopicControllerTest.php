@@ -69,7 +69,7 @@ class TopicControllerTest extends TestBase
                         $this->client = $this->doLogin('admin', 'password');
                         $this->adminCrawler = $this->client->request('GET', $url);
                         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
-                        $this->tryUrl(404, 404, 404, 404, 500, $url);
+                        $this->tryUrl(404, 404, 404, 404, 404, $url);
                     } else {
                         $this->tryUrl(302, 403, 403, 302, 404, $url);
                         $this->tryUrl(404, 404, 404, 404, 404, $url); 

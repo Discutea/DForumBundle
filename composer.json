@@ -12,7 +12,8 @@
     ],
     "require": {
         "php": ">=5.5.9",
-        "symfony/form": "~3.0",
+        "symfony/symfony": "3.0.*",
+        "doctrine/orm": "^2.5",
         "stof/doctrine-extensions-bundle": ">=1.2",
         "knplabs/knp-paginator-bundle": ">=2.5"
     },
