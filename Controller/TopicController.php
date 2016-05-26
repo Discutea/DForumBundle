@@ -27,7 +27,7 @@ class TopicController extends BaseTopicController
     /**
      * infos:  Display the topics of a forum
      * 
-     * @Route("/cat/{slug}", name="forum_topic")
+     * @Route("/cat/{slug}", name="discutea_forum_topic")
      * @ParamConverter("forum")
      * @Security("is_granted('CanReadForum', forum)")
      * 
@@ -64,7 +64,7 @@ class TopicController extends BaseTopicController
     /**
      * @Route("/topic/delete/{id}", name="discutea_forum_topic_delete")
      * @ParamConverter("topic")
-     * @Security("has_role('ROLE_MODERATOR')")
+     * @Security("has_role('ROLE_MODERATOR') and is_granted('CanReadTopic', topic)")
      */
     public function deleteAction(Request $request, Topic $topic)
     {
@@ -73,14 +73,14 @@ class TopicController extends BaseTopicController
         $em->remove($topic);
         $em->flush();
         $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.topic.delete'));
-        return $this->redirect($this->generateUrl('forum_topic', array('slug' => $forumSlug)));       
+        return $this->redirect($this->generateUrl('discutea_forum_topic', array('slug' => $forumSlug)));       
  
     }
 
     /**
      * @Route("/topic/edit/{id}", name="discutea_forum_topic_edit")
      * @ParamConverter("topic")
-     * @Security("has_role('ROLE_MODERATOR')")
+     * @Security("has_role('ROLE_MODERATOR') and is_granted('CanReadTopic', topic)")
      * 
      */
     public function editAction(Request $request, Topic $topic)
@@ -91,7 +91,7 @@ class TopicController extends BaseTopicController
             $forumSlug = $topic->getForum()->getSlug();
             $this->getEm()->flush();
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.topic.edit'));
-            return $this->redirect($this->generateUrl('forum_topic', array('slug' => $forumSlug)));
+            return $this->redirect($this->generateUrl('discutea_forum_topic', array('slug' => $forumSlug)));
         }
          
         return $this->render('DForumBundle::Form/topic_edit.html.twig', array(

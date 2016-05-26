@@ -45,7 +45,7 @@ class CategoryController extends BaseController
             $em->persist($category);
             $em->flush();
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.category.created'));
-            return $this->redirect($this->generateUrl('discutea_forum_moderator_dashboard'));
+            return $this->redirect($this->generateUrl('discutea_forum_admin_dashboard'));
         }
 
         return $this->render('DForumBundle::Admin/category.html.twig', array(
@@ -76,7 +76,7 @@ class CategoryController extends BaseController
             $em->persist($category);
             $em->flush();
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.category.edit'));
-            return $this->redirect($this->generateUrl('discutea_forum_moderator_dashboard'));
+            return $this->redirect($this->generateUrl('discutea_forum_admin_dashboard'));
         }
 
         return $this->render('DForumBundle::Admin/category.html.twig', array(
@@ -121,7 +121,7 @@ class CategoryController extends BaseController
             $em->flush();
 
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.category.delete'));
-            return $this->redirect($this->generateUrl('discutea_forum_moderator_dashboard'));
+            return $this->redirect($this->generateUrl('discutea_forum_admin_dashboard'));
         }
  
         return $this->render('DForumBundle::Admin/remove_category.html.twig', array(

@@ -22,7 +22,7 @@
           {% for forum in category.forums %}
             <div class="col-xs-12 col-sm-6 col-md-4">
               <div class="category thumbnail text-center forum-box color-dark">
-                <h3><a href="{{ path('forum_topic', {'slug': forum.slug}) }}" title="{{ forum.name }}">{{ forum.name }}</a></h3>
+                <h3><a href="{{ path('discutea_forum_topic', {'slug': forum.slug}) }}" title="{{ forum.name }}">{{ forum.name }}</a></h3>
                 <p>{{ forum.description }}</p>
                 <hr />
                 <div class="text-center">

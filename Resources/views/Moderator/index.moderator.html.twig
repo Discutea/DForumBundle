@@ -26,7 +26,7 @@
             <div class="article-post">
               <p>
                 <span class="user-info">{{ 'discutea.forum.by'|trans }}: {{ post.poster.username }} {{ 'discutea.forum.on'|trans }} {{ post.date|date("Y-m-d H:i:s") }}, {{ post.poster.email }}</span><br />
-                <span class="user-info">{{ 'discutea.forum.location'|trans }}: <a href="{{ path('forum_topic', {'slug': post.topic.forum.slug}) }}">{{ post.topic.forum.name }}</a> > <a href="{{ path('discutea_forum_post', {'slug': post.topic.slug}) }}#content{{ post.id }}">{{ post.topic.title }}</a> </span>
+                <span class="user-info">{{ 'discutea.forum.location'|trans }}: <a href="{{ path('discutea_forum_topic', {'slug': post.topic.forum.slug}) }}">{{ post.topic.forum.name }}</a> > <a href="{{ path('discutea_forum_post', {'slug': post.topic.slug}) }}#content{{ post.id }}">{{ post.topic.title }}</a> </span>
               </p>
               <p class="content">
                 {{ post.content|length > 150 ? post.content|slice(0, 150) ~ '...' : post.content  }}
@@ -59,13 +59,13 @@
             <div class="article-post">
               <p>
                 <span class="user-info">{{ 'discutea.forum.by'|trans }}: {{ topic.date|date("Y-m-d H:i:s") }}</span><br />
-                <span class="user-info">{{ 'discutea.forum.location'|trans }}: <a href="{{ path('forum_topic', {'slug': topic.forum.slug}) }}">{{ topic.forum.name }}</a> > <a href="{{ path('discutea_forum_post', {'slug': topic.slug}) }}">{{ topic.title }}</a> </span>
+                <span class="user-info">{{ 'discutea.forum.location'|trans }}: <a href="{{ path('discutea_forum_topic', {'slug': topic.forum.slug}) }}">{{ topic.forum.name }}</a> > <a href="{{ path('discutea_forum_post', {'slug': topic.slug}) }}">{{ topic.title }}</a> </span>
               </p>
               <p class="content">
                 {{ topic.title }}
               </p>
               <div class="pull-right">
-                <a href="{{ path('forum_topic', {'slug': topic.forum.slug}) }}" class="btn btn-primary btn-xs">{{ 'discutea.forum.see'|trans }}</a>
+                <a href="{{ path('discutea_forum_topic', {'slug': topic.forum.slug}) }}" class="btn btn-primary btn-xs">{{ 'discutea.forum.see'|trans }}</a>
               </div>
               <div class="clearfix"></div>
             </div>

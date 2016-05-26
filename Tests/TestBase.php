@@ -217,7 +217,7 @@ class TestBase extends WebTestCase
             $entity->setUser($user);
  
             $post = new Post();
-            $post->setContent($name . 'first post');
+            $post->setContent($name . ' first post');
             $post->setTopic($entity);
             $post->setPoster($entity->getUser());
         

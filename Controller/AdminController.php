@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  * Class AdminController
  * 
  * METHODS LIST:
- * indexAction() return discutea_forum_moderator_dashboard
+ * indexAction() return discutea_forum_admin_dashboard
  * newCategoryAction(Request $request) Create a new category
  * editCategoryAction(Request $request, $id) Edit a category
  * removeCategoryAction(Request $request, $id) Drop a category

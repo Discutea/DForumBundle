@@ -87,7 +87,7 @@ class PostController extends BasePostController
             $em->flush();
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.topic.delete'));
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.post.deleteall'));
-            $redirect = $this->generateUrl('forum_topic', array('slug' => $topic->getForum()->getSlug()));
+            $redirect = $this->generateUrl('discutea_forum_topic', array('slug' => $topic->getForum()->getSlug()));
         } else {
             $em = $this->getEm();
             $em->remove($post);

@@ -43,8 +43,7 @@ class ForumControllerTest extends TestBase
         $this->assertTrue( $this->moderatorCrawler->filter('html:contains("adminForumTest")')->count() <= 0 );
         $this->assertTrue( $this->member2Crawler->filter('html:contains("moderatorForumTest")')->count() <= 0 );
         $this->assertTrue( $this->moderatorCrawler->filter('html:contains("moderatorForumTest")')->count() > 0 );
-        
-        $this->addFixtruresTopic();
+
     }
 
     public function testNewForumAction()
