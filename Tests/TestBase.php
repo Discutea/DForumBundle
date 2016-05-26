@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\StringInput;
 use Discutea\DForumBundle\Entity\Category;
+use Discutea\DForumBundle\Entity\Forum;
+use Discutea\DForumBundle\Entity\Topic;
+use Discutea\DForumBundle\Entity\Post;
 
 class TestBase extends WebTestCase
 {
@@ -22,6 +25,12 @@ class TestBase extends WebTestCase
     protected $executor;
     
     protected static $application;
+
+    protected $clientCrawler;
+    protected $member1Crawler;
+    protected $member2Crawler;
+    protected $moderatorCrawler;
+    protected $adminCrawler;
     
     /**
      * {@inheritDoc}
@@ -100,26 +109,30 @@ class TestBase extends WebTestCase
     protected function tryUrlAdmin($url) {
         $this->tryUrl(302, 403, 403, 403, 200, $url);
     }
+
+    protected function tryUrlFull($url) {
+        $this->tryUrl(200, 200, 200, 200, 200, $url);
+    }
     
     protected function tryUrl($anonCode, $member1Code, $member2Code, $moderatorCode, $adminCode, $url) {
         $this->client = self::createClient();
-        $this->client->request('GET', $url);
+        $this->clientCrawler = $this->client->request('GET', $url);
         $this->assertEquals($anonCode, $this->client->getResponse()->getStatusCode());
-
+        
         $this->client = $this->doLogin('member1', 'password');
-        $this->client->request('GET', $url);
+        $this->member1Crawler = $this->member1Crawler = $this->client->request('GET', $url);
         $this->assertEquals($member1Code, $this->client->getResponse()->getStatusCode());
 
         $this->client = $this->doLogin('member2', 'password');
-        $this->client->request('GET', $url);
+        $this->member2Crawler = $this->client->request('GET', $url);
         $this->assertEquals($member2Code, $this->client->getResponse()->getStatusCode());
 
         $this->client = $this->doLogin('moderator', 'password');
-        $this->client->request('GET', $url);
+        $this->moderatorCrawler = $this->client->request('GET', $url);
         $this->assertEquals($moderatorCode, $this->client->getResponse()->getStatusCode());
 
         $this->client = $this->doLogin('admin', 'password');
-        $this->client->request('GET', $url);
+        $this->adminCrawler = $this->client->request('GET', $url);
         $this->assertEquals($adminCode, $this->client->getResponse()->getStatusCode());
     }
     
@@ -128,19 +141,90 @@ class TestBase extends WebTestCase
         $query->execute(); 
 
         $admin = new Category();
-        $admin->setName('admin');
+        $admin->setName('adminCategoryTest');
         $admin->setReadAuthorisedRoles('ROLE_ADMIN');
         
         $moderator = new Category();
-        $moderator->setName('moderator');
+        $moderator->setName('moderatorCategoryTest');
         $moderator->setReadAuthorisedRoles('ROLE_MODERATOR');
         
         $user = new Category();
-        $user->setName('user');
+        $user->setName('userCategoryTest');
         
         $this->em->persist($admin);
         $this->em->persist($moderator);
         $this->em->persist($user);
         $this->em->flush();
+    }
+
+    protected function addFixtruresForum() {
+        $query = $this->em->createQuery('DELETE FROM DForumBundle:Forum');
+        $query->execute(); 
+        
+        $names = array('admin', 'moderator', 'user');
+        
+        foreach ($names as $name) {
+            
+            $category = $this->em->getRepository('DForumBundle:Category')->findOneByName($name.'CategoryTest');
+            
+            if ($category === NULL) {
+                $this->assertTrue( 1 == 2 );
+                die();
+            }
+        
+            $entity = 'entity'.$name;
+            $entity = new Forum();
+            $entity->setName($name.'ForumTest');
+            $entity->setDescription($name.'ForumTest description');
+            $entity->setCategory($category); 
+            $this->em->persist($entity);
+            $this->em->flush();
+            $this->em->clear();
+        }
+    }
+
+    protected function addFixtruresTopic() {
+        $query = $this->em->createQuery('DELETE FROM DForumBundle:Topic');
+        $query->execute(); 
+        
+        $names = array('admin', 'moderator', 'member1', 'member2');
+
+        foreach ($names as $name) {
+            
+            if ( ($name == 'admin') || ($name == 'moderator') ) {
+                $forum = $this->em->getRepository('DForumBundle:Forum')->findOneBySlug($name.'forumtest');
+            } else {
+                $forum = $this->em->getRepository('DForumBundle:Forum')->findOneBySlug('userforumtest');
+            }
+            
+            if ($forum === NULL) {
+                $this->assertTrue( 1 == 2 );
+                die();
+            }
+            
+            $user = $this->em->getRepository('DForumBundleUsersEntity:Users')->findOneByUsername($name);
+
+            if ($user === NULL) {
+                $this->assertTrue( 1 == 2 );
+                die();
+            }
+            
+            $entity = 'entity'.$name;
+            $entity = new Topic();
+            $entity->setTitle($name.'TopicTest');
+            $entity->setDate(new \Datetime());
+            $entity->setForum($forum);
+            $entity->setUser($user);
+ 
+            $post = new Post();
+            $post->setContent($name . 'first post');
+            $post->setTopic($entity);
+            $post->setPoster($entity->getUser());
+        
+            $this->em->persist($entity);
+            $this->em->persist($post);
+            $this->em->flush();
+            $this->em->clear();
+        }
     }
 }

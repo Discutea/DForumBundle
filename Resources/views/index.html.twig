@@ -16,7 +16,7 @@
   <h1 class="text-center">{{ 'discutea.forum.forumlist'|trans }}</h1>
   <div class="col-md-12">
     {% for category in categories if is_granted('CanReadCategory', category) %}
-      <h2 class="h-bold">{{ category.name }}</h2>
+      <h2>{{ category.name }}</h2>
       <hr />
       <div class="row forum-category-bloc">
           {% for forum in category.forums %}

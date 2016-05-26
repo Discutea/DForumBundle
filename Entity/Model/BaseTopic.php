@@ -6,6 +6,7 @@ namespace Discutea\DForumBundle\Entity\Model;
 use Doctrine\ORM\Mapping as ORM;
 use \Doctrine\Common\Collections\ArrayCollection;
 use \Discutea\DForumBundle\Entity\Post;
+use \Discutea\DForumBundle\Entity\Forum;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Gedmo\Mapping\Annotation as Gedmo;
 
