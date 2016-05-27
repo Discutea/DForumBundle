@@ -2,8 +2,7 @@ INFORMATION SUR LE BUNDLE:
 
 Cet ensemble est conçu pour le framework Symfony 3 et PHP >= 5.x | 7.x
 
-Ce projet a été réalisé pour les besoins de discutea et IRCz qui sont en cours de construction sur Symfony3.
-Ce projet est amateur, mon linkedin: https://www.linkedin.com/in/verdierdavid si mon travail vous satisfait sachez que je cherche à travailler avec le Framework Symfony
+Annonce: Linkedin: https://www.linkedin.com/in/verdierdavid si mon travail vous satisfait sachez que je cherche à travailler avec le Framework Symfony
 
 Disponible sur: 
 * Github

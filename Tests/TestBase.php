@@ -9,6 +9,7 @@ use Discutea\DForumBundle\Entity\Category;
 use Discutea\DForumBundle\Entity\Forum;
 use Discutea\DForumBundle\Entity\Topic;
 use Discutea\DForumBundle\Entity\Post;
+use Discutea\DForumBundle\Tests\tests\src\Entity\Users as User;
 
 class TestBase extends WebTestCase
 {
@@ -183,7 +184,10 @@ class TestBase extends WebTestCase
         }
     }
 
-    protected function addFixtruresTopic() {
+    protected function addFixtruresTopic() 
+    {
+        $queryp = $this->em->createQuery('DELETE FROM DForumBundle:Post');
+        $queryp->execute();
         $query = $this->em->createQuery('DELETE FROM DForumBundle:Topic');
         $query->execute(); 
         
@@ -216,15 +220,45 @@ class TestBase extends WebTestCase
             $entity->setForum($forum);
             $entity->setUser($user);
  
-            $post = new Post();
-            $post->setContent($name . ' first post');
-            $post->setTopic($entity);
-            $post->setPoster($entity->getUser());
-        
             $this->em->persist($entity);
-            $this->em->persist($post);
             $this->em->flush();
-            $this->em->clear();
+            
+            $postContent = $name . ' first post';
+            $this->persistPost($entity, $user, $postContent);
+
         }
+    }
+
+    protected function addFixtruresPost() {
+        $topics = $this->em->getRepository('DForumBundle:Topic')->findLast(100); 
+        $this->assertCount(4, $topics);
+        
+        $adminUsr = $this->em->getRepository('DForumBundleUsersEntity:Users')->findOneByUsername('admin');
+        $moderatorUsr = $this->em->getRepository('DForumBundleUsersEntity:Users')->findOneByUsername('moderator');
+        $m1Usr = $this->em->getRepository('DForumBundleUsersEntity:Users')->findOneByUsername('member1');
+        $m2Usr = $this->em->getRepository('DForumBundleUsersEntity:Users')->findOneByUsername('member2');
+        
+        foreach ($topics as $topic) {
+            $slug = $topic->getSlug();
+            $this->persistPost($topic, $adminUsr, 'admin replyPost');
+
+            if ($slug != 'admintopictest') {
+                $this->persistPost($topic, $moderatorUsr, 'moderator replyPost');
+                
+                if ($slug != 'moderatortopictest') {
+                    $this->persistPost($topic, $m1Usr, 'member1 replyPost');
+                    $this->persistPost($topic, $m2Usr, 'member2 replyPost');
+                }
+            }
+        }
+    }
+    
+    private function persistPost(Topic $topic, User $user, $content) {
+        $post = new Post();
+        $post->setContent($content);
+        $post->setTopic($topic);
+        $post->setPoster($user);
+        $this->em->persist($post);
+        $this->em->flush();
     }
 }

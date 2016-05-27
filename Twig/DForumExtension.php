@@ -4,15 +4,34 @@ namespace Discutea\DForumBundle\Twig;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\User\UserInterface as Poster;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Discutea\DForumBundle\Entity\Forum;
 use Discutea\DForumBundle\Entity\Post;
 
 class DForumExtension extends \Twig_Extension
 {
+
+    /**
+     *
+     * @var object Doctrine\ORM\EntityManager
+     */
     private $em;
 
-    public function __construct (EntityManager $em) {
+    /**
+     *
+     * @var object Symfony\Bundle\FrameworkBundle\Routing\Router
+     */
+    private $router;
+
+    /*
+     * @var array configuration for pagination
+     */
+    private $config;
+
+    public function __construct (EntityManager $em, Router $router, $paginationConfig) {
         $this->em = $em;
+        $this->router = $router;
+        $this->config = $paginationConfig;
     }
     
     public function getFunctions()
@@ -27,7 +46,7 @@ class DForumExtension extends \Twig_Extension
             new \Twig_SimpleFunction('dfLastPosts', array($this, 'dfLastPosts')),
             new \Twig_SimpleFunction('dfLastPostsEdited', array($this, 'dfLastPostsEdited')),
             new \Twig_SimpleFunction('dfLastTopicInForum', array($this, 'dfLastTopicInForum')),
-            new \Twig_SimpleFunction('dfPostsPageCount', array($this, 'dfPostsPageCount')),
+            new \Twig_SimpleFunction('dfLastPostPages', array($this, 'dfLastPostPages')),
         );
     }
 
@@ -118,17 +137,32 @@ class DForumExtension extends \Twig_Extension
     public function dfLastTopicInForum(Forum $forum)
     {
         $topic = $this->em->getRepository('DForumBundle:Topic')->findOneBy(
-            array('forum' => $forum, 'pinned' => null),
+            array('forum' => $forum, 'pinned' => false),
             array('lastPost' => 'DESC'));
         return $topic;
     }
 
-    public function dfPostsPageCount(Post $post)
-    {
-    //    $topic = $post->getTopic();
-    //    $posts = $this->pagin->pagignate('posts', $topic->getPosts());
-    
-        return 1;
+    public function dfLastPostPages(Post $post)
+    {   
+        $paginatorEnabled = $this->config['posts']['enabled'];
+        
+        $topic = $post->getTopic();
+        
+        if ($paginatorEnabled === true) {
+            $postsCount = $topic->getPosts()->count();
+            $postsPerPage = $this->config['posts']['per_page'];
+            $query = $this->config['page_name'];
+            $pagesCount =  ceil( $postsCount / $postsPerPage );
+            
+            if ($pagesCount > 1) {
+                return $this->router->generate('discutea_forum_post', array(
+                    'slug'     => $topic->getSlug(),
+                    $query => $pagesCount
+                ));
+            }
+        }
+        
+        return $this->router->generate('discutea_forum_post', array('slug' => $topic->getSlug()));
     }
 
     public function getName()
