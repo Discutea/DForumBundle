@@ -129,7 +129,7 @@ class PostController extends BasePostController
             }
         }
 
-        return $this->render('DForumBundle::Post:edit_post.html.twig', array(
+        return $this->render('DForumBundle::Post/edit_post.html.twig', array(
             'form'  => $form->createView(),
             'post'  => $post,
             'topic' => $post->getTopic(),

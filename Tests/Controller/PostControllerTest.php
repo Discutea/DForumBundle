@@ -47,10 +47,10 @@ class PostControllerTest extends TestBase
             $posts = $topic->getPosts();
             $categoryName = $topic->getForum()->getCategory()->getName();
             foreach ($posts as $post) {
-                if ($categoryName = 'adminCategoryTest') {
+                if ($categoryName == 'adminCategoryTest') {
                     $this->tryUrl(302, 403, 403, 403, 302, $url);
                     $this->tryUrl(404, 404, 404, 404, 404, $url);
-                } elseif ($categoryName = 'moderatorCategoryTest') {
+                } elseif ($categoryName == 'moderatorCategoryTest') {
                     $this->tryUrl(302, 403, 403, 302, 404, $url);
                     $this->tryUrl(404, 404, 404, 404, 404, $url);
                 } else {
@@ -67,7 +67,34 @@ class PostControllerTest extends TestBase
                 }
             }
         }
-        
+    }
+    
+    public function testEditAction()
+    {
+        $topics = $this->addFixturesAndFindTopics();
+        foreach ($topics as $topic) {
+            $posts = $topic->getPosts();
+            $categoryName = $topic->getForum()->getCategory()->getName();
+            foreach ($posts as $post) {
+                $poster = $post->getPoster();
+                $url = $this->client->getContainer()->get('router')->generate('discutea_forum_post_edit', array('id' => $post->getId()));
+                if ( ($poster == 'admin') && ($categoryName != 'adminCategoryTest') ) {
+                    $this->tryUrlModerator($url);
+                } else {
+                    if ($poster == 'member1') {
+                        $this->tryUrl(302, 200, 403, 200, 200, $url);
+                        $this->assertTrue( $this->member1Crawler->filter('html:contains("Edition du message")')->count() > 0 );
+                    } elseif ($poster == 'member2') {
+                        $this->tryUrl(302, 403, 200, 200, 200, $url);
+                        $this->assertTrue( $this->member2Crawler->filter('html:contains("Edition du message")')->count() > 0 );
+                    } else {
+                        $this->tryUrlModerator($url);
+                    }
+                    $this->assertTrue( $this->adminCrawler->filter('html:contains("Edition du message")')->count() > 0 );
+                    $this->assertTrue( $this->moderatorCrawler->filter('html:contains("Edition du message")')->count() > 0 );
+                }
+            }
+        }
     }
     
     private function addFixturesAndFindTopics()

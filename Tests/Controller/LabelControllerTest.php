@@ -26,10 +26,10 @@ class LabelControllerTest extends TestBase
             $topics = $forum->getTopics();
             foreach ($topics as $topic) {
                 $url = $this->client->getContainer()->get('router')->generate('discutea_label_solved', array('slug' => $topic->getSlug()));
-                if ($topic->getSlug()  == 'admintopictest') {
+                if ($topic->getSlug() == 'admintopictest') {
                     $this->tryUrl(302, 403, 403, 403, 302, $url);
                     $this->tryUrl(302, 403, 403, 403, 302, $url);
-                } elseif ($topic->getSlug()  == 'moderatortopictest') {
+                } elseif ($topic->getSlug() == 'moderatortopictest') {
                     $this->tryUrl(302, 403, 403, 302, 302, $url);
                     $this->tryUrl(302, 403, 403, 302, 302, $url);
                 }

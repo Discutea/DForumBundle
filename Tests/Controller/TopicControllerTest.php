@@ -26,9 +26,9 @@ class TopicControllerTest extends TestBase
         
         foreach ($forums as $forum) {
             $url = $this->client->getContainer()->get('router')->generate('discutea_forum_topic', array('slug' => $forum->getSlug()));
-            if ($forum->getCategory()->getName()  == 'adminCategoryTest') {
+            if ($forum->getCategory()->getName() == 'adminCategoryTest') {
                 $this->tryUrlAdmin($url);
-            } elseif ($forum->getCategory()->getName()  == 'moderatorCategoryTest') {
+            } elseif ($forum->getCategory()->getName() == 'moderatorCategoryTest') {
                 $this->tryUrlModerator($url);
                 $this->assertTrue( $this->moderatorCrawler->filter('html:contains("TopicTest")')->count() > 0 );
             } else {
