@@ -30,25 +30,38 @@ Ce bundle offre les fonctionnalités suivantes:
 Avant de commencer installer KnpPaginatorBundle si cela n'est pas déjà fait.
 
 1: Ajouter la dependance à votre configuration composer
-    "discutea/forum-bundle": "dev-master"
 
-2: Mettre à jour les paquets
-   composer update
 
-3: Enregistrer DForumBundle dans votre kernel
-   # app/AppKernel.php
-   new Discutea\DForumBundle\DForumBundle(),
+    composer require discutea/forum-bundle
+
+2: Enregistrer DForumBundle dans votre kernel
+
+
+    <?php
+    // app/AppKernel.php
+    // ...
+    public function registerBundles()
+    {
+        $bundles = [
+            // ...
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Discutea\DForumBundle\DForumBundle(),
+            // ...
+
 
 4: Ajouter les routes
-   # app/Config/routing.yml
 
-   discutea_forum:
-    resource: "@DForumBundle/Resources/config/routing.yml"
-    prefix:   /
+
+    # app/Config/routing.yml
+
+    discutea_forum:
+        resource: "@DForumBundle/Resources/config/routing.yml"
+        prefix:   /
 
 5: Ajouter la configuration du bundle:
 
 # Configuration de l'entité utilisateur
+
 
     doctrine:
         orm:
@@ -75,7 +88,7 @@ Avant de commencer installer KnpPaginatorBundle si cela n'est pas déjà fait.
         preview:
             enabled: true
         knp_paginator:
-            page_name: p
+            page_name: p  #voir knp_paginator.default_option.page_name
             topics:
                 enabled: true
                 per_page: 10
@@ -83,23 +96,20 @@ Avant de commencer installer KnpPaginatorBundle si cela n'est pas déjà fait.
                 enabled: true
                 per_page: 10
   
-  6: Faites la mise à jour de la base de données
-      php bin/console doctrine:schema:update --force
-      
-  C'est prêt, rendez-vous à l'adresse /forum et créez votre première categorie et votre premier forum
-  
-  Plus de documentation:
-      - Installation
-      - Modifier les vues
-      - Les voters
-      - Le twig helper
-      - Ajouter des bbcodes
-      - Ajouter un breadcrumb
-  
+6: Faites la mise à jour de la base de données
+
+
+    php bin/console doctrine:schema:update --force
+
+
+C'est prêt, rendez-vous à l'adresse /forum et créez votre première categorie et votre premier forum
+
+
 ##  INFORMATIONS PRATIQUES
-  
-  Pour une aide ou demander des fonctionalités merci de me joindre sur IRC (Anglais ou Français)
-    - serveur: irc.ircz.fr:6667
-    - salon:   #IRCz
+
+
+Pour une aide ou demander des fonctionalités merci de me joindre sur IRC (Anglais ou Français)
+  - serveur: irc.ircz.fr:6667
+  - salon:   #IRCz
     
-  Pour les problèmes, merci d'ouvrir un ticket sur GitHub
+Pour les problèmes, merci d'ouvrir un ticket sur GitHub
