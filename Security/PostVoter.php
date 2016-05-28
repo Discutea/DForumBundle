@@ -72,6 +72,10 @@ class PostVoter extends Voter
      */
     public function canReplyPost(Post $post, TokenInterface $token)
     {
+        if (!$this->decisionManager->decide($token, array('CanReadTopic'), $post->getTopic())) {
+            return false;
+        }
+
         if ($this->decisionManager->decide($token, array('ROLE_MODERATOR'))) {
             return true;
         }
@@ -103,7 +107,10 @@ class PostVoter extends Voter
      */
     public function canEditPost(Post $post, TokenInterface $token)
     {
-       
+        if (!$this->decisionManager->decide($token, array('CanReadTopic'), $post->getTopic())) {
+            return false;
+        }
+        
         if ($this->decisionManager->decide($token, array('ROLE_MODERATOR'))) {
             return true;
         }

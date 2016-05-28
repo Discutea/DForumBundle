@@ -70,7 +70,7 @@ class PostController extends BasePostController
      * 
      * @Route("post/delete/{id}/", name="discutea_forum_post_delete")
      * @ParamConverter("post")
-     * @Security("has_role('ROLE_MODERATOR')")
+     * @Security("has_role('ROLE_MODERATOR') and is_granted('CanEditPost', post)")
      *
      * @param objet $post Discutea\DForumBundle\Entity\Post
      * 
