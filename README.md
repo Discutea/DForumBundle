@@ -17,7 +17,7 @@ This bundle has been conceived with and for Symfony 3 (PHP >= 5.x | 7.x)
 Available on:
 * [Github](https://github.com/Discutea/DForumBundle)
 * [Packagist](https://packagist.org/packages/discutea/forum-bundle)
-* KnpBundles
+* [KnpBundles](http://knpbundles.com/Discutea/DForumBundle)
  
 FEATURES:
  
