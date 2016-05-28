@@ -1,5 +1,9 @@
-Développement en cours !!! Discutea ForumBundle README FR.
+ForumBundle README FR.
 =============================
+
+
+[Readme English](https://github.com/Discutea/DForumBundle/blob/master/README.md)
+
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/3b4e49a6-9f64-4441-a88a-65c8f705b3d1/mini.png)](https://insight.sensiolabs.com/projects/3b4e49a6-9f64-4441-a88a-65c8f705b3d1) [![Build Status](https://api.travis-ci.org/Discutea/DForumBundle.png)](https://travis-ci.org/Discutea/DForumBundle) [![Latest Stable Version](https://poser.pugx.org/discutea/forum-bundle/v/stable.png)](https://packagist.org/packages/discutea/forum-bundle) [![Total Downloads](https://poser.pugx.org/discutea/forum-bundle/downloads)](https://packagist.org/packages/discutea/forum-bundle) 
 
