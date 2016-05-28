@@ -16,7 +16,7 @@ Cet ensemble est conçu pour le framework Symfony 3 et PHP >= 5.x | 7.x
 Disponible sur: 
 * [Github](https://github.com/Discutea/DForumBundle)
 * [Packagist](https://packagist.org/packages/discutea/forum-bundle)
-* KnpBundles
+* [KnpBundles](http://knpbundles.com/Discutea/DForumBundle)
 
 CARACTERISTIQUES:
 
