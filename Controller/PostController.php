@@ -25,7 +25,7 @@ class PostController extends BasePostController
 
     /**
      * 
-     * @Route("topic/{slug}", name="discutea_forum_post")
+     * @Route("topic/{slug}/", name="discutea_forum_post")
      * @ParamConverter("topic")
      * @Security("is_granted('CanReadTopic', topic)")
      *
@@ -68,7 +68,7 @@ class PostController extends BasePostController
      * 
      * Delete a post and redirection in post page or topic page after delete.
      * 
-     * @Route("post/delete/{id}", name="discutea_forum_post_delete")
+     * @Route("post/delete/{id}/", name="discutea_forum_post_delete")
      * @ParamConverter("post")
      * @Security("has_role('ROLE_MODERATOR')")
      *
@@ -100,7 +100,7 @@ class PostController extends BasePostController
 
     /**
      * 
-     * @Route("post/edit/{id}", name="discutea_forum_post_edit")
+     * @Route("post/edit/{id}/", name="discutea_forum_post_edit")
      * @ParamConverter("post")
      * @Security("is_granted('CanEditPost', post)")
      * 

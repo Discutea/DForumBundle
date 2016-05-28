@@ -47,7 +47,7 @@ class ForumController extends BaseController
 
     /**
      * 
-     * @Route("/forum/new/{id}", name="discutea_forum_create_forum")
+     * @Route("/forum/new/{id}/", name="discutea_forum_create_forum")
      * @ParamConverter("category")
      * @Security("is_granted('ROLE_ADMIN')")
      * 
@@ -81,7 +81,7 @@ class ForumController extends BaseController
 
     /**
      * 
-     * @Route("forum/edit/{id}", name="discutea_forum_edit_forum")
+     * @Route("forum/edit/{id}/", name="discutea_forum_edit_forum")
      * @ParamConverter("forum")
      * @Security("is_granted('ROLE_ADMIN')")
      * 
@@ -112,7 +112,7 @@ class ForumController extends BaseController
 
     /**
      * 
-     * @Route("forum/remove/{id}", name="discutea_forum_remove_forum")
+     * @Route("forum/remove/{id}/", name="discutea_forum_remove_forum")
      * @ParamConverter("forum")
      * @Security("is_granted('ROLE_ADMIN')")
      * 

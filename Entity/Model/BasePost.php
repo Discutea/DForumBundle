@@ -41,7 +41,7 @@ abstract class BasePost
     
     /**
      * @ORM\ManyToOne(targetEntity="Symfony\Component\Security\Core\User\UserInterface")
-     * @ORM\JoinColumn(nullable=false, referencedColumnName="id")
+     * @ORM\JoinColumn(nullable=true, referencedColumnName="id")
      */
     protected $poster;
     

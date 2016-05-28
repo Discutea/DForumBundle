@@ -25,7 +25,7 @@ class CategoryController extends BaseController
 {
     /**
      * 
-     * @Route("forum/category/create", name="discutea_forum_create_category")
+     * @Route("category/new/", name="discutea_forum_create_category")
      * @Security("is_granted('ROLE_ADMIN')")
      * 
      * 
@@ -55,7 +55,7 @@ class CategoryController extends BaseController
 
     /**
      * 
-     * @Route("forum/category/edit/{id}", name="discutea_forum_edit_category")
+     * @Route("category/edit/{id}/", name="discutea_forum_edit_category")
      * @ParamConverter("category")
      * @Security("is_granted('ROLE_ADMIN')")
      * 
@@ -86,7 +86,7 @@ class CategoryController extends BaseController
 
     /**
      * 
-     * @Route("forum/category/{id}", name="discutea_forum_remove_category")
+     * @Route("category/remove/{id}/", name="discutea_forum_remove_category")
      * @ParamConverter("category")
      * @Security("is_granted('ROLE_ADMIN')")
      * 
