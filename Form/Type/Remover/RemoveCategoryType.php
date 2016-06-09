@@ -28,7 +28,6 @@ class RemoveCategoryType extends AbstractType
         $builder
             ->add('movedTo', ChoiceType::class, array(
                 'choices' => $this->getAllCategories(),
-                'choices_as_values' => true,
             ))
             ->add('purge', CheckboxType::class, array(
                 'label'    => 'discutea.forum.category.removeall.label',

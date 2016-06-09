@@ -17,7 +17,6 @@ class CategoryType extends AbstractType
             ->add('readAuthorisedRoles', ChoiceType::class, array(
                 'label' => 'discutea.forum.category.permitions',
                 'choices' => $options['roles'],
-                'choices_as_values' => true,
             ))
         ;
     }
