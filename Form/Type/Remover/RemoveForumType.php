@@ -29,7 +29,6 @@ class RemoveForumType extends AbstractType
                 
             ->add('movedTo', ChoiceType::class, array(
                 'choices' => $this->getAllForums(),
-                'choices_as_values' => true,
             ))
                 
             ->add('purge', CheckboxType::class, array(
