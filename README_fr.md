@@ -40,7 +40,7 @@ Avant de commencer installer KnpPaginatorBundle si cela n'est pas déjà fait.
 
 2: Enregistrer DForumBundle dans votre kernel
 
-
+```php
     <?php
     // app/AppKernel.php
     // ...
@@ -51,30 +51,27 @@ Avant de commencer installer KnpPaginatorBundle si cela n'est pas déjà fait.
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Discutea\DForumBundle\DForumBundle(),
             // ...
-
+```
 
 4: Ajouter les routes
 
-
+```yml
     # app/Config/routing.yml
-
     discutea_forum:
         resource: "@DForumBundle/Resources/config/routing.yml"
         prefix:   /
-
+```
 5: Ajouter la configuration du bundle:
-
+```yml
 # Configuration de l'entité utilisateur
-
-
     doctrine:
         orm:
             auto_generate_proxy_classes: "%kernel.debug%"
             naming_strategy: doctrine.orm.naming_strategy.underscore
             auto_mapping: true
             resolve_target_entities:
-                Symfony\Component\Security\Core\User\UserInterface: IRCz\UsersBundle\Entity\Users
-    
+                Symfony\Component\Security\Core\User\UserInterface: Namespace\YourUserBundle\Entity\User
+
     # Configurer knp paginator attention changer bien le page_name
     knp_paginator:
         page_range: 3
@@ -99,7 +96,7 @@ Avant de commencer installer KnpPaginatorBundle si cela n'est pas déjà fait.
             posts:
                 enabled: true
                 per_page: 10
-  
+```
 6: Faites la mise à jour de la base de données
 
 
