@@ -17,11 +17,6 @@ class AbstractTopicType extends AbstractType
     {
         $builder->add('title', TextType::class, array('label' => 'discutea.forum.topic.title'));
     }
-    
-  public function getName()
-  {
-    return 'forumbundle_topic';
-  }
   
     /**
      * @param OptionsResolver $resolver
@@ -32,4 +27,5 @@ class AbstractTopicType extends AbstractType
             'data_class' => 'Discutea\DForumBundle\Entity\Topic'
         ));
     }
+
 }

@@ -23,12 +23,7 @@ class TopicEditType extends AbstractType
             ))
         ;
     }
-    
-    public function getName()
-    {
-        return 'forumbundle_topic';
-    }
-  
+
     public function getParent()
     {
         return AbstractTopicType::class;

@@ -52,9 +52,4 @@ class RemoveCategoryType extends AbstractType
 
         return $cats;
     }
-
-    public function getName()
-    {
-        return 'discutea.forum_remove_category';
-    }
 }

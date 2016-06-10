@@ -17,11 +17,6 @@ class AbstractPostType extends AbstractType
     {
         $builder->add('content', TextareaType::class, array('label'  => 'discutea.forum.post'));
     }
-    
-    public function getName()
-    {
-        return 'forumbundle_post';
-    }
   
     /**
      * @param OptionsResolver $resolver

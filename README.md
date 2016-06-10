@@ -49,7 +49,10 @@ Before setting up everything, this bundle requires that you install KnpPaginator
     {
         $bundles = [
             // ...
+			// IF NOT EXIST
+			new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+			// END OF DEPENDANCY
             new Discutea\DForumBundle\DForumBundle(),
             // ...
  
@@ -75,7 +78,13 @@ Before setting up everything, this bundle requires that you install KnpPaginator
             auto_mapping: true
             resolve_target_entities:
                 Symfony\Component\Security\Core\User\UserInterface: IRCz\UsersBundle\Entity\Users
-   
+
+    # Stof Doctrine Extensions
+    stof_doctrine_extensions:
+        orm:
+            default:
+                sluggable: true
+
     # Configuration for knp paginator: don't forget to customize page_name
     knp_paginator:
         page_range: 3
@@ -100,8 +109,10 @@ Before setting up everything, this bundle requires that you install KnpPaginator
             posts:
                 enabled: true
                 per_page: 10
- 
-6: Update the database
+
+6: Add a ROLE_MODERATOR in app/config/security.yml
+
+7: Update the database
  
  
     php bin/console doctrine:schema:update --force
