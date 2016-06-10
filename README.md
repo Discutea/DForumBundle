@@ -41,7 +41,7 @@ Before setting up everything, this bundle requires that you install KnpPaginator
  
 2: Register DForumBundle in the Symfony kernel
  
- 
+ ```php
     <?php
     // app/AppKernel.php
     // ...
@@ -55,7 +55,7 @@ Before setting up everything, this bundle requires that you install KnpPaginator
             // END OF DEPENDANCY
             new Discutea\DForumBundle\DForumBundle(),
             // ...
- 
+```
  
 4: Add routes routes
  
@@ -77,7 +77,7 @@ Before setting up everything, this bundle requires that you install KnpPaginator
             naming_strategy: doctrine.orm.naming_strategy.underscore
             auto_mapping: true
             resolve_target_entities:
-                Symfony\Component\Security\Core\User\UserInterface: IRCz\UsersBundle\Entity\Users
+                Symfony\Component\Security\Core\User\UserInterface: Namespace\YourUserBundle\Entity\User
 
     # Stof Doctrine Extensions
     stof_doctrine_extensions:
