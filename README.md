@@ -49,10 +49,10 @@ Before setting up everything, this bundle requires that you install KnpPaginator
     {
         $bundles = [
             // ...
-			// IF NOT EXIST
-			new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            // IF NOT EXIST
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-			// END OF DEPENDANCY
+            // END OF DEPENDANCY
             new Discutea\DForumBundle\DForumBundle(),
             // ...
  

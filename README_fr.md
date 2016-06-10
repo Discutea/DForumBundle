@@ -48,10 +48,10 @@ Avant de commencer installer KnpPaginatorBundle si cela n'est pas déjà fait.
     {
         $bundles = [
             // ...
-			// IF NOT EXIST
-			new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            // IF NOT EXIST
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-			// END OF DEPENDANCY
+            // END OF DEPENDANCY
             new Discutea\DForumBundle\DForumBundle(),
             // ...
 
