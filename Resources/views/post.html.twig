@@ -7,7 +7,7 @@
   {{ knp_pagination_render(posts) }}
   
   {% if topic.closed == true %}
-    <div class="alert alert-danger">{{ 'discutea.forum.label.closed'|trans }}</div>
+    <div class="alert alert-danger">{{ 'discutea.forum.label.isclosed'|trans }}</div>
   {% endif %}
   {% if topic.resolved == true %}
     <div class="alert alert-success">{{ 'discutea.forum.label.issolved'|trans }}</div>
