@@ -100,8 +100,10 @@ Before setting up everything, this bundle requires that you install KnpPaginator
             posts:
                 enabled: true
                 per_page: 10
- 
-6: Update the database
+
+6: Add a ROLE_MODERATOR in app/config/security.yml
+
+7: Update the database
  
  
     php bin/console doctrine:schema:update --force
@@ -109,7 +111,9 @@ Before setting up everything, this bundle requires that you install KnpPaginator
  
 All set, browse /forum and start by creating your first category and forum
  
- 
+8: Avoid 404
+    http://symfony.com/doc/current/cookbook/routing/redirect_trailing_slash.html  
+
 ## MORE INFO
  
  

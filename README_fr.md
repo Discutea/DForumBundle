@@ -97,7 +97,9 @@ Avant de commencer installer KnpPaginatorBundle si cela n'est pas déjà fait.
                 enabled: true
                 per_page: 10
 ```
-6: Faites la mise à jour de la base de données
+6: Ajouter un ROLE_MODERATOR dans app/config/security.yml
+
+7: Faites la mise à jour de la base de données
 
 
     php bin/console doctrine:schema:update --force
@@ -108,6 +110,8 @@ C'est prêt, rendez-vous à l'adresse /forum et créez votre première categorie
 
 ##  INFORMATIONS PRATIQUES
 
+8: Eviter les 404
+    http://symfony.com/doc/current/cookbook/routing/redirect_trailing_slash.html  
 
 Pour une aide ou demander des fonctionalités merci de me joindre sur IRC (Anglais ou Français)
   - serveur: irc.ircz.fr:6667
