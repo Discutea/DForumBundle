@@ -119,6 +119,8 @@ Avant de commencer installer KnpPaginatorBundle si cela n'est pas déjà fait.
 
 C'est prêt, rendez-vous à l'adresse /forum et créez votre première categorie et votre premier forum
 
+8: Eviter les 404
+    http://symfony.com/doc/current/cookbook/routing/redirect_trailing_slash.html   
 
 ##  INFORMATIONS PRATIQUES
 
@@ -128,3 +130,4 @@ Pour une aide ou demander des fonctionalités merci de me joindre sur IRC (Angla
   - salon:   #IRCz
     
 Pour les problèmes, merci d'ouvrir un ticket sur GitHub
+

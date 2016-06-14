@@ -120,7 +120,9 @@ Before setting up everything, this bundle requires that you install KnpPaginator
  
 All set, browse /forum and start by creating your first category and forum
  
- 
+8: Avoid to 404
+   http://symfony.com/doc/current/cookbook/routing/redirect_trailing_slash.html
+
 ## MORE INFO
  
  

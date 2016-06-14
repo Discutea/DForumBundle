@@ -27,7 +27,7 @@ class TopicController extends BaseTopicController
     /**
      * infos:  Display the topics of a forum
      * 
-     * @Route("/cat/{slug}/", name="discutea_forum_topic")
+     * @Route("/cat/{slug}", name="discutea_forum_topic")
      * @ParamConverter("forum")
      * @Security("is_granted('CanReadForum', forum)")
      * 
@@ -62,7 +62,7 @@ class TopicController extends BaseTopicController
     }
 
     /**
-     * @Route("/topic/delete/{id}/", name="discutea_forum_topic_delete")
+     * @Route("/topic/delete/{id}", name="discutea_forum_topic_delete")
      * @ParamConverter("topic")
      * @Security("has_role('ROLE_MODERATOR') and is_granted('CanReadTopic', topic)")
      */
@@ -78,7 +78,7 @@ class TopicController extends BaseTopicController
     }
 
     /**
-     * @Route("/topic/edit/{id}/", name="discutea_forum_topic_edit")
+     * @Route("/topic/edit/{id}", name="discutea_forum_topic_edit")
      * @ParamConverter("topic")
      * @Security("has_role('ROLE_MODERATOR') and is_granted('CanReadTopic', topic)")
      * 

@@ -19,7 +19,7 @@ class LabelController extends BaseController
     
     /**
      * 
-     * @Route("/label/solved/{slug}/", name="discutea_label_solved")
+     * @Route("/label/solved/{slug}", name="discutea_label_solved")
      * @ParamConverter("topic")
      * @Security("is_granted('CanEditTopic', topic)")
      *
@@ -47,7 +47,7 @@ class LabelController extends BaseController
 
     /**
      * 
-     * @Route("/label/pinned/{slug}/", name="discutea_label_pinned")
+     * @Route("/label/pinned/{slug}", name="discutea_label_pinned")
      * @ParamConverter("topic")
      * @Security("has_role('ROLE_ADMIN')")
      *
@@ -72,7 +72,7 @@ class LabelController extends BaseController
 
     /**
      * 
-     * @Route("/label/closed/{slug}/", name="discutea_label_closed")
+     * @Route("/label/closed/{slug}", name="discutea_label_closed")
      * @ParamConverter("topic")
      * @Security("has_role('ROLE_MODERATOR') and  is_granted('CanEditTopic', topic)")
      *
