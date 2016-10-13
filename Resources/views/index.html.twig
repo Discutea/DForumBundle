@@ -28,10 +28,15 @@
                 <div class="text-center">
                 {% set lastTopic = dfLastTopicInForum(forum) %}
                 {% if lastTopic is not null %}
+                    {% if lastTopic.posts.last.poster is not null %}
+                      {% set username = lastTopic.posts.last.poster.username %}
+                    {% else %}
+                      {% set username = 'discutea.forum.deleted.user'|trans %}
+                    {% endif %}
                     <a class="lastComment" href="{{ dfLastPostPages(lastTopic.posts.last) }}">
                       <p>
-                          {{ 'discutea.forum.lastpostby'|trans }} <strong>{{ lastTopic.posts.last.poster.username }}</strong>
-                          <br />{{ lastTopic.posts.last.date|date("Y-m-d H:i:s") }}
+                        {{ 'discutea.forum.lastpostby'|trans }} <strong>{{ username }}</strong>
+                        <br />{{ lastTopic.posts.last.date|date("Y-m-d H:i:s") }}
                       </p>
                     </a>
                 {% else %}

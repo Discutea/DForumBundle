@@ -63,3 +63,8 @@ services:
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
             - { name: form.type }
+
+    forum.listener.dropauser:
+        class: Discutea\DForumBundle\EventListener\ForumListener
+        tags:
+            - { name: doctrine.event_listener, event: preRemove }

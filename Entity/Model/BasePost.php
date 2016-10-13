@@ -188,7 +188,7 @@ abstract class BasePost
      *
      * @return Post
      */
-    public function setPoster(UserInterface $poster)
+    public function setPoster(UserInterface $poster = NULL)
     {
         $this->poster = $poster;
 
@@ -212,7 +212,7 @@ abstract class BasePost
      *
      * @return Post
      */
-    public function setUpdatedBy(UserInterface $updatedBy = null)
+    public function setUpdatedBy(UserInterface $updatedBy = NULL)
     {
         $this->updatedBy = $updatedBy;
 

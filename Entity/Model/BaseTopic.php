@@ -229,7 +229,7 @@ abstract class BaseTopic
      *
      * @return Topic
      */
-    public function setUser(UserInterface $user)
+    public function setUser(UserInterface $user = NULL)
     {
         $this->user = $user;
 

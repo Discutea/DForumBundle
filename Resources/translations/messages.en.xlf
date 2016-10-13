@@ -124,6 +124,10 @@
                 <source>discutea.forum.forum.form.purge</source>
                 <target>Check to completely delete the forum's topics.</target>
             </trans-unit>
+            <trans-unit id="f15">
+                <source>discutea.forum.deleted.user</source>
+                <target>Deleted user</target>
+            </trans-unit>
             <!-- Topics -->
             <trans-unit id="t1">
                 <source>discutea.forum.topic.create</source>

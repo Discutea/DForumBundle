@@ -24,8 +24,15 @@
               <img width="40" height="40" alt="User" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ1kn09Jy4NdTZmgv4issVLY4M3w_dLz5EGUfDk1DGHN1LKsfDa8A">
             </div>
             <div class="article-post">
+              {% if post.poster is not null %}
+                {% set username = post.poster.username %}
+                {% set email = '-' %}
+              {% else %}
+                {% set username = 'discutea.forum.deleted.user'|trans %}
+                {% set email = post.poster.email %}
+              {% endif %}
               <p>
-                <span class="user-info">{{ 'discutea.forum.by'|trans }}: {{ post.poster.username }} {{ 'discutea.forum.on'|trans }} {{ post.date|date("Y-m-d H:i:s") }}, {{ post.poster.email }}</span><br />
+                <span class="user-info">{{ 'discutea.forum.by'|trans }}: {{ username }} {{ 'discutea.forum.on'|trans }} {{ post.date|date("Y-m-d H:i:s") }}, {{ email }}</span><br />
                 <span class="user-info">{{ 'discutea.forum.location'|trans }}: <a href="{{ path('discutea_forum_topic', {'slug': post.topic.forum.slug}) }}">{{ post.topic.forum.name }}</a> > <a href="{{ path('discutea_forum_post', {'slug': post.topic.slug}) }}#content{{ post.id }}">{{ post.topic.title }}</a> </span>
               </p>
               <p class="content">
