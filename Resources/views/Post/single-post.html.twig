@@ -1,7 +1,12 @@
 <li id="post{{ post.id }}" class="list-group-item topics">
   <div class="row">
     <div class="col-sm-2 text-center">
-      <p><strong>{{ post.poster.username }}</strong></p>
+      {% if post.poster is not null %}
+        {% set username = post.poster.username %}
+      {% else %}
+        {% set username = 'discutea.forum.deleted.user'|trans %}
+      {% endif %}
+      <p><strong>{{ username }}</strong></p>
     </div>
     <div class="col-sm-10">
       <div class="raw">
