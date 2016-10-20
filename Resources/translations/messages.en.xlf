@@ -70,7 +70,7 @@
             <!-- Forums -->
             <trans-unit id="f1">
                 <source>discutea.forum.forum.incat</source>
-                <target>Listing forum in</target>
+                <target>List of forums in</target>
             </trans-unit>
             <trans-unit id="f2">
                 <source>discutea.forum.forum.delete</source>
@@ -358,7 +358,7 @@
             </trans-unit>
             <trans-unit id="d29">
                 <source>discutea.forum.choice</source>
-                <target>Select a forums</target>
+                <target>Select a forum</target>
             </trans-unit>
         </body>
     </file>
