@@ -66,7 +66,7 @@ class ForumController extends BaseController
         
         $form = $this->createForm(ForumType::class, $forum);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->handleRequest($request)->isSubmitted()) {
             $em = $this->getEm();
             $em->persist($forum);
             $em->flush();
@@ -97,7 +97,7 @@ class ForumController extends BaseController
         
         $form = $this->createForm(ForumType::class, $forum);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->handleRequest($request)->isSubmitted()) {
             $em = $this->getEm();
             $em->persist($forum);
             $em->flush();
@@ -129,7 +129,7 @@ class ForumController extends BaseController
 
         $form = $this->createForm(RemoveForumType::class);
         $em = $this->getEm();
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->handleRequest($request)->isSubmitted()) {
             if ($form->getData()['purge'] === false) {
                 $newFor = $em->getRepository('DForumBundle:Forum')->find($form->getData()['movedTo']) ;
                 

@@ -39,7 +39,7 @@ class TopicController extends BaseTopicController
         $pagination = $this->get('discutea.forum.pagin')->pagignate('topics', $topics);
         
         if (($form = $this->generateTopicForm($forum)) !== NULL) {
-            if ($form->handleRequest($request)->isValid()) {
+            if ($form->handleRequest($request)->isSubmitted()) {
                 $content = $form->get('content')->getData();
                 $post = $this->createPost($content, $this->topic);
                 $em = $this->getEm();
@@ -87,7 +87,7 @@ class TopicController extends BaseTopicController
     {
         $form = $this->createForm(TopicEditType::class, $topic);
         
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->handleRequest($request)->isSubmitted()) {
             $forumSlug = $topic->getForum()->getSlug();
             $this->getEm()->flush();
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.topic.edit'));

@@ -43,7 +43,7 @@ class PostController extends BasePostController
 
         if (( $form = $this->generatePostForm($request, $topic) ) !== NULL) {
 
-            if ($form->handleRequest($request)->isValid()) {
+            if ($form->handleRequest($request)->isSubmitted()) {
                 if ( !$preview = $this->getPreview($request, $form, $this->post) ) {
                     $em = $this->getEm();
                     $em->persist($this->post);
@@ -118,7 +118,7 @@ class PostController extends BasePostController
             'preview' => $this->container->getParameter('discutea_forum.preview')
         ));
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->handleRequest($request)->isSubmitted()) {
             if ( !$preview = $this->getPreview($request, $form, $post) ) {
                 $user = $this->get('security.token_storage')->getToken()->getUser();
                 $post->setUpdated(new \DateTime());

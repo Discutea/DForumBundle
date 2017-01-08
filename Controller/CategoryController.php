@@ -40,7 +40,7 @@ class CategoryController extends BaseController
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category, array('roles' => $this->getRolesList()));
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->handleRequest($request)->isSubmitted()) {
             $em = $this->getEm();
             $em->persist($category);
             $em->flush();
@@ -71,7 +71,7 @@ class CategoryController extends BaseController
     {   
         $form = $this->createForm(CategoryType::class, $category, array('roles' => $this->getRolesList()));
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->handleRequest($request)->isSubmitted()) {
             $em = $this->getEm();
             $em->persist($category);
             $em->flush();
@@ -102,7 +102,7 @@ class CategoryController extends BaseController
 
         $form = $this->createForm(RemoveCategoryType::class);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->handleRequest($request)->isSubmitted()) {
             $em = $this->getEm();
             if ($form->getData()['purge'] === false) {
                 $forums = $category->getForums();
