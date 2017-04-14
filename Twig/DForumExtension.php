@@ -13,7 +13,7 @@ class DForumExtension extends \Twig_Extension
     /**
      * @var ObjectManager
      */
-    protected $em;
+    private $em;
 
     /**
      *
