@@ -22,6 +22,14 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->arrayNode('antiflood')
+                    ->children()
+                        ->booleanNode('enabled')->defaultValue(true)->end()
+                        ->integerNode('hours')->defaultValue(12)->end()
+                    ->end()
+                ->end()
+            ->end()
+            ->children()
                 ->arrayNode('preview')
                     ->children()
                         ->booleanNode('enabled')->defaultValue(true)->end()
