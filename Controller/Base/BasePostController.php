@@ -136,7 +136,7 @@ class BasePostController extends BaseController
     }
     
     protected function isFlood(Topic $topic){
-        if ($this->container->getParameter('discutea_forum.antiflood')
+        if ($this->getParameter('discutea_forum.antiflood')
             && $topic->getPosts()->last()->getPoster() === $this->container->get('security.context')->getToken()->getUser()
             && (array) $topic->getLastPost()->diff(new \Datetime) < (array) new \DateInterval(
                     'P0DT'.$this->container->getParameter('discutea_forum.antiflood.hours').'H'

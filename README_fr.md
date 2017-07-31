@@ -116,10 +116,14 @@ Avant de commencer installer KnpPaginatorBundle si cela n'est pas déjà fait.
 
     php bin/console doctrine:schema:update --force
 
+8: Installer les styles
+
+
+    php bin/console asset:install
 
 C'est prêt, rendez-vous à l'adresse /forum et créez votre première categorie et votre premier forum
 
-8: Eviter les 404
+9: Eviter les 404
     http://symfony.com/doc/current/cookbook/routing/redirect_trailing_slash.html   
 
 ##  INFORMATIONS PRATIQUES

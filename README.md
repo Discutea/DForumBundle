@@ -117,7 +117,11 @@ Before setting up everything, this bundle requires that you install KnpPaginator
  
     php bin/console doctrine:schema:update --force
  
- 
+8: Install the styles
+
+
+    php bin/console asset:install
+
 All set, browse /forum and start by creating your first category and forum
  
 8: Avoid to 404

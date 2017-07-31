@@ -30,7 +30,7 @@ class ForumExtension extends Extension
         $container->setParameter('discutea_forum.preview', $config["preview"]["enabled"]);
         $container->setParameter('discutea_forum.antiflood', $config["antiflood"]["enabled"]);
         $container->setParameter('discutea_forum.antiflood.hours', $config["antiflood"]["hours"]);
-
+  
         $container = new ContainerBuilder();
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__));
         $loader->load('../Resources/config/services.yml');

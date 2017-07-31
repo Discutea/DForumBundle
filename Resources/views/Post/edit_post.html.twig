@@ -3,10 +3,7 @@
 {% block title %}{% endblock %}
 
 {% block stylesheets %}
-  {% stylesheets 
-    '@DForumBundle/Resources/public/css/post.css' %}
-  <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
-  {% endstylesheets %}
+   <link rel="stylesheet" href="{{ asset('bundles/dforum/css/post.css') }}" type="text/css" />
 {% endblock %}
 
 {% block body %}
@@ -36,17 +33,9 @@
 
 {% block js %}
   {% if app.user %}
+      <script src="{{ asset('bundles/dforum/js/post.js') }}"></script>
     {% if is_granted('ROLE_MODERATOR') %}
-        {% javascripts
-          '@DForumBundle/Resources/public/js/post.js'
-          '@DForumBundle/Resources/public/js/moderator/post.js' %}
-          <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}       
-    {% else %}
-        {% javascripts
-          '@DForumBundle/Resources/public/js/post.js' %}
-          <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}
+      <script src="{{ asset('bundles/dforum/js/moderator/post.js') }}"></script>   
     {% endif %}
   {% endif %}
 {% endblock %}
