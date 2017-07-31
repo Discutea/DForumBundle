@@ -9,7 +9,6 @@ use Discutea\DForumBundle\Entity\Post;
 use Discutea\DForumBundle\Form\Type\PostType;
 use Discutea\DForumBundle\Entity\Topic;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\FormError;
 
 /**
  * PostController 
@@ -43,25 +42,17 @@ class PostController extends BasePostController
         $posts = $this->getPaginator()->pagignate('posts', $topic->getPosts());
 
         if (( $form = $this->generatePostForm($request, $topic) ) !== NULL) {
-                    if ($form->handleRequest($request)->isSubmitted()) {
-                        if ( !$preview = $this->getPreview($request, $form, $this->post) ) {
-                            if ($this->isFlood($topic)){
-                                $form->addError(new FormError($this->getTranslator()->trans(
-                                        'discutea.forum.antiflood.message', 
-                                        array('%hours%' => $this->container->getParameter('discutea_forum.antiflood.hours')))));
-                            }
-                            else{
-                                $em = $this->getEm();
-                                $em->persist($this->post);
-                                $em->flush();
-                                $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.post.create'));
-                                return $this->redirectAfterPost($posts);
-                            }
-                        }
-                    }
-                    
-                $form = $this->autorizedPostForm($posts, $request, $form);
+            if ($form->handleRequest($request)->isValid()) {
+                if ( !$preview = $this->getPreview($request, $form, $this->post) ) {
+                    $em = $this->getEm();
+                    $em->persist($this->post);
+                    $em->flush();
+                    $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.post.create'));
+                    return $this->redirectAfterPost($posts);
+                }
             }
+            $form = $this->autorizedPostForm($posts, $request, $form);
+        }
         
         return $this->render('DForumBundle::post.html.twig', array(
             'topic' => $topic,

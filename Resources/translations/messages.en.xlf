@@ -360,10 +360,6 @@
                 <source>discutea.forum.choice</source>
                 <target>Select a forum</target>
             </trans-unit>
-            <trans-unit id="d30">
-                <source>discutea.forum.antiflood.message</source>
-                <target>You have to wait %hours%h to post a new message on this topic.</target>
-            </trans-unit>
         </body>
     </file>
 </xliff>
