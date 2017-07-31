@@ -40,7 +40,10 @@ class CategoryController extends BaseController
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category, array('roles' => $this->getRolesList()));
 
-        if ($form->handleRequest($request)->isSubmitted()) {
+        $form->handleRequest($request);
+        
+        if (($form->isSubmitted()) && ($form->isValid())) 
+        {
             $em = $this->getEm();
             $em->persist($category);
             $em->flush();
@@ -71,7 +74,10 @@ class CategoryController extends BaseController
     {   
         $form = $this->createForm(CategoryType::class, $category, array('roles' => $this->getRolesList()));
 
-        if ($form->handleRequest($request)->isSubmitted()) {
+        $form->handleRequest($request);
+        
+        if (($form->isSubmitted()) && ($form->isValid())) 
+        {
             $em = $this->getEm();
             $em->persist($category);
             $em->flush();
@@ -102,14 +108,19 @@ class CategoryController extends BaseController
 
         $form = $this->createForm(RemoveCategoryType::class);
 
-        if ($form->handleRequest($request)->isSubmitted()) {
+        $form->handleRequest($request);
+        
+        if (($form->isSubmitted()) && ($form->isValid())) 
+        {
             $em = $this->getEm();
             if ($form->getData()['purge'] === false) {
-                $forums = $category->getForums();
                 
                 $newCat = $em->getRepository('DForumBundle:Category')->find($form->getData()['movedTo']) ;
                 
-                foreach ($forums as $forum) { $forum->setCategory($newCat); }
+                foreach ($category->getForums() as $forum) 
+                { 
+                    $forum->setCategory($newCat); 
+                }
 
                 $em->flush();
                 $em->clear();

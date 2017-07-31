@@ -42,8 +42,12 @@ class PostController extends BasePostController
         $posts = $this->getPaginator()->pagignate('posts', $topic->getPosts());
 
         if (( $form = $this->generatePostForm($request, $topic) ) !== NULL) {
-            if ($form->handleRequest($request)->isValid()) {
-                if ( !$preview = $this->getPreview($request, $form, $this->post) ) {
+            $form->handleRequest($request);
+
+            if (($form->isSubmitted()) && ($form->isValid())) 
+            {
+                if ( !$preview = $this->getPreview($request, $form, $this->post) ) 
+                {
                     $em = $this->getEm();
                     $em->persist($this->post);
                     $em->flush();
@@ -116,7 +120,10 @@ class PostController extends BasePostController
             'preview' => $this->container->getParameter('discutea_forum.preview')
         ));
 
-        if ($form->handleRequest($request)->isSubmitted()) {
+        $form->handleRequest($request);
+        
+        if (($form->isSubmitted()) && ($form->isValid())) 
+        {
             if ( !$preview = $this->getPreview($request, $form, $post) ) {
                 $user = $this->get('security.token_storage')->getToken()->getUser();
                 $post->setUpdated(new \DateTime());
