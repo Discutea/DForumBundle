@@ -51,9 +51,7 @@ doctrine:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
-
         default_entity_manager: default
-        auto_generate_proxy_classes: "%kernel.debug%"
         resolve_target_entities:
             Symfony\Component\Security\Core\User\UserInterface: Discutea\DForumBundle\Tests\tests\src\Entity\Users
         mappings:

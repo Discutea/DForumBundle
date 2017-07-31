@@ -23,11 +23,6 @@ class TopicType extends AbstractType
             )
         ;
     }
-    
-    public function getName()
-    {
-        return 'forumbundle_topic';
-    }
   
     public function getParent()
     {

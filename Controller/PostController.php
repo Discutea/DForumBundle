@@ -42,9 +42,12 @@ class PostController extends BasePostController
         $posts = $this->getPaginator()->pagignate('posts', $topic->getPosts());
 
         if (( $form = $this->generatePostForm($request, $topic) ) !== NULL) {
+            $form->handleRequest($request);
 
-            if ($form->handleRequest($request)->isValid()) {
-                if ( !$preview = $this->getPreview($request, $form, $this->post) ) {
+            if (($form->isSubmitted()) && ($form->isValid())) 
+            {
+                if ( !$preview = $this->getPreview($request, $form, $this->post) ) 
+                {
                     $em = $this->getEm();
                     $em->persist($this->post);
                     $em->flush();
@@ -52,10 +55,9 @@ class PostController extends BasePostController
                     return $this->redirectAfterPost($posts);
                 }
             }
-
             $form = $this->autorizedPostForm($posts, $request, $form);
         }
-
+        
         return $this->render('DForumBundle::post.html.twig', array(
             'topic' => $topic,
             'posts' => $posts,
@@ -118,7 +120,10 @@ class PostController extends BasePostController
             'preview' => $this->container->getParameter('discutea_forum.preview')
         ));
 
-        if ($form->handleRequest($request)->isValid()) {
+        $form->handleRequest($request);
+        
+        if (($form->isSubmitted()) && ($form->isValid())) 
+        {
             if ( !$preview = $this->getPreview($request, $form, $post) ) {
                 $user = $this->get('security.token_storage')->getToken()->getUser();
                 $post->setUpdated(new \DateTime());

@@ -27,11 +27,6 @@ class ForumType extends AbstractType
         ;
     }
 
-    public function getName()
-    {
-        return 'forum_new_forum';
-    }
-  
     /**
      * @param OptionsResolver $resolver
      */

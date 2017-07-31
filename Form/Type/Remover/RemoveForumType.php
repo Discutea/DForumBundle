@@ -61,9 +61,4 @@ class RemoveForumType extends AbstractType
         
         return $fors;
     }
-
-    public function getName()
-    {
-        return 'forum_remove_forum';
-    }
 }

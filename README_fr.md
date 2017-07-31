@@ -48,7 +48,10 @@ Avant de commencer installer KnpPaginatorBundle si cela n'est pas déjà fait.
     {
         $bundles = [
             // ...
+            // IF NOT EXIST
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            // END OF DEPENDANCY
             new Discutea\DForumBundle\DForumBundle(),
             // ...
 ```
@@ -71,6 +74,13 @@ Avant de commencer installer KnpPaginatorBundle si cela n'est pas déjà fait.
             auto_mapping: true
             resolve_target_entities:
                 Symfony\Component\Security\Core\User\UserInterface: Namespace\YourUserBundle\Entity\User
+
+
+    # Stof Doctrine Extensions
+    stof_doctrine_extensions:
+        orm:
+            default:
+                sluggable: true
 
     # Configurer knp paginator attention changer bien le page_name
     knp_paginator:
@@ -97,6 +107,7 @@ Avant de commencer installer KnpPaginatorBundle si cela n'est pas déjà fait.
                 enabled: true
                 per_page: 10
 ```
+
 6: Ajouter un ROLE_MODERATOR dans app/config/security.yml
 
 7: Faites la mise à jour de la base de données
@@ -104,9 +115,15 @@ Avant de commencer installer KnpPaginatorBundle si cela n'est pas déjà fait.
 
     php bin/console doctrine:schema:update --force
 
+8: Installer les styles
+
+
+    php bin/console asset:install
 
 C'est prêt, rendez-vous à l'adresse /forum et créez votre première categorie et votre premier forum
 
+9: Eviter les 404
+    http://symfony.com/doc/current/cookbook/routing/redirect_trailing_slash.html   
 
 ##  INFORMATIONS PRATIQUES
 
@@ -118,3 +135,4 @@ Pour une aide ou demander des fonctionalités merci de me joindre sur IRC (Angla
   - salon:   #IRCz
     
 Pour les problèmes, merci d'ouvrir un ticket sur GitHub
+

@@ -88,7 +88,6 @@ class BaseController extends Controller
     {
         $rolesList = $this->get('service_container')->getParameter('security.role_hierarchy.roles');
         $roles = array();
-        $roles['Aucun'] = NULL;
         foreach ($rolesList as $roleParent) {
             foreach ($roleParent as $roleChild) {
                 $roles[$roleChild] = $roleChild;  

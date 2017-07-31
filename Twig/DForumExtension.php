@@ -2,18 +2,16 @@
 
 namespace Discutea\DForumBundle\Twig;
 
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\User\UserInterface as Poster;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Discutea\DForumBundle\Entity\Forum;
 use Discutea\DForumBundle\Entity\Post;
+use Doctrine\Common\Persistence\ObjectManager;
 
 class DForumExtension extends \Twig_Extension
 {
-
     /**
-     *
-     * @var object Doctrine\ORM\EntityManager
+     * @var ObjectManager
      */
     private $em;
 
@@ -28,8 +26,8 @@ class DForumExtension extends \Twig_Extension
      */
     private $config;
 
-    public function __construct (EntityManager $em, Router $router, $paginationConfig) {
-        $this->em = $em;
+    public function __construct (ObjectManager $objectManager, Router $router, $paginationConfig) {
+        $this->em = $objectManager;
         $this->router = $router;
         $this->config = $paginationConfig;
     }

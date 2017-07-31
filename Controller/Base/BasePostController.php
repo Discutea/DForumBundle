@@ -134,5 +134,4 @@ class BasePostController extends BaseController
         
         return '[quote='.$post->getPoster()->getUsername().']'.$post->getContent().'[/quote]';
     }
-    
 }
