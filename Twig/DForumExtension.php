@@ -2,6 +2,7 @@
 
 namespace Discutea\DForumBundle\Twig;
 
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\User\UserInterface as Poster;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Discutea\DForumBundle\Entity\Forum;
@@ -17,7 +18,7 @@ class DForumExtension extends \Twig_Extension
 
     /**
      *
-     * @var object Symfony\Bundle\FrameworkBundle\Routing\Router
+     * @var UrlGeneratorInterface
      */
     private $router;
 
@@ -26,7 +27,8 @@ class DForumExtension extends \Twig_Extension
      */
     private $config;
 
-    public function __construct (ObjectManager $objectManager, Router $router, $paginationConfig) {
+    public function __construct (ObjectManager $objectManager, UrlGeneratorInterface $router, $paginationConfig)
+    {
         $this->em = $objectManager;
         $this->router = $router;
         $this->config = $paginationConfig;
