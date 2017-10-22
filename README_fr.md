@@ -58,18 +58,15 @@ Avant de commencer installer KnpPaginatorBundle si cela n'est pas déjà fait.
 
 4: Ajouter les routes
 
-
+```yml
     # app/Config/routing.yml
-
     discutea_forum:
         resource: "@DForumBundle/Resources/config/routing.yml"
         prefix:   /
-
+```
 5: Ajouter la configuration du bundle:
-
+```yml
 # Configuration de l'entité utilisateur
-
-
     doctrine:
         orm:
             auto_generate_proxy_classes: "%kernel.debug%"
@@ -77,6 +74,7 @@ Avant de commencer installer KnpPaginatorBundle si cela n'est pas déjà fait.
             auto_mapping: true
             resolve_target_entities:
                 Symfony\Component\Security\Core\User\UserInterface: Namespace\YourUserBundle\Entity\User
+
 
     # Stof Doctrine Extensions
     stof_doctrine_extensions:
@@ -108,6 +106,7 @@ Avant de commencer installer KnpPaginatorBundle si cela n'est pas déjà fait.
             posts:
                 enabled: true
                 per_page: 10
+```
 
 6: Ajouter un ROLE_MODERATOR dans app/config/security.yml
 
@@ -128,6 +127,8 @@ C'est prêt, rendez-vous à l'adresse /forum et créez votre première categorie
 
 ##  INFORMATIONS PRATIQUES
 
+8: Eviter les 404
+    http://symfony.com/doc/current/cookbook/routing/redirect_trailing_slash.html  
 
 Pour une aide ou demander des fonctionalités merci de me joindre sur IRC (Anglais ou Français)
   - serveur: irc.ircz.fr:6667
