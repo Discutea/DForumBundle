@@ -24,7 +24,8 @@
             </div>
             <div class="col-md-2 topic-msg-count">
               {% set posts_count = topic.posts|length %}
-              <p><span class="badge">{{ posts_count }} {% if posts_count > 1 %}{{ 'discutea.forum.posts'|trans }}{% else %}{{ 'discutea.forum.post'|trans }}{% endif %}</span></p>
+              <p><span class="badge">{{ posts_count }} {{ posts_count > 1 ? 'discutea.forum.posts'|trans : 'discutea.forum.post'|trans }}</span></p>
+              <p><span class="badge">{{ topic.views }} {{ topic.views > 1 ? 'discutea.forum.topic.views'|trans : 'discutea.forum.topic.view'|trans }}</span></p>
               <p>
                 {% if topic.resolved == true %}<br />{{ 'discutea.forum.label.issolved'|trans }}{% endif %}
                 {% if topic.pinned == true %}<br />{{ 'discutea.forum.label.ispinned'|trans }}{% endif %}

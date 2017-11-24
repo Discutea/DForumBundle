@@ -153,6 +153,14 @@
                 <source>discutea.forum.topic.title</source>
                 <target>Aiheen otsikko:</target>
             </trans-unit>
+            <trans-unit id="t7">
+                <source>discutea.forum.topic.view</source>
+                <target>näkymät</target>
+            </trans-unit>
+            <trans-unit id="t8">
+                <source>discutea.forum.topic.views</source>
+                <target>näkymät</target>
+            </trans-unit>
             <!-- Posts -->
             <trans-unit id="p1">
                 <source>discutea.forum.warning.preview</source>

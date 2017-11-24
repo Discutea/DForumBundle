@@ -76,8 +76,8 @@ class TopicController extends BaseTopicController
         $em->remove($topic);
         $em->flush();
         $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.topic.delete'));
-        return $this->redirect($this->generateUrl('discutea_forum_topic', array('slug' => $forumSlug)));       
- 
+
+        return $this->redirect($this->generateUrl('discutea_forum_topic', array('slug' => $forumSlug)));
     }
 
     /**

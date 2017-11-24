@@ -38,7 +38,6 @@ class PostController extends BasePostController
     public function postAction(Request $request, Topic $topic)
     {
         $preview = false;
-        
         $posts = $this->getPaginator()->pagignate('posts', $topic->getPosts());
 
         if (( $form = $this->generatePostForm($request, $topic) ) !== NULL) {
@@ -59,13 +58,13 @@ class PostController extends BasePostController
         }
         
         return $this->render('DForumBundle::post.html.twig', array(
-            'topic' => $topic,
+            'topic' => $this->incrementeView($topic),
             'posts' => $posts,
             'form'  => $form,
             'postpreview' => $preview
         ));
     }
-    
+
     /**
      * 
      * Delete a post and redirection in post page or topic page after delete.
@@ -143,4 +142,17 @@ class PostController extends BasePostController
 
     }
 
+    /**
+     * @param Topic $topic
+     * @return Topic
+     */
+    private function incrementeView(Topic $topic)
+    {
+        $topic->addView();
+        $em = $this->getEm();
+        $em->persist($topic);
+        $em->flush();
+
+        return $topic;
+    }
 }

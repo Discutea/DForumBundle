@@ -85,7 +85,14 @@ abstract class BaseTopic
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected $lastPost;
-    
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $views = 0;
+
     /**
      * Constructor
      */
@@ -341,5 +348,41 @@ abstract class BaseTopic
     public function getLastPost()
     {
         return $this->lastPost;
+    }
+
+    /**
+     * Set views
+     *
+     * @param int $wiews
+     *
+     * @return Topic
+     */
+    public function setViews($views)
+    {
+        $this->views = $views;
+
+        return $this;
+    }
+
+    /**
+     * Get views
+     *
+     * @return integer
+     */
+    public function getViews()
+    {
+        return $this->views;
+    }
+
+    /**
+     * Add view
+     *
+     * @return Topic
+     */
+    public function addView()
+    {
+        $this->views = $this->views + 1;
+
+        return $this;
     }
 }
