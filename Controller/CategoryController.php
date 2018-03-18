@@ -1,4 +1,5 @@
 <?php
+
 namespace Discutea\DForumBundle\Controller;
 
 use Discutea\DForumBundle\Controller\Base\BaseController;
@@ -7,7 +8,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Discutea\DForumBundle\Form\Type\Remover\RemoveCategoryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
-
 use Discutea\DForumBundle\Entity\Category;
 use Discutea\DForumBundle\Form\Type\CategoryType;
 
@@ -24,16 +24,11 @@ use Discutea\DForumBundle\Form\Type\CategoryType;
 class CategoryController extends BaseController
 {
     /**
-     * 
      * @Route("category/new", name="discutea_forum_create_category")
      * @Security("is_granted('ROLE_ADMIN')")
-     * 
-     * 
-     * @param object $request Symfony\Component\HttpFoundation\Request
-     * 
-     * @return object Symfony\Component\HttpFoundation\RedirectResponse moderator's dashboard
-     * @return objet Symfony\Component\HttpFoundation\Response
-     * 
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function newCategoryAction(Request $request)
     {
@@ -51,24 +46,19 @@ class CategoryController extends BaseController
             return $this->redirect($this->generateUrl('discutea_forum_admin_dashboard'));
         }
 
-        return $this->render('DForumBundle::Admin/category.html.twig', array(
+        return $this->render('@DForum/Admin/category.html.twig', array(
             'form' => $form->createView()
         ));
     }
 
     /**
-     * 
      * @Route("category/edit/{id}", name="discutea_forum_edit_category")
      * @ParamConverter("category")
      * @Security("is_granted('ROLE_ADMIN')")
-     * 
-     * 
-     * @param object $request Symfony\Component\HttpFoundation\Request
-     * @param objct $category Discutea\DForumBundle\Entity\Category
-     * 
-     * @return object Symfony\Component\HttpFoundation\RedirectResponse moderator's dashboard
-     * @return objet Symfony\Component\HttpFoundation\Response
-     * 
+     *
+     * @param Request $request
+     * @param Category $category
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editCategoryAction(Request $request, Category $category)
     {   
@@ -85,27 +75,22 @@ class CategoryController extends BaseController
             return $this->redirect($this->generateUrl('discutea_forum_admin_dashboard'));
         }
 
-        return $this->render('DForumBundle::Admin/category.html.twig', array(
+        return $this->render('@DForum/Admin/category.html.twig', array(
             'form' => $form->createView()
         ));
     }
 
     /**
-     * 
      * @Route("category/remove/{id}", name="discutea_forum_remove_category")
      * @ParamConverter("category")
      * @Security("is_granted('ROLE_ADMIN')")
-     * 
-     * @param object $request Symfony\Component\HttpFoundation\Request
-     * @param objct $category Discutea\DForumBundle\Entity\Category
-     * 
-     * @return object Symfony\Component\HttpFoundation\RedirectResponse moderator's dashboard
-     * @return objet Symfony\Component\HttpFoundation\Response
-     * 
+     *
+     * @param Request $request
+     * @param Category $category
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function removeCategoryAction(Request $request, Category $category)
     {
-
         $form = $this->createForm(RemoveCategoryType::class);
 
         $form->handleRequest($request);
@@ -115,7 +100,7 @@ class CategoryController extends BaseController
             $em = $this->getEm();
             if ($form->getData()['purge'] === false) {
                 
-                $newCat = $em->getRepository('DForumBundle:Category')->find($form->getData()['movedTo']) ;
+                $newCat = $em->getRepository(Category::class)->find($form->getData()['movedTo']) ;
                 
                 foreach ($category->getForums() as $forum) 
                 { 
@@ -127,7 +112,7 @@ class CategoryController extends BaseController
                 $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.category.movedforums'));
             }
             
-            $category = $em->getRepository('DForumBundle:Category')->find($category->getId()); // Fix detach error;
+            $category = $em->getRepository(Category::class)->find($category->getId()); // Fix detach error;
             $em->remove($category);
             $em->flush();
 
@@ -135,7 +120,7 @@ class CategoryController extends BaseController
             return $this->redirect($this->generateUrl('discutea_forum_admin_dashboard'));
         }
  
-        return $this->render('DForumBundle::Admin/remove_category.html.twig', array(
+        return $this->render('@DForum/Admin/remove_category.html.twig', array(
             'form' => $form->createView()
         ));
     }

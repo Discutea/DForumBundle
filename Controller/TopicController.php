@@ -1,6 +1,6 @@
 <?php
-namespace Discutea\DForumBundle\Controller;
 
+namespace Discutea\DForumBundle\Controller;
 
 use Discutea\DForumBundle\Controller\Base\BaseTopicController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -23,14 +23,16 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class TopicController extends BaseTopicController
 {
-
     /**
      * infos:  Display the topics of a forum
-     * 
+     *
      * @Route("/cat/{slug}", name="discutea_forum_topic")
      * @ParamConverter("forum")
      * @Security("is_granted('CanReadForum', forum)")
-     * 
+     *
+     * @param Request $request
+     * @param Forum $forum
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function topicAction(Request $request, Forum $forum)
     {
@@ -57,7 +59,7 @@ class TopicController extends BaseTopicController
             $form = $form->createView();
         }
         
-        return $this->render('DForumBundle::topic.html.twig', array(
+        return $this->render('@DForum/topic.html.twig', array(
             'forum' => $forum,
             'pagination' => $pagination,
             'form' => $form
@@ -68,6 +70,10 @@ class TopicController extends BaseTopicController
      * @Route("/topic/delete/{id}", name="discutea_forum_topic_delete")
      * @ParamConverter("topic")
      * @Security("has_role('ROLE_MODERATOR') and is_granted('CanReadTopic', topic)")
+     *
+     * @param Request $request
+     * @param Topic $topic
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction(Request $request, Topic $topic)
     {
@@ -84,7 +90,10 @@ class TopicController extends BaseTopicController
      * @Route("/topic/edit/{id}", name="discutea_forum_topic_edit")
      * @ParamConverter("topic")
      * @Security("has_role('ROLE_MODERATOR') and is_granted('CanReadTopic', topic)")
-     * 
+     *
+     * @param Request $request
+     * @param Topic $topic
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editAction(Request $request, Topic $topic)
     {
@@ -100,9 +109,8 @@ class TopicController extends BaseTopicController
             return $this->redirect($this->generateUrl('discutea_forum_topic', array('slug' => $forumSlug)));
         }
          
-        return $this->render('DForumBundle::Form/topic_edit.html.twig', array(
+        return $this->render('@DForum/Form/topic_edit.html.twig', array(
             'form'  => $form->createView()
         ));
     }
-
 }

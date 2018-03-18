@@ -1,10 +1,14 @@
 <?php
+
 namespace Discutea\DForumBundle\Controller;
 
 use Discutea\DForumBundle\Controller\Base\BaseController;
+use Discutea\DForumBundle\Entity\Category;
+use Discutea\DForumBundle\Entity\Forum;
+use Discutea\DForumBundle\Entity\Post;
+use Discutea\DForumBundle\Entity\Topic;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-
 
 /**
  * @author David Verdier <contact@discutea.com>
@@ -26,27 +30,24 @@ class AdminController extends BaseController
 {
 
     /**
-     * 
-     * Moderator's dashboard
-     * 
      * @Route("/admin", name="discutea_forum_admin_dashboard")
      * @Security("is_granted('ROLE_MODERATOR')")
-     * 
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
         $em = $this->getEm();
-        $posts = $em->getRepository('DForumBundle:Post')->findBy(array(), array('date' => 'desc'));
-        $topics = $em->getRepository('DForumBundle:Topic')->findBy(array(), array('date' => 'desc'));
+        $posts = $em->getRepository(Post::class)->findBy(array(), array('date' => 'desc'));
+        $topics = $em->getRepository(Topic::class)->findBy(array(), array('date' => 'desc'));
         if ($this->getAuthorization()->isGranted('ROLE_ADMIN')) {
-            $forums = $em->getRepository('DForumBundle:Forum')->findAll();
-            $categories = $em->getRepository('DForumBundle:Category')->findBy(array(), array('position' => 'desc', ));
+            $forums = $em->getRepository(Forum::class)->findAll();
+            $categories = $em->getRepository(Category::class)->findBy(array(), array('position' => 'desc', ));
         } else {
             $forums = NULL;
             $categories = NULL;
         }
 
-        return $this->render('DForumBundle::Moderator/index.moderator.html.twig', array(
+        return $this->render('@DForum/Moderator/index.moderator.html.twig', array(
             'posts' => $posts,
             'topics' => $topics,
             'forums' => $forums,

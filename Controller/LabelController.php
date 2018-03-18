@@ -1,4 +1,5 @@
 <?php
+
 namespace Discutea\DForumBundle\Controller;
 
 use Discutea\DForumBundle\Controller\Base\BaseController;
@@ -16,13 +17,15 @@ use Discutea\DForumBundle\Entity\Topic;
  */
 class LabelController extends BaseController
 {
-    
+
     /**
-     * 
      * @Route("/label/solved/{slug}", name="discutea_label_solved")
      * @ParamConverter("topic")
      * @Security("is_granted('CanEditTopic', topic)")
      *
+     * @param Request $request
+     * @param Topic $topic
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function solvedAction(Request $request, Topic $topic)
     {        
@@ -39,18 +42,18 @@ class LabelController extends BaseController
             $em->flush();
             $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('discutea.forum.label.mark.solved'));
         }
-                
-        
- 
+
         return $this->redirect($this->generateUrl('discutea_forum_post', array('slug' => $topic->getSlug())));
     }
 
     /**
-     * 
      * @Route("/label/pinned/{slug}", name="discutea_label_pinned")
      * @ParamConverter("topic")
      * @Security("has_role('ROLE_ADMIN')")
      *
+     * @param Request $request
+     * @param Topic $topic
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function pinnedAction(Request $request, Topic $topic)
     {
@@ -71,11 +74,13 @@ class LabelController extends BaseController
     }
 
     /**
-     * 
      * @Route("/label/closed/{slug}", name="discutea_label_closed")
      * @ParamConverter("topic")
      * @Security("has_role('ROLE_MODERATOR') and  is_granted('CanEditTopic', topic)")
      *
+     * @param Request $request
+     * @param Topic $topic
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function closedAction(Request $request, Topic $topic)
     {

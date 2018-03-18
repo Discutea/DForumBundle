@@ -2,8 +2,6 @@
 
 namespace Discutea\DForumBundle\Controller\Base;
 
-use Discutea\DForumBundle\Controller\Base\BaseController;
-
 use Discutea\DForumBundle\Entity\Forum;
 use Discutea\DForumBundle\Form\Type\TopicType;
 use Discutea\DForumBundle\Entity\Topic;
@@ -21,17 +19,16 @@ use Discutea\DForumBundle\Entity\Post;
  */
 class BaseTopicController extends BaseController
 {
-    /*
+    /**
      * @var object $post Discutea\DForumBundle\Entity\Topic
      */
     protected $topic;
 
     /**
      * Generate topic form or return Null if not authorised
-     * 
-     * @param objet $forum  Discutea\DForumBundle\Entity\Forum
-     * 
-     * @return NULL|object Symfony\Component\Form\Form
+     *
+     * @param Forum $forum
+     * @return null|\Symfony\Component\Form\FormInterface
      */
     protected function generateTopicForm(Forum $forum) {
         
@@ -48,11 +45,10 @@ class BaseTopicController extends BaseController
 
     /**
      * Create a new post objet set content, topic and user
-     * 
-     * @param string $content post content
-     * @param objet $topic Discutea\DForumBundle\Entity\Topic
-     * 
-     * @return objet $topic Discutea\DForumBundle\Entity\Post
+     *
+     * @param $content
+     * @param Topic $topic
+     * @return Post
      */
     protected function createPost($content, Topic $topic) {
         $post = new post();

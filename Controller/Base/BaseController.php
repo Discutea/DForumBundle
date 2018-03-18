@@ -1,4 +1,5 @@
 <?php
+
 namespace Discutea\DForumBundle\Controller\Base;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -13,54 +14,53 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class BaseController extends Controller
 {
 
-    /*
+    /**
      * @var object $em Doctrine\ORM\EntityManager
      */
     protected $em;
 
-    /*
+    /**
      * @var object $paginator Discutea\DForumBundle\Component\Pagin
      */
     protected $paginator;
 
-    /*
+    /**
      * @var object $authorizationChecker Symfony\Component\Security\Core\Authorization\AuthorizationChecker
      */
     protected $authorizationChecker;
 
-    /*
+    /**
      * @var object $translator Symfony\Component\Translation\DataCollectorTranslator
      */
     protected $translator;
 
-    /*
+    /**
      * @return object Doctrine\ORM\EntityManager
      */
     protected function getEm() {
-        if  ( $this->em === NULL ) {
+        if  (null === $this->em) {
             $this->em = $this->getDoctrine()->getManager();
         }
         
         return $this->em;
     }
 
-    /*
+    /**
      * @return object Discutea\DForumBundle\Component\Pagin
      */
     protected function getPaginator() {
-        if  ( $this->paginator === NULL ) {
+        if  (null === $this->paginator) {
             $this->paginator = $this->get('discutea.forum.pagin');
         }
         
         return $this->paginator;
     }
 
-    /*
-     * 
+    /**
      * @return object Symfony\Component\Security\Core\Authorization\AuthorizationChecker
      */
     protected function getAuthorization() {
-        if  ( $this->authorizationChecker === NULL ) {
+        if  (null === $this->authorizationChecker) {
             $this->authorizationChecker = $this->get('security.authorization_checker');
         }
         
@@ -72,7 +72,7 @@ class BaseController extends Controller
      * @return object Symfony\Component\Translation\DataCollectorTranslator
      */
     protected function getTranslator() {
-        if  ( $this->translator === NULL ) {
+        if  (null === $this->translator) {
             $this->translator = $this->get('translator');
         }
         
@@ -80,9 +80,7 @@ class BaseController extends Controller
     }
 
     /**
-     * Role listing
-     * 
-     * @return array $roles
+     * @return array
      */
     protected function getRolesList()
     {

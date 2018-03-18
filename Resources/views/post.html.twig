@@ -1,4 +1,4 @@
-{% extends "DForumBundle::layout.html.twig" %}
+{% extends "@DForum/layout.html.twig" %}
 
 {% block title %}{{ topic.title }}{% endblock %}
 
@@ -17,9 +17,9 @@
   {% endif %}
 
   <ul class="list-unstyled">
-    {% for post in posts %}{% include 'DForumBundle::Post/single-post.html.twig' %}{% endfor %}
-    {% if postpreview %}{% include 'DForumBundle::Post/preview-post.html.twig' %}{% endif %}
-    {% if is_granted('CanEditTopic', topic) %}{% include 'DForumBundle::label.html.twig' %}{% endif %}
+    {% for post in posts %}{% include '@DForum/Post/single-post.html.twig' %}{% endfor %}
+    {% if postpreview %}{% include '@DForum/Post/preview-post.html.twig' %}{% endif %}
+    {% if is_granted('CanEditTopic', topic) %}{% include '@DForum/label.html.twig' %}{% endif %}
   </ul>
 
   {{ knp_pagination_render(posts) }}
@@ -29,6 +29,6 @@
     {% if date(topic.lastpost) < date('-1month') %}
       <div class="alert alert-danger text-center" role="alert">{{ 'discutea.forum.post.aged'|trans }}</div>
     {% endif %}
-    {% include 'DForumBundle::Form/Post.html.twig' %}
+    {% include '@DForum/Form/Post.html.twig' %}
   {% endif %}
 {% endblock %}
