@@ -12,18 +12,25 @@
     ],
     "require": {
         "php": ">5.5.0 || ^7.0",
-        "symfony/symfony": "~2.8|~3.0",
+        "symfony/form": "^2.8 || ^3.0 || ^4.0",
+        "symfony/framework-bundle": "^2.8 || ^3.0 || ^4.0",
+        "symfony/security-bundle": "^2.8 || ^3.0 || ^4.0",
+        "symfony/twig-bundle": "^2.8 || ^3.0 || ^4.0",
+        "symfony/validator": "^2.8 || ^3.0 || ^4.0",
+        "twig/twig": "^1.28 || ^2.0",
+        "symfony/templating": "^2.8 || ^3.0 || ^4.0",
+        "doctrine/doctrine-bundle": "^1.3",
         "doctrine/orm": "^2.5",
-        "sensio/distribution-bundle": "^5.0",
-        "symfony/swiftmailer-bundle": "^2.4",
-        "sensio/framework-extra-bundle": "^3.0.2 || ^5.0.0",
+        "swiftmailer/swiftmailer": "^4.3 || ^5.0 || ^6.0",
         "stof/doctrine-extensions-bundle": ">=1.2",
         "knplabs/knp-paginator-bundle": ">=2.5"
     },
     "require-dev": {
-        "sensio/generator-bundle": "^3.0",
         "friendsofsymfony/user-bundle": "dev-master",
-        "symfony/phpunit-bridge": "^3.0",
+        "symfony/console": "^2.8 || ^3.0 || ^4.0",
+        "symfony/phpunit-bridge": "^2.8 || ^3.0 || ^4.0",
+        "symfony/yaml": "^2.8 || ^3.0 || ^4.0",
+        "phpunit/phpunit": "^4.8.35|^5.7.11|^6.5",
         "doctrine/doctrine-fixtures-bundle": "^2.3"
     },
     "suggest": {
