@@ -1,5 +1,5 @@
 services:
-    topic.listener.updatelastpost:
+    topic.listener.update_last_post:
         class: Discutea\DForumBundle\EventListener\UpdateTopic
         tags:
             - { name: doctrine.event_listener, event: postPersist }
@@ -7,6 +7,7 @@ services:
 
     discutea.forum.pagin:
             class: Discutea\DForumBundle\Component\Pagin
+            public: true
             arguments:
                 - '@request_stack'
                 - '@knp_paginator'
@@ -64,7 +65,7 @@ services:
         tags:
             - { name: form.type }
 
-    forum.listener.dropauser:
+    forum.listener.drop_user:
         class: Discutea\DForumBundle\EventListener\ForumListener
         tags:
             - { name: doctrine.event_listener, event: preRemove }
